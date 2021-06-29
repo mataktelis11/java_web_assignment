@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Page Title</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="style.css">
+		<style>
+			body {
+				font-family: Arial;
+			}
+			
+			input[type=text], select, input[type=password] {
+				width: 100%;
+				padding: 12px 20px;
+				margin: 8px 0;
+				display: block;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+				box-sizing: border-box;
+			}
+			
+			input[type=submit] {
+				width: 100%;
+				font-size: 20px;
+				background-color: #04AA6D;
+				color: white;
+				padding: 14px 20px;
+				margin: 8px 0;
+				border: none;
+				border-radius: 4px;
+				cursor: pointer;
+			}
+			
+			input[type=submit]:hover {
+				background-color: #45a049;
+			}
+			
+			div.container {
+				border-radius: 5px;
+				background-color: #f2f2f2;
+				padding: 20px;
+			}
+		</style>
+	</head>
+	<body>
+	
+		<div class="header">
+			<h1>Web Health</h1>
+			<p>Doctor appointment search service</p>
+		</div>
+		
+		<div class="navbar">
+			<a href="index.jsp">Home</a>
+			<a href="about.jsp">About</a>
+			<a id="selected" href="login.html" class="right">Log in</a>
+			<a href="form2.html" class="right">Register</a>
+		</div>
+		
+		<div class="offset"> </div>
+		
+		<div class="fmain">
+			<div class="container">
+			    <h1>Login</h1>
+			    <hr>
+			    <br>
+			    <form method="POST" action='login'>
+					<input type="hidden" name="action" value="login" />
+					<label for="username">Username</label>
+					<input type="text" id="username" name="username" placeholder="Enter Username.." required>
+					
+					<label for="psw">Password</label>
+					<input type="password" id="psw" name="psw" placeholder="Enter Password.." required>
+					<input type="submit" value="Click to log in">
+				</form>
+				<p>Don't have an account? <a href="form2.html">Sign up!</a>.</p>
+			</div>
+		</div>
+		
+		<script>
+			// navbar 
+			
+			window.onscroll = function() {
+				if(window.pageYOffset >= document.getElementsByClassName("header")[0].clientHeight) {
+					document.getElementsByClassName("offset")[0].style.height = (document.getElementsByClassName("navbar")[0].clientHeight + "px");
+					document.getElementsByClassName("navbar")[0].style.top = "0";
+					document.getElementsByClassName("navbar")[0].style.position = "fixed";
+				}
+				else {
+					document.getElementsByClassName("navbar")[0].style.position = "relative";
+					document.getElementsByClassName("offset")[0].style.height = "0px";
+				}
+			}
+		</script>
+		
+	</body>
+</html>
