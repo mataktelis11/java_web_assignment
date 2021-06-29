@@ -16,7 +16,6 @@ import com.model.User;
 import com.util.Encryption;
 
 
-// SHORT was here...
 
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
