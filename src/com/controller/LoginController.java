@@ -67,6 +67,9 @@ public class LoginController extends HttpServlet {
 							case "patient":
 							forward = "/patient/welcomepatient.jsp";
 							break;
+							case "doctor":
+							forward = "/doctor/welcomedoctor.jsp";
+							break;
 						}
 					}
 				} else {

@@ -66,6 +66,11 @@
 				<a href="patient?action=welcome" class="right"> <%= session.getAttribute("name") %> </a>
 				<a href="patient?action=details" class="right">Account Details</a>
 				<a href="patient?action=appointments" class="right">Appointment menu</a>
+			
+			<% } else if(session.getAttribute("role").equals("doctor")){ %>
+				<a href="logout.jsp" class="right">Log out</a>
+				<a href="doctor?action=welcome" class="right"> <%= session.getAttribute("name") %> </a>
+				<a href="doctor?action=appointments" class="right">Appointment menu</a>
 			<% } %>
 		</div>
 		
