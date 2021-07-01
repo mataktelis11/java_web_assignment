@@ -60,12 +60,12 @@
 		<div class="offset"> </div>
 		
 		<div class="fmain">
-			<form action="/action_page.php">
+			<form method="POST" action='patient'>
 				<div class="container">
 					<h1>Register</h1>
 					<p>Please fill in this form to create an account as a <b>Patient</b>.</p>
 					<hr>
-				
+					<input type="hidden" name="action" value="register" />
 					<label for="name"><b>Name</b></label>
 					<input type="text" placeholder="Enter Name.." name="name" id="name" required>
 				

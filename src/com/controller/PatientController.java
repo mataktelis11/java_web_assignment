@@ -86,7 +86,24 @@ public class PatientController extends HttpServlet {
 	}
 	
 	
-	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String forward = "";
+		String action = request.getParameter("action");
+		response.setContentType("text/html; charset=UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
+		
+		forward = "/falseRequest.jsp";
+		
+		
+		//more to be added
+		
+		
+		
+		RequestDispatcher view = request.getRequestDispatcher(forward);
+		view.forward(request, response);
+	}
 
 	
 }
