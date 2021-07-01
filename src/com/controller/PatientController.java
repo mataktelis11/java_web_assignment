@@ -97,7 +97,19 @@ public class PatientController extends HttpServlet {
 		
 		if(action.equalsIgnoreCase("register")) {
 			
+			Patient p = new Patient();
+			p.setName("AAAAAA");
+			p.setSurname("BBBBAA");
+			p.setSalt("Bq_&HR`LRkIHdT4_");
+			p.setPassword("2C52C69FBD9B7F298BA0A6B663D3C2F1");
+			p.setUsername("telis2");
+			p.setAMKA("1386605437");
 			
+			System.out.println(dao.addPatient(p));
+			
+			
+			
+			forward = "/falseRequest.jsp";
 		}
 		
 
