@@ -1,8 +1,7 @@
 
-
--- empty out rows
--- Uncomment the following command if your your MySql session has the 'safe-updates' option set (prevents update or delete of records without specifying a key)
--- SET SQL_SAFE_UPDATES = 0;
+-- empty ou rows
+-- Uncomment the following command if your your MySql session has the safe-updates option set (prevents update or delete records without specifying a key)
+SET SQL_SAFE_UPDATES = 0;
 
 
 DELETE FROM `appointment`;
@@ -12,7 +11,6 @@ DELETE FROM `admin`;
 DELETE FROM `headadmin`;
 DELETE FROM `patient`;
 DELETE FROM `user`;
-
 
 
 INSERT INTO `user` VALUES ('cgallimore0','2C52C69FBD9B7F298BA0A6B663D3C2F1','Bq_&HR`LRkIHdT4_','Clary','Gallimore','patient');				-- password: nYVXInYN
@@ -47,7 +45,6 @@ INSERT INTO `user` VALUES ('kchamberlens','83B7B73804157FF36A7FB243B81CFC7E','N`
 INSERT INTO `user` VALUES ('kcousanst','02D89F1D7C77601F5EC28981D6D207C5','(^4Z(=g1hajoW1la','Keefer','Cousans','patient');				-- password: k8EN2WGGl
 
 
-
 INSERT INTO `user` VALUES ('sscrivineru','CB7795D6C844D99872175B58E9383133','A3}sxGPyrmj~NN%2','Stefan','Scriviner','doctor');				-- password: nX366I
 INSERT INTO `user` VALUES ('fjerransv','F12FD3760AA5FA742E701F3A74E3CC9C','+}Kh*Z_x+C`Jt_mY','Farlie','Jerrans','doctor');					-- password: mELqdn
 INSERT INTO `user` VALUES ('cmacelhargew','09E9028C22CD4A91CF770F49D45C4943','7L]qv*U3nCn#CWy6','Constancia','MacElharge','doctor');			-- password: sVUC0K
@@ -70,7 +67,6 @@ INSERT INTO `user` VALUES ('vbolstridge1c','6D0CE0393F05D6D85F2497D6A462F46B','V
 INSERT INTO `user` VALUES ('fguiton1d','EF6452E3C0B3A340BF9998F28B4A2DFF','Fn]AOp03u{V}k2Yg','Fielding','Guiton','doctor');				-- password: RptgxrvKWu
 
 
-
 INSERT INTO `user` VALUES ('preckus1e','4C08B5E1DB161BE8D1DE00631C19FF95','f3vVNl5V{7vhcqyy','Pattin','Reckus','admin');					-- password: tXGRyKDwJ0
 INSERT INTO `user` VALUES ('ibarsby1f','287A70D56F8DBC759593EEC609D91276','Mut1@Q3U!kIluhT0','Ivonne','Barsby','admin');					-- password: MXykUGFh8
 INSERT INTO `user` VALUES ('frackley1g','5509A5576D6925B4CDBCFF926AC931DF',';lYWZ+]{Rt#+Lq7i','Fabian','Rackley','admin');					-- password: nawreB
@@ -83,11 +79,88 @@ INSERT INTO `user` VALUES ('mkellock1m','0EA490E3B1A51F585F9740B5C86CC826','o9^!
 INSERT INTO `user` VALUES ('pvongrollmann1n','A003246D0A142CC2889159E6A92B7229','^E^KK`(_)LqP}AaJ','Phylys','von','admin');				-- password: jquatum
 
 
+INSERT INTO `user` VALUES ('skiwitz1o','343F06B967969D90EDFD3A4546EC8C97','jekXE`]dhZ`LYe79','Aristotle','Onassis','headadmin');					-- password: iu5DlpMJ9
+INSERT INTO `user` VALUES ('briby1p','A773456FAC3C02FB718BBF4F99BA2E12','_QKF}MlU1k4sKmMI','Vasili','Arkhipov','headadmin');					-- password: WoA4jLd8t
+INSERT INTO `user` VALUES ('bkindall1q','485E5A597AEBB71D296F5D5A1B7E8CC1','YOEfTrpq8*m5FhE8','Tony','Stark','headadmin');					-- password: PAdiukA
 
-INSERT INTO `user` VALUES ('skiwitz1o','343F06B967969D90EDFD3A4546EC8C97','jekXE`]dhZ`LYe79','Sammy','Kiwitz','headadmin');					-- password: iu5DlpMJ9
-INSERT INTO `user` VALUES ('briby1p','A773456FAC3C02FB718BBF4F99BA2E12','_QKF}MlU1k4sKmMI','Brina','Riby','headadmin');					-- password: WoA4jLd8t
-INSERT INTO `user` VALUES ('bkindall1q','485E5A597AEBB71D296F5D5A1B7E8CC1','YOEfTrpq8*m5FhE8','Bruis','Kindall','headadmin');					-- password: PAdiukA
 
+INSERT INTO `patient` VALUES('cgallimore0',8748608342);
+INSERT INTO `patient` VALUES('egarrity1',6861927437);
+INSERT INTO `patient` VALUES('lallberry2',4950626857);
+INSERT INTO `patient` VALUES('smcdool3',5608748895);
+INSERT INTO `patient` VALUES('tyarnall4',9045919638);
+INSERT INTO `patient` VALUES('awraxall5',2669421118);
+INSERT INTO `patient` VALUES('ljobling6',1386605434);
+INSERT INTO `patient` VALUES('aspedding7',9557293481);
+INSERT INTO `patient` VALUES('astolze8',7034429238);
+INSERT INTO `patient` VALUES('rphilippeaux9',6759180924);
+INSERT INTO `patient` VALUES('rgodinga',2769128620);
+INSERT INTO `patient` VALUES('mandrenb',9776063797);
+INSERT INTO `patient` VALUES('tbizleyc',3546919730);
+INSERT INTO `patient` VALUES('mbettingtond',2697081464);
+INSERT INTO `patient` VALUES('msoppe',3283467482);
+INSERT INTO `patient` VALUES('bsimonsenf',2326419068);
+INSERT INTO `patient` VALUES('tlabuschg',4892608597);
+INSERT INTO `patient` VALUES('abirchallh',9750609454);
+INSERT INTO `patient` VALUES('atindleyi',7647540483);
+INSERT INTO `patient` VALUES('kcravenj',3396804121);
+INSERT INTO `patient` VALUES('rrubinfajnk',4636418442);
+INSERT INTO `patient` VALUES('rpallesenl',2395878787);
+INSERT INTO `patient` VALUES('ablumm',1528323710);
+INSERT INTO `patient` VALUES('amegarryn',3489531673);
+INSERT INTO `patient` VALUES('afergusono',2603592005);
+INSERT INTO `patient` VALUES('jmaphamp',9047492796);
+INSERT INTO `patient` VALUES('ghardypigginq',9305089008);
+INSERT INTO `patient` VALUES('tminsterr',9447082098);
+INSERT INTO `patient` VALUES('kchamberlens',7243024604);
+INSERT INTO `patient` VALUES('kcousanst',1082804177);
+
+
+INSERT INTO `headadmin` VALUES ('skiwitz1o');					-- password: iu5DlpMJ9
+INSERT INTO `headadmin` VALUES ('briby1p');					-- password: WoA4jLd8t
+INSERT INTO `headadmin` VALUES ('bkindall1q');					-- password: PAdiukA
+
+
+INSERT INTO `admin` VALUES ('preckus1e','skiwitz1o');					-- password: tXGRyKDwJ0
+INSERT INTO `admin` VALUES ('ibarsby1f','skiwitz1o');					-- password: MXykUGFh8
+INSERT INTO `admin` VALUES ('frackley1g','skiwitz1o');					-- password: nawreB
+INSERT INTO `admin` VALUES ('aquene1h','briby1p');					-- password: ZiiZnYQa
+INSERT INTO `admin` VALUES ('malwen1i','briby1p');					-- password: 8QnuUNmzUC7B
+INSERT INTO `admin` VALUES ('egaunt1j','briby1p');					-- password: i4KLDwEOc
+INSERT INTO `admin` VALUES ('tvarah1k','bkindall1q');					-- password: KhN7g44IK
+INSERT INTO `admin` VALUES ('jchristou1l','bkindall1q');				-- password: 19VCXC3TP9
+INSERT INTO `admin` VALUES ('mkellock1m','bkindall1q');					-- password: i24KLato
+INSERT INTO `admin` VALUES ('pvongrollmann1n','skiwitz1o');				-- password: jquatum
+
+
+INSERT INTO `hospital` VALUES ('Cleveland Clinic','2049 East 100th Street Cleveland');
+INSERT INTO `hospital` VALUES ('Houston Methodist Hospital','6565 Fannin St, Houston');
+INSERT INTO `hospital` VALUES ('Andalusia Health','849 S. Three Notch Street');
+INSERT INTO `hospital` VALUES ('Anderson Hospital','6800 Illinois Route 162 Maryville');
+INSERT INTO `hospital` VALUES ('Memorial Hospital','500 London Avenue Marysville,');
+INSERT INTO `hospital` VALUES ('Methodist North Hospital','3960 New Covington Pike Memphis');
+
+
+INSERT INTO `doctor` VALUES ('sscrivineru',6273003678,'Cleveland Clinic','preckus1e','Pathologist');				-- password: nX366I
+INSERT INTO `doctor` VALUES ('fjerransv',4141646061,'Cleveland Clinic','preckus1e','Pathologist');					-- password: mELqdn
+INSERT INTO `doctor` VALUES ('cmacelhargew',8630802712,'Cleveland Clinic','preckus1e','Pathologist');			-- password: sVUC0K
+INSERT INTO `doctor` VALUES ('mwellandx',5887185255,'Cleveland Clinic','ibarsby1f','Pathologist');					-- password: u5Er5Vx
+INSERT INTO `doctor` VALUES ('ibarberyy',3756232045,'Cleveland Clinic','frackley1g','Pathologist');				-- password: bbBcnk
+INSERT INTO `doctor` VALUES ('mdescroixz',2964710225,'Houston Methodist Hospital','aquene1h','Pathologist');				-- password: RySxKUsX
+INSERT INTO `doctor` VALUES ('nmeharry10',2738279701,'Houston Methodist Hospital','aquene1h','Pathologist');				-- password: wGd0r6NY
+INSERT INTO `doctor` VALUES ('bsinkings11',2310559061,'Houston Methodist Hospital','malwen1i','Ophthalmologist');				-- password: FWwVkNn6caMP
+INSERT INTO `doctor` VALUES ('agawthrop12',9639117510,'Houston Methodist Hospital','malwen1i','Ophthalmologist');				-- password: 7i78DvxK3
+INSERT INTO `doctor` VALUES ('ksaye13',8590764807,'Andalusia Health','egaunt1j','Ophthalmologist');					-- password: oTv5Mp
+INSERT INTO `doctor` VALUES ('pzannini14',1533109861,'Andalusia Health','egaunt1j','Ophthalmologist');					-- password: vlJL0E7q18e
+INSERT INTO `doctor` VALUES ('vnelson15',1398348241,'Anderson Hospital','tvarah1k','Ophthalmologist');					-- password: oD7Upepq
+INSERT INTO `doctor` VALUES ('ftredwell16',7716737606,'Anderson Hospital','tvarah1k','Ophthalmologist');				-- password: 2gtMr1nlZ6
+INSERT INTO `doctor` VALUES ('bblumire17',2878581521,'Memorial Hospital','jchristou1l','Orthopedic');				-- password: LmioOBH
+INSERT INTO `doctor` VALUES ('bdevenny18',4296611559,'Memorial Hospital','jchristou1l','Orthopedic');					-- password: uAQfRhJj
+INSERT INTO `doctor` VALUES ('cpourvoieur19',6705286878,'Memorial Hospital','mkellock1m','Orthopedic');			-- password: XBOoqs6wl
+INSERT INTO `doctor` VALUES ('lmorgans1a',6813603361,'Methodist North Hospital','mkellock1m','Orthopedic');				-- password: RH6gxxU
+INSERT INTO `doctor` VALUES ('agaspero1b',8755543707,'Methodist North Hospital','pvongrollmann1n','Orthopedic');				-- password: XORms5IgB2e
+INSERT INTO `doctor` VALUES ('vbolstridge1c',2787575770,'Methodist North Hospital','pvongrollmann1n','Orthopedic');			-- password: 6n7S5hgQw3
+INSERT INTO `doctor` VALUES ('fguiton1d',4289851232,'Methodist North Hospital','pvongrollmann1n','Orthopedic');				-- password: RptgxrvKWu
 
 
 
