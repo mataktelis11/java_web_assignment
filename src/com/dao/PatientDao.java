@@ -58,6 +58,35 @@ public class PatientDao{
 		
 		return patient;
 	}
+	
+	
+	
+	/**
+	 * Adds a patient to the database
+	 * @param username username of the Patient in the database
+	 * @return Patient Object with the attributes in the database
+	 */
+	public Patient addPatient(Patient patient) {
+
+		/*
+		try {
+			PreparedStatement preparedStatement = connection.
+					prepareStatement("");
+			preparedStatement.setString(1, username);
+
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		*/
+		return patient;
+		
+	}
+	
+	
+	
+	
+	
 
 	/**
 	 * Returns the List of Appointments of a given Patient.

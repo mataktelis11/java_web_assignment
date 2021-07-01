@@ -94,10 +94,13 @@ public class PatientController extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		
-		forward = "/falseRequest.jsp";
 		
+		if(action.equalsIgnoreCase("register")) {
+			
+			
+		}
 		
-		//more to be added
+
 		
 		
 		
