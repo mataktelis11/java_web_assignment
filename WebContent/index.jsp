@@ -85,7 +85,7 @@
 			<% if(session.getAttribute("username")==null) { %>
 			
 				<a href="login.html" class="right">Log in</a>
-				<a href="form2.html" class="right">Register</a>
+				<a href="register.html" class="right">Register</a>
 				
 			<% } else if(session.getAttribute("role").equals("patient")){ %>
 				<a href="logout.jsp" class="right">Log out</a>

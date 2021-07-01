@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<title>About Page</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="style.css">
@@ -59,7 +60,7 @@
 			<% if(session.getAttribute("username")==null) { %>
 			
 				<a href="login.html" class="right">Log in</a>
-				<a href="form2.html" class="right">Register</a>
+				<a href="register.html" class="right">Register</a>
 				
 			<% } else if(session.getAttribute("role").equals("patient")){ %>
 			<a href="logout.jsp" class="right">Log out</a>
