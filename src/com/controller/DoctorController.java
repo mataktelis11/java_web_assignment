@@ -63,6 +63,9 @@ public class DoctorController extends HttpServlet {
 			if(action.equalsIgnoreCase("appointments")) {
 				forward = "/doctor/appointments.jsp";
 			}
+			if(action.equalsIgnoreCase("appointmentdeclaration")) {
+				forward = "/doctor/appointmentdeclaration.jsp";
+			}
 			else if(action.equalsIgnoreCase("welcome")) {
 				forward = "/doctor/welcomedoctor.jsp";
 			}

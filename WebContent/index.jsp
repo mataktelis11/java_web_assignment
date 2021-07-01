@@ -97,6 +97,7 @@
 				<a href="logout.jsp" class="right">Log out</a>
 				<a href="doctor?action=welcome" class="right"> <%= session.getAttribute("name") %> </a>
 				<a href="doctor?action=appointments" class="right">Appointment menu</a>
+				<a href="doctor?action=appointmentdeclaration" class="right">Appointment declaration</a>
 			<% } %>
 		</div>
 		
