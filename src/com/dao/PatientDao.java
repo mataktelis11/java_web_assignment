@@ -58,6 +58,63 @@ public class PatientDao{
 		
 		return patient;
 	}
+	
+	
+	
+	/**
+	 * Adds a user to the database with the role = 'patient'
+	 * @param patient to be added
+	 * @return the number of affected rows in the database
+	 */
+	private int addPatientUser(Patient patient) {
+
+		
+		try {
+			PreparedStatement preparedStatement = connection.
+					prepareStatement("INSERT INTO user VALUES (?,?,?,?,?,'patient');");
+			preparedStatement.setString(1, patient.getUsername());
+			preparedStatement.setString(2, patient.getPassword());
+			preparedStatement.setString(3, patient.getSalt());
+			preparedStatement.setString(4, patient.getName());
+			preparedStatement.setString(5, patient.getSurname());
+
+			int count =  preparedStatement.executeUpdate();
+			
+			return count;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	
+	/**
+	 * Adds a patient to the database'
+	 * @param patient to be added
+	 * @return the number of affected rows in the database
+	 */
+	public int addPatient(Patient patient) {
+
+		//use the above method
+		if(addPatientUser(patient)==0) return 0;
+		
+		try {
+			PreparedStatement preparedStatement = connection.
+					prepareStatement("INSERT INTO patient VALUES (?,?);");
+			preparedStatement.setString(1, patient.getUsername());
+			preparedStatement.setString(2, patient.getAMKA());
+
+			int count =  preparedStatement.executeUpdate();
+			
+			return count;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	
+	
 
 	/**
 	 * Returns the List of Appointments of a given Patient.
