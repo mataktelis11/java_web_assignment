@@ -6,13 +6,56 @@
 		<title>Welcome</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="style.css">
-		<link rel="stylesheet" href="doctor/calendar.css">
-		<link rel="stylesheet" href="doctor/timePicker.css">
 		<style>
 		
 			.show {
 				display: block;
 			}
+			
+			.header {
+				font-size: 42px !important;
+			}
+			
+			ul {
+				overflow: hidden;
+			}
+			
+			body {
+			background: #eee;
+			}
+			
+			.weekdays {
+				cursor: pointer;
+				margin: 0;
+				padding: 10px 0;
+				background-color: #ddd;
+			}
+			
+			.weekdays li {
+				float: left;
+				display: inline-block;
+				width: 13.6%;
+				color: #666;
+				text-align: center;
+			}
+			
+			.days {
+				cursor: default;
+				padding: 10px 0;
+				margin: 0;
+			}
+			
+			.days li {
+				cursor: default;
+				float: right;
+				display: inline-block;
+				list-style-type: none;
+				width: 13.6%;
+				margin-bottom: 10px;
+				font-size:16px;
+				color: #777;
+			}
+			
 			
 			
 			
@@ -36,7 +79,6 @@
 		
 		<div class="header">
 			<h1>Welcome</h1>
-			<p> <%= session.getAttribute("name") %> </p>
 		</div>
 		
 		<div class="navbar">
@@ -52,95 +94,123 @@
 		
 		<div class="offset"> </div>
 		
-		<div class="month">
-			<h2 id="month" style="font-size:25px">
-				<br>August<br>2021
-			</h2>
-		</div>
-		
 		<ul class="weekdays">
-			<li>Mo</li>
-			<li>Tu</li>
-			<li>We</li>
-			<li>Th</li>
-			<li>Fr</li>
-			<li>Sa</li>
-			<li>Su</li>
+			<li onclick="myCreateFunction('monTimes')">Mo<br> click to add</li>
+			<li onclick="myCreateFunction('tusTimes')">Tu<br> click to add</li>
+			<li onclick="myCreateFunction('wedTimes')">We<br> click to add</li>
+			<li onclick="myCreateFunction('thuTimes')">Th<br> click to add</li>
+			<li onclick="myCreateFunction('friTimes')">Fr<br> click to add</li>
+			<li onclick="myCreateFunction('satTimes')">Sa<br> click to add</li>
+			<li onclick="myCreateFunction('sunTimes')">Su<br> click to add</li>
 		</ul>
 		
-		<ul class="days">  
-			<li id="1" class="inactive" onclick="myFun(this)">1</li>
-			<li id="2" class="inactive" onclick="myFun(this)">2</li>
-			<li id="3" class="inactive" onclick="myFun(this)">3</li>
-			<li id="4" class="inactive" onclick="myFun(this)">4</li>
-			<li id="5" class="inactive" onclick="myFun(this)">5</li>
-			<li id="6" class="inactive" onclick="myFun(this)">6</li>
-			<li id="7" class="inactive" onclick="myFun(this)">7</li>
-			<li id="8" class="inactive" onclick="myFun(this)">8</li>
-			<li id="9" class="inactive" onclick="myFun(this)">9</li>
-			<li id="10" class="inactive" onclick="myFun(this)">10</li>
-			<li id="11" class="inactive" onclick="myFun(this)">11</li>
-			<li id="12" class="inactive" onclick="myFun(this)">12</li>
-			<li id="13" class="inactive" onclick="myFun(this)">13</li>
-			<li id="14" class="inactive" onclick="myFun(this)">14</li>
-			<li id="15" class="inactive" onclick="myFun(this)">15</li>
-			<li id="16" class="inactive" onclick="myFun(this)">16</li>
-			<li id="17" class="inactive" onclick="myFun(this)">17</li>
-			<li id="18" class="inactive" onclick="myFun(this)">18</li>
-			<li id="19" class="inactive" onclick="myFun(this)">19</li>
-			<li id="20" class="inactive" onclick="myFun(this)">20</li>
-			<li id="21" class="inactive" onclick="myFun(this)">21</li>
-			<li id="22" class="inactive" onclick="myFun(this)">22</li>
-			<li id="23" class="inactive" onclick="myFun(this)">23</li>
-			<li id="24" class="inactive" onclick="myFun(this)">24</li>
-			<li id="25" class="inactive" onclick="myFun(this)">25</li>
-			<li id="26" class="inactive" onclick="myFun(this)">26</li>
-			<li id="27" class="inactive" onclick="myFun(this)">27</li>
-			<li id="28" class="inactive" onclick="myFun(this)">28</li>
-			<li id="29" class="inactive" onclick="myFun(this)">29</li>
-			<li id="30" class="inactive" onclick="myFun(this)">30</li>
-			<li id="31" class="inactive" onclick="myFun(this)">31</li>
+		<ul class="days">
+		<li>
+			<table id="sunTimes">
+			</table>
+			<br>
+		</li>
+		<li>
+			<table id="satTimes">
+			</table>
+			<br>
+		</li>
+		<li>
+			<table id="friTimes">
+			</table>
+			<br>
+		</li>
+		<li>
+			<table id="thuTimes">
+			</table>
+			<br>
+		</li>
+		<li>
+			<table id="wedTimes">
+			</table>
+			<br>
+		</li>
+		<li>
+			<table id="tusTimes">
+			</table>
+			<br>
+		</li>
+		<li>
+			<table id="monTimes">
+			</table>
+			<br>
+		</li>
 		</ul>
-		
-		<div class="form-popup" id="timePicker">
-			<form class="form-container">
-				<h1>Pick the time span</h1>
-				
-				<label for="from">From:</label>
-				<select id="from" required>
-					<option value="8">6</option>
-					<option value="8">7</option>
-					<option value="8">8</option>
-					<option value="9">9</option>
-					<option value="10">10</option>
-					<option value="11">11</option>
-					<option value="12">12</option>
-					<option value="13">13</option>
-				</select>
-				
-				<label for="to">To:</label>
-				<select id="to" required>
-					<option value="8">8</option>
-					<option value="9">9</option>
-					<option value="10">10</option>
-					<option value="11">11</option>
-					<option value="12">12</option>
-					<option value="13">13</option>
-					<option value="14">14</option>
-					<option value="15">15</option>
-					<option value="15">16</option>
-					<option value="15">17</option>
-					<option value="15">18</option>
-				</select>
-				
-				<button type="button" class="btn" onclick="confirmDay()">Confirm</button>
-				<button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-			</form>
-		</div>
 			
 		<script>
+			var counter = 0;
+			function myCreateFunction(id) {
+				var table = document.getElementById(id);
+				var rows = table.getElementsByTagName('tr');
+				var lastrow = rows.length;
+				var row = table.insertRow(lastrow);
+				var cell1 = row.insertCell(0);
+				var cell2 = row.insertCell(1);
+				cell1.innerHTML = 
+				'<td>' +
+					'<label for="from">From:&nbsp;</label>' +
+					'<select id="from" required>' +
+						'<option value="8">6</option>' +
+						'<option value="8">7</option>' +
+						'<option value="8">8</option>' +
+						'<option value="9">9</option>' +
+						'<option value="10">10</option>' +
+						'<option value="11">11</option>' +
+						'<option value="12">12</option>' +
+						'<option value="13">13</option>' +
+					'</select>' +
+					'<br>' +
+					'<label for="to">To:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>' +
+					'<select id="to" required>' +
+						'<option value="8">8</option>' +
+						'<option value="9">9</option>' +
+						'<option value="10">10</option>' +
+						'<option value="11">11</option>' +
+						'<option value="12">12</option>' +
+						'<option value="13">13</option>' +
+						'<option value="14">14</option>' +
+						'<option value="15">15</option>' +
+						'<option value="15">16</option>' +
+						'<option value="15">17</option>' +
+						'<option value="15">18</option>' +
+					'</select><br><br>' +
+				'</td>';
+				cell2.innerHTML = "<button style='color:red' id='"+counter+"' onclick='myDeleteFunction(this, `"+id+"`)'>X</button><br><br>";
+				row.id = counter;
+				counter++;
+			}
+			
+			function myDeleteFunction(ele, id) {
+				alert(id);
+			    var table = document.getElementById(id);
+			   	var rowIndex = document.getElementById(ele.id).rowIndex;
+			    table.deleteRow(rowIndex);
+			}
 		
-			//returned value
+			window.onload = function() {
+				
+				const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+				var today = new Date();
+				var dd = String(today.getDate()).padStart(2, '0');
+				var mm = today.getMonth() + 2;
+				var yyyy = today.getFullYear();
+				while(mm > 11) {
+					mm -= 12;
+					yyyy += 1;
+				}
+				
+				document.getElementsByClassName("header")[0].innerHTML = '<br>' + months[mm] + '<br>' + yyyy;
+				
+			}
+		
+		
+		
+			/* //returned value
 			var returned_days = "";
 		
 			//date picker
@@ -205,7 +275,7 @@
 				document.getElementById(ele_id).className = "active";
 				closeForm();
 			}
-		
+		 */
 			//navbar 
 			
 			window.onscroll = function() {
