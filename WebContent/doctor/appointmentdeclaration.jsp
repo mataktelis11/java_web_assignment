@@ -47,7 +47,7 @@
 			
 			.days li {
 				cursor: default;
-				float: right;
+				float: left;
 				display: inline-block;
 				list-style-type: none;
 				width: 13.6%;
@@ -106,27 +106,7 @@
 		
 		<ul class="days">
 		<li>
-			<table id="sunTimes">
-			</table>
-			<br>
-		</li>
-		<li>
-			<table id="satTimes">
-			</table>
-			<br>
-		</li>
-		<li>
-			<table id="friTimes">
-			</table>
-			<br>
-		</li>
-		<li>
-			<table id="thuTimes">
-			</table>
-			<br>
-		</li>
-		<li>
-			<table id="wedTimes">
+			<table id="monTimes">
 			</table>
 			<br>
 		</li>
@@ -136,7 +116,27 @@
 			<br>
 		</li>
 		<li>
-			<table id="monTimes">
+			<table id="wedTimes">
+			</table>
+			<br>
+		</li>
+		<li>
+			<table id="thuTimes">
+			</table>
+			<br>
+		</li>
+		<li>
+			<table id="friTimes">
+			</table>
+			<br>
+		</li>
+		<li>
+			<table id="satTimes">
+			</table>
+			<br>
+		</li>
+		<li>
+			<table id="sunTimes">
 			</table>
 			<br>
 		</li>
@@ -164,8 +164,8 @@
 						'<option value="12">12</option>' +
 						'<option value="13">13</option>' +
 					'</select>' +
-					'<br>' +
-					'<label for="to">To:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>' +
+					'&nbsp;&nbsp;' +
+					'<label for="to">To:&nbsp;</label>' +
 					'<select id="to" required>' +
 						'<option value="8">8</option>' +
 						'<option value="9">9</option>' +
@@ -178,9 +178,9 @@
 						'<option value="15">16</option>' +
 						'<option value="15">17</option>' +
 						'<option value="15">18</option>' +
-					'</select><br><br>' +
+					'</select><br>' +
 				'</td>';
-				cell2.innerHTML = "<button style='color:red' id='"+counter+"' onclick='myDeleteFunction(this, `"+id+"`)'>X</button><br><br>";
+				cell2.innerHTML = "<button style='color:red' id='"+counter+"' onclick='myDeleteFunction(this, `"+id+"`)'>X</button><br>";
 				row.id = counter;
 				counter++;
 			}
@@ -208,55 +208,7 @@
 				
 			}
 		
-		
-		
-			/* //returned value
-			var returned_days = "";
-		
-			//date picker
-			
-			window.onload = function() {
-				
-				const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-				var today = new Date();
-				var dd = String(today.getDate()).padStart(2, '0');
-				var mm = today.getMonth() + 2;
-				var yyyy = today.getFullYear();
-				while(mm > 11) {
-					mm -= 12;
-					yyyy += 1;
-				}
-				
-				if(mm == 1) {
-					document.getElementById("29").className = "active";
-					document.getElementById("30").className = "active";
-					document.getElementById("31").className = "active";
-				}
-				else if(mm < 7 && mm % 2 == 1) {
-					document.getElementById("31").className = "active";
-				}
-				else if(mm >= 7 && mm % 2 == 0){
-					document.getElementById("31").className = "active";
-				}
-				
-				document.getElementById("month").innerHTML = '<br>' + months[mm] + '<br>' + yyyy;
-				
-			}
-			
-			var chosen_days = "";
-			var ele_id;
-			function myFun(ele) {
-				chosen_days = "";
-				ele_id = ele.id;
-				var clas = ele.className;
-				
-				if(clas == "inactive") {
-					chosen_days += ele_id + " ";
-					openForm();
-				}
-				
-				
-			}
+			/*
 			
 			//time picker
 			
@@ -275,7 +227,8 @@
 				document.getElementById(ele_id).className = "active";
 				closeForm();
 			}
-		 */
+			*/
+		 
 			//navbar 
 			
 			window.onscroll = function() {
