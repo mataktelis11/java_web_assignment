@@ -13,6 +13,8 @@ import javax.servlet.http.HttpSession;
 
 import com.dao.PatientDao;
 import com.model.Patient;
+import com.util.Generator;
+import com.util.Encryption;
 
 /**
  * 
@@ -31,10 +33,12 @@ public class PatientController extends HttpServlet {
 	 */
 	private static final long serialVersionUID = -91978933072924051L;
 	private PatientDao dao;
+	private Generator gen;
 	
 	public PatientController() {
 		super();
 		dao = new PatientDao();
+		gen = new Generator();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -98,24 +102,50 @@ public class PatientController extends HttpServlet {
 		if(action.equalsIgnoreCase("register")) {
 			
 			Patient p = new Patient();
-			p.setName("AAAAAA");
-			p.setSurname("BBBBAA");
-			p.setSalt("Bq_&HR`LRkIHdT4_");
-			p.setPassword("2C52C69FBD9B7F298BA0A6B663D3C2F1");
-			p.setUsername("telis2");
-			p.setAMKA("1386605437");
 			
-			System.out.println(dao.addPatient(p));
+			//get data from the request
+			String name = request.getParameter("name");
+			String surName = request.getParameter("surname");
+			String amka = request.getParameter("amka");
+			String username = request.getParameter("username");
+			String password = request.getParameter("psw");
+			String passwordRepeat = request.getParameter("psw-repeat");
+			
+			//check data
+			if(password.equals(passwordRepeat)) {
+				//pass data to object
+				p.setName(name);
+				p.setSurname(surName);
+				p.setSalt(gen.generate(16));
+				p.setPassword(Encryption.getHashMD5(password, p.getSalt()));
+				p.setUsername(username);
+				p.setAMKA(amka);
+				
+				//call dao
+				
+				int check = dao.addPatient(p);
+				
+				if(check == 1) {
+					forward = "/regsuccess.jsp";
+				}
+					
+				else {
+					forward = "/regfail.jsp";
+					String message = "username and/or amka already in the database OR invalid.";
+					request.setAttribute("message", message);
+				}
+					
+			}
+			else {
+				forward = "/regfail.jsp";
+				String message = "invalid password given.";
+				request.setAttribute("message", message);
+			}
 			
 			
-			
-			forward = "/falseRequest.jsp";
-		}
-		
 
-		
-		
-		
+		}
+
 		RequestDispatcher view = request.getRequestDispatcher(forward);
 		view.forward(request, response);
 	}
