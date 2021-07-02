@@ -24,6 +24,10 @@ public class Hospital {
 		this.setName(name);
 		this.setAddress(address);
 	}
+	
+	public Hospital() {
+		super();
+	}
 
 	public Hospital(String name) {
 		super();

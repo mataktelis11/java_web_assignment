@@ -12,7 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.dao.DoctorDao2;
+import com.dao.HospitalDao;
 import com.dao.PatientDao;
+import com.model.Doctor;
+import com.model.Hospital;
 import com.model.Patient;
 import com.util.Encryption;
 import com.util.Generator;
@@ -29,12 +33,15 @@ public class AdminController extends HttpServlet {
 	private static final long serialVersionUID = -3181915305413793528L;
 	private PatientDao dao;
 	private Generator gen;
-	
+	private HospitalDao hdao;
+	private DoctorDao2 ddao;
 
 	public AdminController() {
 		super();
 		dao = new PatientDao();
 		gen = new Generator();
+		hdao = new HospitalDao();
+		ddao = new DoctorDao2();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -75,6 +82,13 @@ public class AdminController extends HttpServlet {
 			}
 			else if(action.equalsIgnoreCase("adddoctor")) {
 				forward = "/admin/adddoctor.jsp";
+				request.setAttribute("Hospitals", hdao.getHospitals());
+				request.setAttribute("message", "nomessage");
+			}
+			else if(action.equalsIgnoreCase("addhospital")) {
+				forward = "/admin/addhospital.jsp";
+				request.setAttribute("Hospitals", hdao.getHospitals());
+				request.setAttribute("message", "nomessage");
 			}
 		}
 		
@@ -83,6 +97,9 @@ public class AdminController extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		HttpSession session = request.getSession(false);
+		
 		
 		String forward = "";
 		String action = request.getParameter("action");
@@ -118,6 +135,9 @@ public class AdminController extends HttpServlet {
 				p.setUsername(username);
 				p.setAMKA(amka);
 				
+				
+				
+				
 				//call dao
 				int check = dao.addPatient(p);
 				
@@ -136,13 +156,89 @@ public class AdminController extends HttpServlet {
 		}
 		else if(action.equalsIgnoreCase("insertdoctor")) {
 			
+			forward = "/admin/adddoctor.jsp";
+			
+			Doctor d = new Doctor();
+			
+			String name = request.getParameter("name");
+			String surName = request.getParameter("surname");
+			String amka = request.getParameter("amka");
+			String username = request.getParameter("username");
+			String password = request.getParameter("psw");
+			String speciality = request.getParameter("sp");
+			String hospital = request.getParameter("hospital");
+			
+			//check data
+			if(true) {
+			
+				d.setName(username);
+				d.setSurname(surName);
+				d.setAMKA(amka);
+				d.setUsername(username);
+				
+				d.setSalt(gen.generate(16));
+				d.setPassword(Encryption.getHashMD5(password, d.getSalt()));
+				
+				d.setAdmin((String)session.getAttribute("username"));
+				
+				d.setSpeciality(speciality);
+				d.setHospital(new Hospital(hospital));
+				
+				
+				//call dao
+				int check = ddao.addDoctor(d);
+				
+				if(check == 1) {
+					request.setAttribute("message", "Success");
+					request.setAttribute("Hospitals", hdao.getHospitals());
+				}
+					
+				else {
+					request.setAttribute("message", "Fail");
+					request.setAttribute("Hospitals", hdao.getHospitals());
+				}
+			}
+
+
+			
 		}
 		
-		
+		else if(action.equalsIgnoreCase("inserthospital")) {
+			
+			forward = "/admin/addhospital.jsp";
+			
+			Hospital h = new Hospital();
+			
+			String name = request.getParameter("name");
+			String address = request.getParameter("address");
+			
+			//check data
+			if(true) {
+			
+
+				h.setName(name);
+				h.setAddress(address);
+				
+				
+				//call dao
+				int check = hdao.addHospital(h);
+				
+				if(check == 1) {
+					request.setAttribute("message", "Success");
+					request.setAttribute("Hospitals", hdao.getHospitals());
+				}
+					
+				else {
+					request.setAttribute("message", "Fail");
+					request.setAttribute("Hospitals", hdao.getHospitals());
+				}
+			}
+		}
 		
 		RequestDispatcher view = request.getRequestDispatcher(forward);
 		view.forward(request, response);
 	}
+
 	
 	
 }

@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<meta charset="ISO-8859-1">
-		<title>Welcome</title>
+		<title>Add Patient Form</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="style.css">
 		<style>
@@ -45,6 +45,7 @@
 			<a href="admin?action=appointments" class="right">Appointment menu</a>
 			<a id="selected" href="admin?action=addpatient" class="right">Add a Patient</a>
 			<a href="admin?action=adddoctor" class="right">Add a Doctor</a>
+			<a href="admin?action=addhospital" class="right">Add a Hospital</a>
 			
 		</div>
 		
