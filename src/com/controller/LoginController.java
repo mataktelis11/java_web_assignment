@@ -16,7 +16,15 @@ import com.model.User;
 import com.util.Encryption;
 
 
-
+/**
+ * 
+ * Class that extends <b>HttpServlet</b>.
+ * It's only function is the <i>login</i> of all user types.<br>
+ * If the credentials are right, the user is forwarded to the corresponding welcome page and a <b>session</b> is created.
+ * 
+ * @authors telis, vasilis, atnwnis
+ * 
+ */
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
 	
@@ -65,10 +73,16 @@ public class LoginController extends HttpServlet {
 						//forward user to the right welcome page
 						switch(user.getRole()) {
 							case "patient":
-							forward = "/patient/welcomepatient.jsp";
+								//forward = "/patient/welcomepatient.jsp";
+								response.sendRedirect("patient?action=welcome");
 							break;
 							case "doctor":
-							forward = "/doctor/welcomedoctor.jsp";
+								//forward = "/doctor/welcomedoctor.jsp";
+								response.sendRedirect("doctor?action=welcome");
+							break;
+							case "admin":
+								//forward = "/admin/welcomeadmin.jsp";
+								response.sendRedirect("admin?action=welcome");
 							break;
 						}
 					}
@@ -77,8 +91,8 @@ public class LoginController extends HttpServlet {
 				}
 			}
 			
-			RequestDispatcher view = request.getRequestDispatcher(forward);
-			view.forward(request, response);
+			//RequestDispatcher view = request.getRequestDispatcher(forward);
+			//view.forward(request, response);
 		}
 	}
 }
