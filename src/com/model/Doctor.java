@@ -15,6 +15,7 @@ public final class Doctor extends User{
 	private Hospital hospital;
 	private boolean onHalt;
 	private String AMKA;
+	private String admin;
 	
 	/**
 	 * Constructor of the Doctor Class.
@@ -38,6 +39,12 @@ public final class Doctor extends User{
 	public Doctor(String name, String surname, String speciality) {
 		super(name, surname);
 		this.speciality = speciality;
+	}
+	
+	
+
+	public Doctor() {
+		super();
 	}
 
 	public String getSpeciality() {
@@ -63,4 +70,23 @@ public final class Doctor extends User{
 	public void setOnHalt(boolean onHalt) {
 		this.onHalt = onHalt;
 	}
+
+	public String getAMKA() {
+		return AMKA;
+	}
+
+	public void setAMKA(String aMKA) {
+		AMKA = aMKA;
+	}
+
+	public String getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(String admin) {
+		this.admin = admin;
+	}
+	
+	
+	
 }

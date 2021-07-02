@@ -14,15 +14,7 @@ import javax.servlet.http.HttpSession;
 import com.dao.PatientDao;
 import com.model.Patient;
 
-/**
- * 
- * Class that extends <b>HttpServlet</b>.
- * It's only function is the <i>login</i> of all user types.<br>
- * If the credentials are right, the user is forwarded to the corresponding welcome page and a <b>session</b> is created.
- * 
- * @authors telis, vasilis, atnwnis
- * 
- */
+
 @WebServlet("/doctor")
 public class DoctorController extends HttpServlet {
 	
