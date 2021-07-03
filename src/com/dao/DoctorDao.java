@@ -62,7 +62,7 @@ public class DoctorDao {
 			e.printStackTrace();
 		}
 	
-}
+	}
 	 public void fillDates(String username,String date) {
 		//ArrayList<String> test = new ArrayList();
 		

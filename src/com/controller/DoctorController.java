@@ -61,6 +61,10 @@ public class DoctorController extends HttpServlet {
 			else if(action.equalsIgnoreCase("welcome")) {
 				forward = "/doctor/welcomedoctor.jsp";
 			}
+			else if(action.equalsIgnoreCase("callendar")) {
+				filldates(request.getParameter("data"));
+				forward = "/doctor/appointmentdeclaration.jsp";
+			}
 		}
 		
 		RequestDispatcher view = request.getRequestDispatcher(forward);
@@ -69,6 +73,10 @@ public class DoctorController extends HttpServlet {
 	
 	
 	
-
+	
+	private void filldates(String data) {
+		
+	}
+	
 	
 }

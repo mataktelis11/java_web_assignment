@@ -388,7 +388,7 @@
 				}
 				//==========================================================//
 				
-				window.location.href = "doctor?action=callendar?data=" + data;
+				window.location.href = "doctor?action=callendar&data=" + data;
 				
 			}
 		

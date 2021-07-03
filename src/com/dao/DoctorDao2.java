@@ -2,6 +2,7 @@ package com.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.model.Doctor;
@@ -73,6 +74,43 @@ public class DoctorDao2 {
 			return 0;
 		}
 	}
+	
+	
+	
+	public String getAmka(Doctor doctor) {
+		try {
+			PreparedStatement preparedStatement = connection.
+					prepareStatement("select * from doctor where user.username = ?");
+			preparedStatement.setString(1, doctor.getUsername());
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			if(rs.next()) {
+				return String.valueOf(rs.getLong("amka"));
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return "0";
+	}
+	
+	
+	
+	public void addAvailableAppointment(Doctor doctor,String date1,String date2) {
+		String s=getAmka(doctor);
+		try {
+			PreparedStatement preparedstatement =connection.prepareStatement("INSERT INTO appointment VALUES (1,?,?,?,1);");
+			preparedstatement.setString(0, s);
+			preparedstatement.setString(1, date1);
+			preparedstatement.setString(0, date2);
+			
+			int count = preparedstatement.executeUpdate();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+	
+	}
+	
 	
 	
 
