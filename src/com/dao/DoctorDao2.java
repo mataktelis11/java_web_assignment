@@ -80,7 +80,7 @@ public class DoctorDao2 {
 	public String getAmka(String username) {
 		try {
 			PreparedStatement preparedStatement = connection.
-					prepareStatement("select * from user inner join doctor on user.username = doctor.user_username where user.username = ?");
+					prepareStatement("select amka from doctor  where user_username = ?");
 			preparedStatement.setString(1, username);
 			ResultSet rs = preparedStatement.executeQuery();
 			
