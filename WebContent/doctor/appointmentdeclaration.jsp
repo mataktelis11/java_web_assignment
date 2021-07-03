@@ -8,6 +8,20 @@
 		<link rel="stylesheet" href="style.css">
 		<style>
 		
+			/* Button used to open the contact form - fixed at the bottom of the page */
+			.open-button {
+				background-color: #555;
+				color: white;
+				padding: 16px 20px;
+				border: none;
+				cursor: pointer;
+				opacity: 0.8;
+				position: fixed;
+				bottom: 23px;
+				right: 28px;
+				width: 280px;
+			}
+		
 			.show {
 				display: block;
 			}
@@ -21,7 +35,7 @@
 			}
 			
 			body {
-			background: #eee;
+				background: #eee;
 			}
 			
 			.weekdays {
@@ -31,29 +45,34 @@
 				background-color: #ddd;
 			}
 			
-			.weekdays li {
-				float: left;
-				display: inline-block;
-				width: 13.6%;
+			.weekdays td {
+				display: table-cell;
 				color: #666;
 				text-align: center;
+				width: 13.6%;
 			}
 			
 			.days {
 				cursor: default;
-				padding: 10px 0;
-				margin: 0;
 			}
 			
-			.days li {
+			.days td {
+				display: table-cell;
+				vertical-align: top;
 				cursor: default;
-				float: left;
-				display: inline-block;
-				list-style-type: none;
-				width: 13.6%;
-				margin-bottom: 10px;
 				font-size:16px;
 				color: #777;
+			}
+			
+			.days td .tdbgd {
+				background-color: #ddd;
+				width: 100%;
+				border: 5px solid #ddd;
+			}
+			
+			.board {
+				width: 100%;
+				table-layout: fixed;
 			}
 			
 			
@@ -94,111 +113,72 @@
 		
 		<div class="offset"> </div>
 		
-		<ul class="weekdays">
-			<li onclick="myCreateFunction('monTimes')">Mo<br> click to add</li>
-			<li onclick="myCreateFunction('tusTimes')">Tu<br> click to add</li>
-			<li onclick="myCreateFunction('wedTimes')">We<br> click to add</li>
-			<li onclick="myCreateFunction('thuTimes')">Th<br> click to add</li>
-			<li onclick="myCreateFunction('friTimes')">Fr<br> click to add</li>
-			<li onclick="myCreateFunction('satTimes')">Sa<br> click to add</li>
-			<li onclick="myCreateFunction('sunTimes')">Su<br> click to add</li>
-		</ul>
+		<table class="board">
 		
-		<ul class="days">
-		<li>
-			<table id="monTimes">
-			</table>
-			<br>
-		</li>
-		<li>
-			<table id="tusTimes">
-			</table>
-			<br>
-		</li>
-		<li>
-			<table id="wedTimes">
-			</table>
-			<br>
-		</li>
-		<li>
-			<table id="thuTimes">
-			</table>
-			<br>
-		</li>
-		<li>
-			<table id="friTimes">
-			</table>
-			<br>
-		</li>
-		<li>
-			<table id="satTimes">
-			</table>
-			<br>
-		</li>
-		<li>
-			<table id="sunTimes">
-			</table>
-			<br>
-		</li>
-		</ul>
+				<tr class="weekdays">
+					<td onclick="myCreateFunction('monTimes')">Mo<br> click to add</td>
+					<td onclick="myCreateFunction('tusTimes')">Tu<br> click to add</td>
+					<td onclick="myCreateFunction('wedTimes')">We<br> click to add</td>
+					<td onclick="myCreateFunction('thuTimes')">Th<br> click to add</td>
+					<td onclick="myCreateFunction('friTimes')">Fr<br> click to add</td>
+					<td onclick="myCreateFunction('satTimes')">Sa<br> click to add</td>
+					<td onclick="myCreateFunction('sunTimes')">Su<br> click to add</td>
+				</tr>
+				
+				<tr class="days">
+				<td>
+					<table id="monTimes">
+					</table>
+					<br>
+				</td>
+				<td>
+					<table id="tusTimes">
+					</table>
+					<br>
+				</td>
+				<td>
+					<table id="wedTimes">
+					</table>
+					<br>
+				</td>
+				<td>
+					<table id="thuTimes">
+					</table>
+					<br>
+				</td>
+				<td>
+					<table id="friTimes">
+					</table>
+					<br>
+				</td>
+				<td>
+					<table id="satTimes">
+					</table>
+					<br>
+				</td>
+				<td>
+					<table id="sunTimes">
+					</table>
+					<br>
+				</td>
+				</tr>
+				</table>
+				
+				<button class="open-button" onclick="dataContructor()" >Submit Data</button>
 			
 		<script>
-			var counter = 0;
-			function myCreateFunction(id) {
-				var table = document.getElementById(id);
-				var rows = table.getElementsByTagName('tr');
-				var lastrow = rows.length;
-				var row = table.insertRow(lastrow);
-				var cell1 = row.insertCell(0);
-				var cell2 = row.insertCell(1);
-				cell1.innerHTML = 
-				'<td>' +
-					'<label for="from">From:&nbsp;</label>' +
-					'<select id="from" required>' +
-						'<option value="8">6</option>' +
-						'<option value="8">7</option>' +
-						'<option value="8">8</option>' +
-						'<option value="9">9</option>' +
-						'<option value="10">10</option>' +
-						'<option value="11">11</option>' +
-						'<option value="12">12</option>' +
-						'<option value="13">13</option>' +
-					'</select>' +
-					'&nbsp;&nbsp;' +
-					'<label for="to">To:&nbsp;</label>' +
-					'<select id="to" required>' +
-						'<option value="8">8</option>' +
-						'<option value="9">9</option>' +
-						'<option value="10">10</option>' +
-						'<option value="11">11</option>' +
-						'<option value="12">12</option>' +
-						'<option value="13">13</option>' +
-						'<option value="14">14</option>' +
-						'<option value="15">15</option>' +
-						'<option value="15">16</option>' +
-						'<option value="15">17</option>' +
-						'<option value="15">18</option>' +
-					'</select><br>' +
-				'</td>';
-				cell2.innerHTML = "<button style='color:red' id='"+counter+"' onclick='myDeleteFunction(this, `"+id+"`)'>X</button><br>";
-				row.id = counter;
-				counter++;
-			}
 			
-			function myDeleteFunction(ele, id) {
-				alert(id);
-			    var table = document.getElementById(id);
-			   	var rowIndex = document.getElementById(ele.id).rowIndex;
-			    table.deleteRow(rowIndex);
-			}
-		
+			//window on-load
+			
+			var mm;
+			var yyyy;
 			window.onload = function() {
 				
 				const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 				var today = new Date();
 				var dd = String(today.getDate()).padStart(2, '0');
-				var mm = today.getMonth() + 2;
-				var yyyy = today.getFullYear();
+				mm = today.getMonth() + 1;
+				yyyy = today.getFullYear();
 				while(mm > 11) {
 					mm -= 12;
 					yyyy += 1;
@@ -208,26 +188,157 @@
 				
 			}
 		
-			/*
+			//data constructor
 			
-			//time picker
-			
-			function openForm() {
-				document.getElementById("timePicker").style.display = "block";
+			var data;
+			function dataContructor() {
+				data = (mm + 1) + "," + yyyy + ",";
+
+				//Monday====================================================//
+				var rows = document.getElementById("monTimes").rows;
+				data += 'Monday/';
+				for(var i = 0; i < rows.length; i++) {
+					var row = rows[i];
+					var cell = row.cells[0];
+					var from = cell.getElementsByClassName('from')[0].value;
+					var to = cell.getElementsByClassName('to')[0].value;
+					data += from + '-' + to + '/';
+				}
+				data += ',';
+				//==========================================================//
+				
+				//Tuesday===================================================//
+				var rows = document.getElementById("tusTimes").rows;
+				data += 'Tuesday/';
+				for(var i = 0; i < rows.length; i++) {
+					var row = rows[i];
+					var cell = row.cells[0];
+					var from = cell.getElementsByClassName('from')[0].value;
+					var to = cell.getElementsByClassName('to')[0].value;
+					data += from + '-' + to + '/';
+				}
+				data += ',';
+				//==========================================================//
+				
+				//Wednesday=================================================//
+				var rows = document.getElementById("wedTimes").rows;
+				data += 'Wednesday/';
+				for(var i = 0; i < rows.length; i++) {
+					var row = rows[i];
+					var cell = row.cells[0];
+					var from = cell.getElementsByClassName('from')[0].value;
+					var to = cell.getElementsByClassName('to')[0].value;
+					data += from + '-' + to + '/';
+				}
+				data += ',';
+				//==========================================================//
+				
+				//Thursday==================================================//
+				var rows = document.getElementById("thuTimes").rows;
+				data += 'Thursday/';
+				for(var i = 0; i < rows.length; i++) {
+					var row = rows[i];
+					var cell = row.cells[0];
+					var from = cell.getElementsByClassName('from')[0].value;
+					var to = cell.getElementsByClassName('to')[0].value;
+					data += from + '-' + to + '/';
+				}
+				data += ',';
+				//==========================================================//
+				
+				//Friday====================================================//
+				var rows = document.getElementById("friTimes").rows;
+				data += 'Friday/';
+				for(var i = 0; i < rows.length; i++) {
+					var row = rows[i];
+					var cell = row.cells[0];
+					var from = cell.getElementsByClassName('from')[0].value;
+					var to = cell.getElementsByClassName('to')[0].value;
+					data += from + '-' + to + '/';
+				}
+				data += ',';
+				//==========================================================//
+				
+				//Saturday==================================================//
+				var rows = document.getElementById("satTimes").rows;
+				data += 'Saturday/';
+				for(var i = 0; i < rows.length; i++) {
+					var row = rows[i];
+					var cell = row.cells[0];
+					var from = cell.getElementsByClassName('from')[0].value;
+					var to = cell.getElementsByClassName('to')[0].value;
+					data += from + '-' + to + '/';
+				}
+				data += ',';
+				//==========================================================//
+				
+				//Sunday====================================================//
+				var rows = document.getElementById("sunTimes").rows;
+				data += 'Sunday/';
+				for(var i = 0; i < rows.length; i++) {
+					var row = rows[i];
+					var cell = row.cells[0];
+					var from = cell.getElementsByClassName('from')[0].value;
+					var to = cell.getElementsByClassName('to')[0].value;
+					data += from + '-' + to + '/';
+				}
+				data += ',';
+				//==========================================================//
+				
+				
+				window.location.href = "doctor?action=callendar?data=" + data;
+				
+			}
+		
+			//datetime picker
+		
+			var counter = 0;
+			function myCreateFunction(id) {
+				var table = document.getElementById(id);
+				var rows = table.getElementsByTagName('tr');
+				var lastrow = rows.length;
+				var row = table.insertRow(lastrow);
+				var cell1 = row.insertCell(0);
+				cell1.innerHTML = 
+				'<div class="tdbgd">' +
+					'<label>From:&nbsp;</label>' +
+					'<select class="from" required>' +
+						'<option value="6">6</option>' +
+						'<option value="7">7</option>' +
+						'<option value="8">8</option>' +
+						'<option value="9">9</option>' +
+						'<option value="10">10</option>' +
+						'<option value="11">11</option>' +
+						'<option value="12">12</option>' +
+						'<option value="13">13</option>' +
+					'</select>' +
+					'&nbsp;&nbsp;' +
+					'<label>To:&nbsp;</label>' +
+					'<select class="to" required>' +
+						'<option value="8">8</option>' +
+						'<option value="9">9</option>' +
+						'<option value="10">10</option>' +
+						'<option value="11">11</option>' +
+						'<option value="12">12</option>' +
+						'<option value="13">13</option>' +
+						'<option value="14">14</option>' +
+						'<option value="15">15</option>' +
+						'<option value="16">16</option>' +
+						'<option value="17">17</option>' +
+						'<option value="18">18</option>' +
+					'</select>' +
+					'&nbsp;&nbsp;' +
+					"<button style='color:red' id='"+counter+"' onclick='myDeleteFunction(this, `"+id+"`)'>X</button><br>" +
+					'</div>';
+				row.id = counter;
+				counter++;
 			}
 			
-			function closeForm() {
-				document.getElementById("timePicker").style.display = "none";
+			function myDeleteFunction(ele, id) {
+			    var table = document.getElementById(id);
+			   	var rowIndex = document.getElementById(ele.id).rowIndex;
+			    table.deleteRow(rowIndex);
 			}
-			
-			function confirmDay() {
-				chosen_days += document.getElementById("from").value + "-" + document.getElementById("to").value + "/";
-				returned_days += chosen_days;
-				alert(returned_days);
-				document.getElementById(ele_id).className = "active";
-				closeForm();
-			}
-			*/
 		 
 			//navbar 
 			
