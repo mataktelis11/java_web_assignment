@@ -14,4 +14,11 @@ public final class HeadAdmin extends Admin{
 		super(username, password, name, surname);
 		
 	}
+
+	public HeadAdmin() {
+		super();
+	}
+	
+	
+	
 }

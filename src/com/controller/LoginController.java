@@ -56,6 +56,8 @@ public class LoginController extends HttpServlet {
 
 			if(user == null) {
 				forward = "/loginfailed.jsp";
+				RequestDispatcher view = request.getRequestDispatcher(forward);
+				view.forward(request, response);
 			}
 			else {
 				//check with hash function
@@ -72,22 +74,31 @@ public class LoginController extends HttpServlet {
 						
 						//forward user to the right welcome page
 						switch(user.getRole()) {
+						
 							case "patient":
 								//forward = "/patient/welcomepatient.jsp";
 								response.sendRedirect("patient?action=welcome");
 							break;
+							
 							case "doctor":
 								//forward = "/doctor/welcomedoctor.jsp";
 								response.sendRedirect("doctor?action=welcome");
 							break;
+							
 							case "admin":
 								//forward = "/admin/welcomeadmin.jsp";
 								response.sendRedirect("admin?action=welcome");
+							break;
+							
+							case "headadmin":
+								response.sendRedirect("headadmin?action=welcome");
 							break;
 						}
 					}
 				} else {
 					forward = "/loginfailed.jsp";
+					RequestDispatcher view = request.getRequestDispatcher(forward);
+					view.forward(request, response);
 				}
 			}
 			

@@ -20,8 +20,25 @@ public class Admin extends User {
 	 * @param surname	The surname of the Administrator
 	 * 
 	 */
+	
+	private String headAdmin;
+	
 	public Admin(String username, String password, String name, String surname) {
 		super(username, password, name, surname);
 	}
+
+	public Admin() {
+		super();
+	}
+
+	public String getHeadAdmin() {
+		return headAdmin;
+	}
+
+	public void setHeadAdmin(String headAdmin) {
+		this.headAdmin = headAdmin;
+	}
+	
+	
 }
 
