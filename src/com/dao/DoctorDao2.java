@@ -77,11 +77,11 @@ public class DoctorDao2 {
 	
 	
 	
-	public String getAmka(Doctor doctor) {
+	public String getAmka(String username) {
 		try {
 			PreparedStatement preparedStatement = connection.
 					prepareStatement("select * from doctor where user.username = ?");
-			preparedStatement.setString(1, doctor.getUsername());
+			preparedStatement.setString(1, username);
 			ResultSet rs = preparedStatement.executeQuery();
 			
 			if(rs.next()) {
@@ -96,15 +96,16 @@ public class DoctorDao2 {
 	
 	
 	
-	public void addAvailableAppointment(Doctor doctor,String date1,String date2) {
-		String s=getAmka(doctor);
+	public void addAvailableAppointment(String username,String date1,String date2) {
+		String s=getAmka(username);
 		try {
-			PreparedStatement preparedstatement =connection.prepareStatement("INSERT INTO appointment VALUES (1,?,?,?,1);");
-			preparedstatement.setString(0, s);
-			preparedstatement.setString(1, date1);
-			preparedstatement.setString(0, date2);
+			PreparedStatement preparedstatement =connection.prepareStatement("INSERT INTO appointment VALUES (5,?,?,?,1);");
+			preparedstatement.setString(1, s);
+			preparedstatement.setString(2, date1);
+			preparedstatement.setString(3, date2);
 			
 			int count = preparedstatement.executeUpdate();
+			System.out.println(count);
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
