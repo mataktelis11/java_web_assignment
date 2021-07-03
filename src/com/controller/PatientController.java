@@ -80,6 +80,11 @@ public class PatientController extends HttpServlet {
 				//get appointment list from dao and pass it to jsp
 				request.setAttribute("Appointments", dao.getAppointments(username));
 			}
+			else if(action.equalsIgnoreCase("availables")) {
+				forward = "/patient/availappointments.jsp";
+				//get appointment list from dao and pass it to jsp
+				request.setAttribute("Appointments", dao.getAppointments());
+			}
 			else if(action.equalsIgnoreCase("welcome")) {
 				forward = "/patient/welcomepatient.jsp";
 			}

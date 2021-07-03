@@ -56,6 +56,7 @@
 			<a href="patient?action=welcome" class="right"> <%= session.getAttribute("name") %> </a>
 			<a href="patient?action=details" class="right">Account Details</a>
 			<a id="selected" href="patient?action=appointments" class="right">Appointment menu</a>
+			<a href="patient?action=availables" class="right">Available Appointments</a>
 			
 		</div>
 		
