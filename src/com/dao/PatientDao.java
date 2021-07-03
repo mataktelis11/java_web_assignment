@@ -157,7 +157,7 @@ public class PatientDao{
 	 * Returns the List of Available Appointments.
 	 * @return List of Available Appointments found in the database.
 	 */
-	public List<Appointment> getAppointments() {
+	public List<Appointment> getAvailableAppointments() {
 			
 			List<Appointment> appointments = new ArrayList<Appointment>();
 			try {
