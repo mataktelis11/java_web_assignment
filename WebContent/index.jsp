@@ -7,6 +7,16 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="style.css">
 		<style>
+					
+			/* Makes the text of the buttons unselectable */
+			.unselectable {
+			    -webkit-touch-callout: none;
+			    -webkit-user-select: none;
+			    -khtml-user-select: none;
+			    -moz-user-select: none;
+			    -ms-user-select: none;
+			    user-select: none;
+			}
 			
 			.mySlides {
 				display: none;
@@ -71,7 +81,7 @@
 		
 		</style>
 	</head>
-	<body>
+	<body class="unselectable">
 	
 		<div class="header">
 			<h1>Web Health</h1>

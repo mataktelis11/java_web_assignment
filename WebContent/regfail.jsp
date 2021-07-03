@@ -10,7 +10,17 @@
 		<link rel="stylesheet" href="style.css">
 		
 		<style>
-		
+				
+			/* Makes the text of the buttons unselectable */
+			.unselectable {
+			    -webkit-touch-callout: none;
+			    -webkit-user-select: none;
+			    -khtml-user-select: none;
+			    -moz-user-select: none;
+			    -ms-user-select: none;
+			    user-select: none;
+			}
+			
 			/* Header/logo Title */
 			.header {
 				padding: 60px;
@@ -49,7 +59,7 @@
 		</style>
 		
 	</head>
-	<body>
+	<body class="unselectable">
 	
 		<div class="header">
 			<h1>Register failed!</h1>

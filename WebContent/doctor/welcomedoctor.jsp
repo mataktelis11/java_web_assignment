@@ -7,14 +7,24 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="style.css">
 		<style>
-		
+				
+			/* Makes the text of the buttons unselectable */
+			.unselectable {
+			    -webkit-touch-callout: none;
+			    -webkit-user-select: none;
+			    -khtml-user-select: none;
+			    -moz-user-select: none;
+			    -ms-user-select: none;
+			    user-select: none;
+			}
+			
 			.show {
 				display: block;
 			}
 			
 		</style>
 	</head>
-	<body>
+	<body class="unselectable">
 	
 		<% 
 			

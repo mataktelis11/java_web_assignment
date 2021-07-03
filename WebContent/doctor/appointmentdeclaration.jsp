@@ -8,8 +8,18 @@
 		<link rel="stylesheet" href="style.css">
 		<style>
 		
+			/* Makes the text of the buttons unselectable */
+			.unselectable {
+			    -webkit-touch-callout: none;
+			    -webkit-user-select: none;
+			    -khtml-user-select: none;
+			    -moz-user-select: none;
+			    -ms-user-select: none;
+			    user-select: none;
+			}
+			
 			/* Button used to open the contact form - fixed at the bottom of the page */
-			.open-button {
+			.submitButton {
 				background-color: #555;
 				color: white;
 				padding: 16px 20px;
@@ -75,12 +85,9 @@
 				table-layout: fixed;
 			}
 			
-			
-			
-			
 		</style>
 	</head>
-	<body>
+	<body class="unselectable">
 	
 		<% 
 			
@@ -97,7 +104,7 @@
 		
 		
 		<div class="header">
-			<h1>Welcome</h1>
+			<h1></h1>
 		</div>
 		
 		<div class="navbar">
@@ -108,7 +115,6 @@
 			<a href="doctor?action=welcome" class="right"> <%= session.getAttribute("name") %> </a>
 			<a href="doctor?action=appointments" class="right">Appointment menu</a>
 			<a id="selected" href="doctor?action=appointmentdeclaration" class="right">Appointment declaration</a>
-			
 		</div>
 		
 		<div class="offset"> </div>
@@ -116,13 +122,13 @@
 		<table class="board">
 		
 				<tr class="weekdays">
-					<td onclick="myCreateFunction('monTimes')">Mo<br> click to add</td>
-					<td onclick="myCreateFunction('tusTimes')">Tu<br> click to add</td>
-					<td onclick="myCreateFunction('wedTimes')">We<br> click to add</td>
-					<td onclick="myCreateFunction('thuTimes')">Th<br> click to add</td>
-					<td onclick="myCreateFunction('friTimes')">Fr<br> click to add</td>
-					<td onclick="myCreateFunction('satTimes')">Sa<br> click to add</td>
-					<td onclick="myCreateFunction('sunTimes')">Su<br> click to add</td>
+					<td onclick="myCreateFunction('monTimes')"> Monday <br> <b>click to add</b> </td>
+					<td onclick="myCreateFunction('tusTimes')"> Tuesday <br> <b>click to add</b> </td>
+					<td onclick="myCreateFunction('wedTimes')"> Wednesday <br> <b>click to add</b> </td>
+					<td onclick="myCreateFunction('thuTimes')"> Thursday <br> <b>click to add</b> </td>
+					<td onclick="myCreateFunction('friTimes')"> Friday <br> <b>click to add</b> </td>
+					<td onclick="myCreateFunction('satTimes')"> Saturday <br> <b>click to add</b> </td>
+					<td onclick="myCreateFunction('sunTimes')"> Sunday <br> <b>click to add</b> </td>
 				</tr>
 				
 				<tr class="days">
@@ -164,7 +170,7 @@
 				</tr>
 				</table>
 				
-				<button class="open-button" onclick="dataContructor()" >Submit Data</button>
+				<button class="submitButton" onclick="dataContructor()" >Submit Data</button>
 			
 		<script>
 			
@@ -176,7 +182,6 @@
 				
 				const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 				var today = new Date();
-				var dd = String(today.getDate()).padStart(2, '0');
 				mm = today.getMonth() + 1;
 				yyyy = today.getFullYear();
 				while(mm > 11) {
@@ -187,12 +192,18 @@
 				document.getElementsByClassName("header")[0].innerHTML = '<br>' + months[mm] + '<br>' + yyyy;
 				
 			}
+			
+			//data validation
+			
+			function validate(from, to) {
+				if(from >= to) return false;
+				else return true;
+			}
 		
 			//data constructor
 			
-			var data;
 			function dataContructor() {
-				data = (mm + 1) + "," + yyyy + ",";
+				var data = (mm + 1) + "," + yyyy + ",";
 
 				//Monday====================================================//
 				var rows = document.getElementById("monTimes").rows;
@@ -208,7 +219,7 @@
 				//==========================================================//
 				
 				//Tuesday===================================================//
-				var rows = document.getElementById("tusTimes").rows;
+				rows = document.getElementById("tusTimes").rows;
 				data += 'Tuesday/';
 				for(var i = 0; i < rows.length; i++) {
 					var row = rows[i];
@@ -221,7 +232,7 @@
 				//==========================================================//
 				
 				//Wednesday=================================================//
-				var rows = document.getElementById("wedTimes").rows;
+				rows = document.getElementById("wedTimes").rows;
 				data += 'Wednesday/';
 				for(var i = 0; i < rows.length; i++) {
 					var row = rows[i];
@@ -234,7 +245,7 @@
 				//==========================================================//
 				
 				//Thursday==================================================//
-				var rows = document.getElementById("thuTimes").rows;
+				rows = document.getElementById("thuTimes").rows;
 				data += 'Thursday/';
 				for(var i = 0; i < rows.length; i++) {
 					var row = rows[i];
@@ -247,7 +258,7 @@
 				//==========================================================//
 				
 				//Friday====================================================//
-				var rows = document.getElementById("friTimes").rows;
+				rows = document.getElementById("friTimes").rows;
 				data += 'Friday/';
 				for(var i = 0; i < rows.length; i++) {
 					var row = rows[i];
@@ -260,7 +271,7 @@
 				//==========================================================//
 				
 				//Saturday==================================================//
-				var rows = document.getElementById("satTimes").rows;
+				rows = document.getElementById("satTimes").rows;
 				data += 'Saturday/';
 				for(var i = 0; i < rows.length; i++) {
 					var row = rows[i];
@@ -273,7 +284,7 @@
 				//==========================================================//
 				
 				//Sunday====================================================//
-				var rows = document.getElementById("sunTimes").rows;
+				rows = document.getElementById("sunTimes").rows;
 				data += 'Sunday/';
 				for(var i = 0; i < rows.length; i++) {
 					var row = rows[i];
@@ -282,9 +293,7 @@
 					var to = cell.getElementsByClassName('to')[0].value;
 					data += from + '-' + to + '/';
 				}
-				data += ',';
 				//==========================================================//
-				
 				
 				window.location.href = "doctor?action=callendar?data=" + data;
 				
@@ -311,6 +320,12 @@
 						'<option value="11">11</option>' +
 						'<option value="12">12</option>' +
 						'<option value="13">13</option>' +
+						'<option value="14">14</option>' +
+						'<option value="15">15</option>' +
+						'<option value="16">16</option>' +
+						'<option value="17">17</option>' +
+						'<option value="18">18</option>' +
+						'<option value="19">19</option>' +
 					'</select>' +
 					'&nbsp;&nbsp;' +
 					'<label>To:&nbsp;</label>' +
@@ -326,9 +341,12 @@
 						'<option value="16">16</option>' +
 						'<option value="17">17</option>' +
 						'<option value="18">18</option>' +
+						'<option value="19">19</option>' +
+						'<option value="20">20</option>' +
+						'<option value="21">21</option>' +
 					'</select>' +
 					'&nbsp;&nbsp;' +
-					"<button style='color:red' id='"+counter+"' onclick='myDeleteFunction(this, `"+id+"`)'>X</button><br>" +
+					"<button style='color:red;opacity:0.8;cursor:pointer;' id='"+counter+"' onclick='myDeleteFunction(this, `"+id+"`)'>X</button><br>" +
 					'</div>';
 				row.id = counter;
 				counter++;
