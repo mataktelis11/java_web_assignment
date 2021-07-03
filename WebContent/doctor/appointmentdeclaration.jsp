@@ -7,7 +7,15 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="style.css">
 		<style>
-		
+			
+			body {
+				background: #eee;
+			}
+			
+			.header {
+				font-size: 42px !important;
+			}
+			
 			/* Makes the text of the buttons unselectable */
 			.unselectable {
 			    -webkit-touch-callout: none;
@@ -31,22 +39,69 @@
 				right: 28px;
 				width: 280px;
 			}
-		
-			.show {
-				display: block;
+			
+			/* Error Popup -- https://www.w3schools.com/howto/howto_js_popup.asp */
+			
+			/* Popup container */
+			.popup {
+				position: relative;
+				display: inline-block;
+				cursor: pointer;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
 			}
 			
-			.header {
-				font-size: 42px !important;
+			/* The popup */
+			.popup .popuptext {
+				visibility: hidden;
+				width: 280px;
+				background-color: #555;
+				color: #fff;
+				text-align: center;
+				border-radius: 6px;
+				padding: 8px 0;
+				position: fixed;
+				z-index: 1;
+				bottom: 76px;
+				right: 28px;
+				margin-left: -80px;
 			}
 			
-			ul {
-				overflow: hidden;
+			/* Popup arrow */
+			.popup .popuptext::after {
+				content: "";
+				position: absolute;
+				top: 100%;
+				left: 50%;
+				margin-left: -5px;
+				border-width: 5px;
+				border-style: solid;
+				border-color: #555 transparent transparent transparent;
 			}
 			
-			body {
-				background: #eee;
+			/* hide and show the popup */
+			.popup .show {
+				visibility: visible;
+				-webkit-animation: fadeIn 1s;
+				animation: fadeIn 1s;
 			}
+			
+			/* fade in the popup animation */
+			@-webkit-keyframes fadeIn {
+				from {opacity: 0;} 
+				to {opacity: 1;}
+			}
+			
+			@keyframes fadeIn {
+				from {opacity: 0;}
+				to {opacity:1 ;}
+			}
+			
+			/*                                                                   */
+			
+			/* DateTime selection board */
 			
 			.weekdays {
 				cursor: pointer;
@@ -84,6 +139,8 @@
 				width: 100%;
 				table-layout: fixed;
 			}
+			
+			/*                          */
 			
 		</style>
 	</head>
@@ -170,8 +227,11 @@
 				</tr>
 				</table>
 				
-				<button class="submitButton" onclick="dataContructor()" >Submit Data</button>
-			
+				<div class="popup">
+					<button class="submitButton" onclick="dataContructor()" >Submit Data</button>
+					<span class="popuptext" id="error" onclick="errorPopup()"><b style="color:red">ERROR</b> <br> <i>hint: check the time spans</i> </span>
+				</div>
+				
 		<script>
 			
 			//window on-load
@@ -196,8 +256,13 @@
 			//data validation
 			
 			function validate(from, to) {
-				if(from >= to) return false;
+				if(parseInt(from) >= parseInt(to)) return false;
 				else return true;
+			}
+			
+			function errorPopup() {
+				  var popup = document.getElementById("error");
+				  popup.classList.toggle("show");
 			}
 		
 			//data constructor
@@ -213,6 +278,10 @@
 					var cell = row.cells[0];
 					var from = cell.getElementsByClassName('from')[0].value;
 					var to = cell.getElementsByClassName('to')[0].value;
+					if(!validate(from, to)) {
+						errorPopup();
+						return;
+					}
 					data += from + '-' + to + '/';
 				}
 				data += ',';
@@ -226,6 +295,10 @@
 					var cell = row.cells[0];
 					var from = cell.getElementsByClassName('from')[0].value;
 					var to = cell.getElementsByClassName('to')[0].value;
+					if(!validate(from, to)) {
+						errorPopup();
+						return;
+					}
 					data += from + '-' + to + '/';
 				}
 				data += ',';
@@ -239,6 +312,10 @@
 					var cell = row.cells[0];
 					var from = cell.getElementsByClassName('from')[0].value;
 					var to = cell.getElementsByClassName('to')[0].value;
+					if(!validate(from, to)) {
+						errorPopup();
+						return;
+					}
 					data += from + '-' + to + '/';
 				}
 				data += ',';
@@ -252,6 +329,10 @@
 					var cell = row.cells[0];
 					var from = cell.getElementsByClassName('from')[0].value;
 					var to = cell.getElementsByClassName('to')[0].value;
+					if(!validate(from, to)) {
+						errorPopup();
+						return;
+					}
 					data += from + '-' + to + '/';
 				}
 				data += ',';
@@ -265,6 +346,10 @@
 					var cell = row.cells[0];
 					var from = cell.getElementsByClassName('from')[0].value;
 					var to = cell.getElementsByClassName('to')[0].value;
+					if(!validate(from, to)) {
+						errorPopup();
+						return;
+					}
 					data += from + '-' + to + '/';
 				}
 				data += ',';
@@ -278,6 +363,10 @@
 					var cell = row.cells[0];
 					var from = cell.getElementsByClassName('from')[0].value;
 					var to = cell.getElementsByClassName('to')[0].value;
+					if(!validate(from, to)) {
+						errorPopup();
+						return;
+					}
 					data += from + '-' + to + '/';
 				}
 				data += ',';
@@ -291,6 +380,10 @@
 					var cell = row.cells[0];
 					var from = cell.getElementsByClassName('from')[0].value;
 					var to = cell.getElementsByClassName('to')[0].value;
+					if(!validate(from, to)) {
+						errorPopup();
+						return;
+					}
 					data += from + '-' + to + '/';
 				}
 				//==========================================================//
