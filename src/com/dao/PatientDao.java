@@ -152,35 +152,40 @@ public class PatientDao{
 		return appointments;
 	}
 	
-public List<Appointment> getAppointments() {
-		
-		List<Appointment> appointments = new ArrayList<Appointment>();
-		try {
-			PreparedStatement preparedStatement = connection.
-					prepareStatement("select user.firstname, user.surname, temp.doctor_specialty, temp.appdate, temp.endtime, temp.hospital "
-							+ "from	(select doctor.user_username as doctor_username, doctor.speciality as doctor_specialty, doctor.hospital_hospname as hospital, appdate, endtime "
-							+ "		from (appointment inner join patient on patient.amka = appointment.patient_amka) "
-							+ "		inner join doctor on  doctor.amka = appointment.doctor_amka "
-							+ "		where appointment.availability = 1) as temp"
-							+ "		inner join user on user.username = temp.doctor_username");
+	
+	/**
+	 * Returns the List of Available Appointments.
+	 * @return List of Available Appointments found in the database.
+	 */
+	public List<Appointment> getAppointments() {
 			
-			ResultSet rs = preparedStatement.executeQuery();
-
-			while (rs.next()) {
-				Appointment appointment = new Appointment();
-
-				appointment.setDoctor(new Doctor(String.valueOf(rs.getString("firstname")), String.valueOf(rs.getString("surname")), String.valueOf(rs.getString("doctor_specialty"))));
-				appointment.setDatetime(String.valueOf(rs.getString("appdate")));
-				appointment.setEndtime(String.valueOf(rs.getString("endtime")));
-				appointment.setHospital(new Hospital(rs.getString("hospital")));
-				appointments.add(appointment);
+			List<Appointment> appointments = new ArrayList<Appointment>();
+			try {
+				PreparedStatement preparedStatement = connection.
+						prepareStatement("select user.firstname, user.surname, temp.doctor_specialty, temp.appdate, temp.endtime, temp.hospital "
+								+ "from	(select doctor.user_username as doctor_username, doctor.speciality as doctor_specialty, doctor.hospital_hospname as hospital, appdate, endtime "
+								+ "		from (appointment inner join patient on patient.amka = appointment.patient_amka) "
+								+ "		inner join doctor on  doctor.amka = appointment.doctor_amka "
+								+ "		where appointment.availability = 1) as temp"
+								+ "		inner join user on user.username = temp.doctor_username");
+				
+				ResultSet rs = preparedStatement.executeQuery();
+	
+				while (rs.next()) {
+					Appointment appointment = new Appointment();
+	
+					appointment.setDoctor(new Doctor(String.valueOf(rs.getString("firstname")), String.valueOf(rs.getString("surname")), String.valueOf(rs.getString("doctor_specialty"))));
+					appointment.setDatetime(String.valueOf(rs.getString("appdate")));
+					appointment.setEndtime(String.valueOf(rs.getString("endtime")));
+					appointment.setHospital(new Hospital(rs.getString("hospital")));
+					appointments.add(appointment);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+	
+			return appointments;
 		}
-
-		return appointments;
-	}
 
 
 
