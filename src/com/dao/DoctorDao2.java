@@ -105,7 +105,7 @@ public class DoctorDao2 {
 			preparedstatement.setString(3, date2);
 			
 			int count = preparedstatement.executeUpdate();
-			System.out.println(count);
+			
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
