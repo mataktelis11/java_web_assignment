@@ -118,24 +118,28 @@ public class PatientController extends HttpServlet {
 					forward = "/patient/availappointments.jsp";
 					//get appointment list from dao and pass it to jsp
 					request.setAttribute("Appointments", dao.getAvailableAppointments());
+					request.setAttribute("PAMKA", dao.getAmka((String)session.getAttribute("username")));
 				}
 				else if (request.getParameter("data").equals("Pathologist")) {
 					forward = "/patient/availappointments.jsp";
 					//get appointment list from dao and pass it to jsp
 					request.setAttribute("Appointments", dao.getAvailableAppointments(request.getParameter("data")));
 					request.setAttribute("Data", request.getParameter("data"));
+					request.setAttribute("PAMKA", dao.getAmka((String)session.getAttribute("username")));
 				}
 				else if (request.getParameter("data").equals("Ophthalmologist")) {
 					forward = "/patient/availappointments.jsp";
 					//get appointment list from dao and pass it to jsp
 					request.setAttribute("Appointments", dao.getAvailableAppointments(request.getParameter("data")));
 					request.setAttribute("Data", request.getParameter("data"));
+					request.setAttribute("PAMKA", dao.getAmka((String)session.getAttribute("username")));
 				}
 				else if (request.getParameter("data").equals("Orthopedic")) {
 					forward = "/patient/availappointments.jsp";
 					//get appointment list from dao and pass it to jsp
 					request.setAttribute("Appointments", dao.getAvailableAppointments(request.getParameter("data")));
 					request.setAttribute("Data", request.getParameter("data"));
+					request.setAttribute("PAMKA", dao.getAmka((String)session.getAttribute("username")));
 				}
 			}
 			else if(action.equalsIgnoreCase("welcome")) {
@@ -146,14 +150,7 @@ public class PatientController extends HttpServlet {
 				String pamka = request.getParameter("pamka");
 				String date = request.getParameter("date");
 				
-				
-				
 				dao.cancelAppointment(pamka, damka, date);
-				
-				
-				
-				
-				
 				
 				forward = "/patient/appointments.jsp";
 				//get username from session
@@ -172,13 +169,46 @@ public class PatientController extends HttpServlet {
 					
 					long time = date1.getTime();
 
-					
 					Timestamp ts = new Timestamp(time);
 				
 				for(Appointment a : appointments) {
 					
+					if(Timestamp.valueOf(a.getEndtime()).after(ts))
+						appointments1.add(a);
+					else
+						appointments2.add(a);
+				}
+				
+				request.setAttribute("Appointments1", appointments1);
+				request.setAttribute("Appointments2", appointments2);
+			}
+			else if(action.equalsIgnoreCase("add")) {
+				String damka = request.getParameter("damka");
+				String pamka = request.getParameter("pamka");
+				String date = request.getParameter("date");
+				
+				dao.addAppointment(pamka, damka, date);
+				
+				forward = "/patient/appointments.jsp";
+				//get username from session
+				String username = (String)session.getAttribute("username");
+				//get appointment list from dao and pass it to jsp
+				
+				List<Appointment> appointments = dao.getAppointments(username);
+				
+				List<Appointment> appointments1 = new ArrayList<Appointment>();
+				List<Appointment> appointments2 = new ArrayList<Appointment>();
+				
+				
+				//https://tecadmin.net/get-current-timestamp-in-java/
+				
+				Date date1= new Date();
 					
+				long time = date1.getTime();
 
+				Timestamp ts = new Timestamp(time);
+				
+				for(Appointment a : appointments) {
 					
 					if(Timestamp.valueOf(a.getEndtime()).after(ts))
 						appointments1.add(a);

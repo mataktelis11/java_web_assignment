@@ -161,7 +161,7 @@
 			th{
 				opacity: 1;
 				z-index: 1;
-				padding: 12px;
+				padding: 8px;
 				background-color: #555;
 			    color: #ffffff;
 			    font-size: 1.5em;
@@ -177,7 +177,7 @@
 			
 			td {
     			font-size: 0.9em;
-				padding: 12px;
+				padding: 8px;
 			}
 			
 		</style>
@@ -240,7 +240,7 @@
 						<td><c:out value="${a.doctor.speciality}" /></td>
 						<td><c:out value="${a.datetime}" /></td>
 						<td><c:out value="${a.hospital.name}" /></td>
-						<td> <button class="chooseAppointment" onclick='openModal("${a.doctor.name}", "${a.doctor.surname}", "${a.doctor.speciality}", "${a.datetime}", "${a.hospital.name}")'>Choose appointment</button> </td>
+						<td> <button class="chooseAppointment" onclick='openModal("${a.doctor.name}", "${a.doctor.surname}", "${a.doctor.speciality}", "${a.datetime}", "${a.hospital.name}", "${a.doctor.AMKA}", "${requestScope.PAMKA}")'>Choose appointment</button> </td>
 
 					</tr>
 	            </c:forEach>
@@ -255,7 +255,7 @@
 					<h2>Make a reservation with this doctor?</h2>
 				</div>
 				<br>
-				<div class="modal-body"><p style="font-size:15px; font-family:verdana;"></p><p style="font-size:15px; font-family:verdana;"></p><p style="font-size:15px; font-family:verdana;"></p><p style="font-size:15px; font-family:verdana;"></p></div>
+				<div class="modal-body"><p style="font-size:15px; font-family:verdana;"></p><p style="font-size:15px; font-family:verdana;"></p><p style="font-size:15px; font-family:verdana;"></p><p style="font-size:15px; font-family:verdana;"></p><p style='font-size:10px; font-family:verdana;'></p></div>
 				<br>
 				<div class="modal-footer">
 					<br>
@@ -272,7 +272,7 @@
 			//add appointment
 			
 			function addAppointment() {
-				
+				window.location.href = "patient?action=add&damka="+doctorAMKA+"&pamka="+patientAMKA+"&date="+dateTime;
 			}
 		
 			//modal
@@ -283,9 +283,18 @@
 			// Get the <span> element that closes the modal
 			var span = document.getElementsByClassName("close")[0];
 			
+			//POST data variables
+			var doctorAMKA;
+			var patientAMKA;
+			var dateTime;
+			
 			// When the user clicks the button, open the modal 
-			function openModal(docName, docSurname, docSpeciality, datetime, hospital) {
+			function openModal(docName, docSurname, docSpeciality, datetime, hospital, docAMKA, patAMKA) {
 				modal.style.display = "block";
+				
+				doctorAMKA = docAMKA;
+				patientAMKA = patAMKA;
+				dateTime = datetime;
 				
 				var date = datetime.split(' ')[0];
 				var time = datetime.split(' ')[1];
@@ -297,7 +306,7 @@
 				document.getElementsByClassName("modal-body")[0].childNodes[1].innerHTML = "<br><b> Doctor Full Name: </b> " + docSurname + " " + docName;
 				document.getElementsByClassName("modal-body")[0].childNodes[2].innerHTML = "<br><b> Appointment Date: </b> " + date;
 				document.getElementsByClassName("modal-body")[0].childNodes[3].innerHTML = "<br><b> Appointment Time: </b> " + time;
-				document.getElementsByClassName("modal-body")[0].innerHTML += "<p style='font-size:10px; font-family:verdana;'> You can cancel your appointment up to three days prior. </p>"
+				document.getElementsByClassName("modal-body")[0].childNodes[4].innerHTML =  "You can cancel your appointment up to three days prior."
 					
 				
 			}
