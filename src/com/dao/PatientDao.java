@@ -194,7 +194,7 @@ public class PatientDao{
 		
 		try {
 			PreparedStatement preparedStatement = connection.
-					prepareStatement("delete from appointment where patient_amka=? and doctor_amka=? and appdate=?;");
+					prepareStatement("UPDATE appointment set availability=1,patient_amka=5 where patient_amka=? and doctor_amka=? and appdate=?;");
 			preparedStatement.setString(1, pamka);
 			preparedStatement.setString(2, damka);
 			preparedStatement.setString(3, date);
