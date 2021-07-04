@@ -197,7 +197,7 @@ public class AdminController extends HttpServlet {
 			//check data
 			if(Validate.validAMKA(amka) && Validate.validPass(password)) {
 			
-				d.setName(username);
+				d.setName(name);
 				d.setSurname(surName);
 				d.setAMKA(amka);
 				d.setUsername(username);
