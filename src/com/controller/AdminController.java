@@ -2,7 +2,7 @@ package com.controller;
 
 
 import java.io.IOException;
-
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import com.dao.DoctorDao2;
 import com.dao.HospitalDao;
 import com.dao.PatientDao;
+import com.model.Appointment;
 import com.model.Doctor;
 import com.model.Hospital;
 import com.model.Patient;
@@ -84,11 +85,24 @@ public class AdminController extends HttpServlet {
 				forward = "/admin/adddoctor.jsp";
 				request.setAttribute("Hospitals", hdao.getHospitals());
 				request.setAttribute("message", "nomessage");
+				request.setAttribute("Doctors", ddao.getAllDoctors());
 			}
 			else if(action.equalsIgnoreCase("addhospital")) {
 				forward = "/admin/addhospital.jsp";
 				request.setAttribute("Hospitals", hdao.getHospitals());
 				request.setAttribute("message", "nomessage");
+			}
+			else if(action.equalsIgnoreCase("delete")) {
+				forward = "/admin/adddoctor.jsp";
+				request.setAttribute("Hospitals", hdao.getHospitals());
+				request.setAttribute("Doctors", ddao.getAllDoctors());
+				
+				
+				//check
+				if(removeDoctor(request.getParameter("DoctorUsername"),request.getParameter("DoctorAMKA")))
+					request.setAttribute("message", "Doctor removed successfully.");
+				else
+					request.setAttribute("message", "Doctor cannot be removed.");
 			}
 		}
 		
@@ -239,6 +253,18 @@ public class AdminController extends HttpServlet {
 		view.forward(request, response);
 	}
 
-	
+	public boolean removeDoctor(String username, String amka) {
+		
+		List<Appointment> appointments = ddao.getScheduledAppointments(amka);
+		
+		if(appointments.size()>0)
+			return false;
+		
+		else
+			return true;
+		
+		
+		
+	}
 	
 }

@@ -4,8 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.model.Appointment;
 import com.model.Doctor;
+import com.model.Hospital;
 import com.util.DbUtil;
 
 public class DoctorDao2 {
@@ -77,11 +81,11 @@ public class DoctorDao2 {
 	
 	
 	
-	public String getAmka(Doctor doctor) {
+	public String getAmka(String username) {
 		try {
 			PreparedStatement preparedStatement = connection.
-					prepareStatement("select * from doctor where user.username = ?");
-			preparedStatement.setString(1, doctor.getUsername());
+					prepareStatement("select amka from doctor  where user_username = ?");
+			preparedStatement.setString(1, username);
 			ResultSet rs = preparedStatement.executeQuery();
 			
 			if(rs.next()) {
@@ -96,15 +100,16 @@ public class DoctorDao2 {
 	
 	
 	
-	public void addAvailableAppointment(Doctor doctor,String date1,String date2) {
-		String s=getAmka(doctor);
+	public void addAvailableAppointment(String username,String date1,String date2) {
+		String s=getAmka(username);
 		try {
-			PreparedStatement preparedstatement =connection.prepareStatement("INSERT INTO appointment VALUES (1,?,?,?,1);");
-			preparedstatement.setString(0, s);
-			preparedstatement.setString(1, date1);
-			preparedstatement.setString(0, date2);
+			PreparedStatement preparedstatement =connection.prepareStatement("INSERT INTO appointment VALUES (5,?,?,?,1);");
+			preparedstatement.setString(1, s);
+			preparedstatement.setString(2, date1);
+			preparedstatement.setString(3, date2);
 			
 			int count = preparedstatement.executeUpdate();
+			
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -112,6 +117,66 @@ public class DoctorDao2 {
 	}
 	
 	
+	public List<Doctor> getAllDoctors() {
+		
+		List<Doctor> doctors = new ArrayList<Doctor>();
+		
+		try {
+			
+			
+			PreparedStatement preparedStatement = connection.
+					prepareStatement("select username, amka, firstname, surname from doctor inner join user on doctor.user_username = user.username;");
+			
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				Doctor doctor = new Doctor();
+
+				doctor.setName(rs.getString("firstname"));
+				doctor.setSurname(rs.getString("surname"));
+				doctor.setAMKA(rs.getString("amka"));
+				doctor.setUsername(rs.getString("username"));
+				
+				doctors.add(doctor);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		
+		return doctors;
+	}
 	
+	public List<Appointment> getScheduledAppointments(String amka){
+		
+		List<Appointment> appointments = new ArrayList<Appointment>();
+		
+		try {
+			
+			
+			PreparedStatement preparedStatement = connection.
+					prepareStatement("select * from appointment where doctor_amka=? and availability=1;");
+			
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				Appointment appointment = new Appointment();
+
+
+				appointment.setDatetime(String.valueOf(rs.getString("appdate")));
+				appointment.setEndtime(String.valueOf(rs.getString("endtime")));
+
+				appointments.add(appointment);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		return appointments;
+	}
 
 }
