@@ -4,8 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.model.Appointment;
 import com.model.Doctor;
+import com.model.Hospital;
 import com.util.DbUtil;
 
 public class DoctorDao2 {
@@ -113,6 +117,66 @@ public class DoctorDao2 {
 	}
 	
 	
+	public List<Doctor> getAllDoctors() {
+		
+		List<Doctor> doctors = new ArrayList<Doctor>();
+		
+		try {
+			
+			
+			PreparedStatement preparedStatement = connection.
+					prepareStatement("select username, amka, firstname, surname from doctor inner join user on doctor.user_username = user.username;");
+			
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				Doctor doctor = new Doctor();
+
+				doctor.setName(rs.getString("firstname"));
+				doctor.setSurname(rs.getString("surname"));
+				doctor.setAMKA(rs.getString("amka"));
+				doctor.setUsername(rs.getString("username"));
+				
+				doctors.add(doctor);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		
+		return doctors;
+	}
 	
+	public List<Appointment> getScheduledAppointments(String amka){
+		
+		List<Appointment> appointments = new ArrayList<Appointment>();
+		
+		try {
+			
+			
+			PreparedStatement preparedStatement = connection.
+					prepareStatement("select * from appointment where doctor_amka=? and availability=1;");
+			
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				Appointment appointment = new Appointment();
+
+
+				appointment.setDatetime(String.valueOf(rs.getString("appdate")));
+				appointment.setEndtime(String.valueOf(rs.getString("endtime")));
+
+				appointments.add(appointment);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		return appointments;
+	}
 
 }

@@ -128,6 +128,34 @@
 			</table>
 		</form>
 		
+		
+		<br>
+		<p>Doctors in database:</p>
+		<table border=1>
+	        <thead>
+				<tr>
+					<th>Doctor Username</th>
+					<th>Doctor AMKA</th>
+					<th>Doctor Name</th>
+					<th>Doctor Surname</th>
+					<th>Action</th>
+				</tr>
+	        </thead>
+	        <tbody>
+	            <c:forEach items="${requestScope.Doctors}" var="d">
+					<tr>
+
+						<td><c:out value="${d.username}" /></td>
+						<td><c:out value="${d.AMKA}" /></td>
+						<td><c:out value="${d.name}" /></td>
+						<td><c:out value="${d.surname}" /></td>
+						<td><a href="admin?action=delete&DoctorUsername=<c:out value="${d.username}"/>&DoctorAMKA=<c:out value="${d.AMKA}"/>">Delete</a></td>
+					</tr>
+	            </c:forEach>
+	        </tbody>
+		</table>
+		
+		
 
 		<% String message = (String)request.getAttribute("message");%>
 			
