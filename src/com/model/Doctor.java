@@ -41,7 +41,11 @@ public final class Doctor extends User{
 		this.speciality = speciality;
 	}
 	
-	
+	public Doctor(String name, String surname, String speciality, String amka) {
+		super(name, surname);
+		this.speciality = speciality;
+		this.AMKA = amka;
+	}
 
 	public Doctor() {
 		super();

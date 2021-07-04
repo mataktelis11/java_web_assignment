@@ -156,8 +156,9 @@ public class DoctorDao2 {
 			
 			
 			PreparedStatement preparedStatement = connection.
-					prepareStatement("select * from appointment where doctor_amka=? and availability=1;");
+					prepareStatement("select * from appointment where doctor_amka=? and availability=0;");
 			
+			preparedStatement.setString(1, amka);
 			ResultSet rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
@@ -174,9 +175,7 @@ public class DoctorDao2 {
 			e.printStackTrace();
 		}
 		
-		
-		
 		return appointments;
 	}
-
+	
 }

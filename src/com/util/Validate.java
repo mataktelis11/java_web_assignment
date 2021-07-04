@@ -19,9 +19,10 @@ public class Validate {
 	};
 	
 	public static boolean validAMKA(String amka) {
-		// Requirements: minimum length 11
-		if(amka.length() < 11) return false;
+		// Requirements: minimum length 10
+		if(amka.length() < 10) return false;
 		else return true;
 	};
 	
 }
+

@@ -32,6 +32,10 @@ public final class Patient extends User {
 		super();
 	}
 
+	public Patient(String aMKA) {
+		AMKA = aMKA;
+	}
+
 	public String getAMKA() {
 		return AMKA;
 	}

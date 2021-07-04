@@ -62,6 +62,41 @@
 		
 		<div class="offset"> </div>
 		
+		
+		<h2>Scheduled Appointments</h2>
+		<br>
+    	<table border=1>
+	        <thead>
+				<tr>
+					<th>Doctor Full name</th>
+					<th>Doctor Speciality</th>
+					<th>Date Time</th>
+					<th>End Time</th>
+					<th>Hospital</th>
+					<th>Action</th>
+				</tr>
+	        </thead>
+	        <tbody>
+	            <c:forEach items="${requestScope.Appointments1}" var="a">
+					<tr>
+
+						<td><c:out value="${a.doctor.name}" /> <c:out value="${a.doctor.surname}" /></td>
+						<td><c:out value="${a.doctor.speciality}" /></td>
+						<td><c:out value="${a.datetime}" /></td>
+						<td><c:out value="${a.endtime}" /></td>
+						<td><c:out value="${a.hospital.name}" /></td>
+						<td><a href="patient?action=delete&damka=<c:out value="${a.doctor.AMKA}"/>&pamka=<c:out value="${a.patient.AMKA}"/>&date=<c:out value="${a.datetime}"/>">Cancel</a></td>
+
+					</tr>
+	            </c:forEach>
+	        </tbody>
+		</table>
+		
+		
+		<br><br>
+		
+		<h2>Appointment History</h2>
+		<p>Appointments that have been completed.</p>
 		<br>
     	<table border=1>
 	        <thead>
@@ -74,7 +109,7 @@
 				</tr>
 	        </thead>
 	        <tbody>
-	            <c:forEach items="${requestScope.Appointments}" var="a">
+	            <c:forEach items="${requestScope.Appointments2}" var="a">
 					<tr>
 
 						<td><c:out value="${a.doctor.name}" /> <c:out value="${a.doctor.surname}" /></td>
