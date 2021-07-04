@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -41,7 +43,6 @@
 			
 			<a href="logout.jsp" class="right">Log out</a>
 			<a id="selected" href="admin?action=welcome" class="right"> <%= session.getAttribute("name") %> </a>
-			<a href="admin?action=details" class="right">Account Details</a>
 			<a href="admin?action=appointments" class="right">Appointment menu</a>
 			<a href="admin?action=addpatient" class="right">Add a Patient</a>
 			<a href="admin?action=adddoctor" class="right">Add a Doctor</a>
@@ -52,7 +53,27 @@
 		<div class="offset"> </div>
 		
 		<p>This is the welcome page of the admin.</p>
-			
+		
+		
+		<p>Details of this account:</p>
+		
+		<br>
+		<table style="width:100%">
+			<tr>
+				<th>Username:</th>
+				<td><c:out value="${Admin.username}"/></td>
+			</tr>
+			<tr>
+				<th>FirstName:</th>
+				<td><c:out value="${Admin.name}"/></td>
+			</tr>
+			<tr>
+				<th>SurName:</th>
+				<td><c:out value="${Admin.surname}"/></td>
+			</tr>
+		</table>
+		
+		
 		<script>
 			//navbar 
 			

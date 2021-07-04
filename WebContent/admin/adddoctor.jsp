@@ -43,7 +43,6 @@
 			
 			<a href="logout.jsp" class="right">Log out</a>
 			<a href="admin?action=welcome" class="right"> <%= session.getAttribute("name") %> </a>
-			<a href="admin?action=details" class="right">Account Details</a>
 			<a href="admin?action=appointments" class="right">Appointment menu</a>
 			<a href="admin?action=addpatient" class="right">Add a Patient</a>
 			<a id="selected" href="admin?action=adddoctor" class="right">Add a Doctor</a>

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.dao.AdminDao;
 import com.dao.DoctorDao2;
 import com.dao.HospitalDao;
 import com.dao.PatientDao;
@@ -36,6 +37,7 @@ public class AdminController extends HttpServlet {
 	private Generator gen;
 	private HospitalDao hdao;
 	private DoctorDao2 ddao;
+	private AdminDao adao;
 
 	public AdminController() {
 		super();
@@ -43,6 +45,7 @@ public class AdminController extends HttpServlet {
 		gen = new Generator();
 		hdao = new HospitalDao();
 		ddao = new DoctorDao2();
+		adao = new AdminDao();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -73,9 +76,7 @@ public class AdminController extends HttpServlet {
 			}
 			else if(action.equalsIgnoreCase("welcome")) {
 				forward = "/admin/welcomeadmin.jsp";
-			}
-			else if(action.equalsIgnoreCase("details")) {
-				forward = "/admin/admindetails.jsp";
+				request.setAttribute("Admin", adao.getDetails((String)session.getAttribute("username")));
 			}
 			else if(action.equalsIgnoreCase("addpatient")) {
 				forward = "/admin/addpatient.jsp";
@@ -95,14 +96,19 @@ public class AdminController extends HttpServlet {
 			else if(action.equalsIgnoreCase("delete")) {
 				forward = "/admin/adddoctor.jsp";
 				request.setAttribute("Hospitals", hdao.getHospitals());
-				request.setAttribute("Doctors", ddao.getAllDoctors());
 				
+				
+				
+				String username = request.getParameter("DoctorUsername");
+				String amka = request.getParameter("DoctorAMKA");
 				
 				//check
-				if(removeDoctor(request.getParameter("DoctorUsername"),request.getParameter("DoctorAMKA")))
+				if(removeDoctor(username, amka))
 					request.setAttribute("message", "Doctor removed successfully.");
 				else
 					request.setAttribute("message", "Doctor cannot be removed.");
+				
+				request.setAttribute("Doctors", ddao.getAllDoctors());
 			}
 		}
 		
@@ -203,13 +209,15 @@ public class AdminController extends HttpServlet {
 				int check = ddao.addDoctor(d);
 				
 				if(check == 1) {
-					request.setAttribute("message", "Success");
+					request.setAttribute("message", "Doctor added successfully.");
 					request.setAttribute("Hospitals", hdao.getHospitals());
+					request.setAttribute("Doctors", ddao.getAllDoctors());
 				}
 					
 				else {
-					request.setAttribute("message", "Fail");
+					request.setAttribute("message", "Failed to add doctor.");
 					request.setAttribute("Hospitals", hdao.getHospitals());
+					request.setAttribute("Doctors", ddao.getAllDoctors());
 				}
 			}
 
@@ -260,8 +268,14 @@ public class AdminController extends HttpServlet {
 		if(appointments.size()>0)
 			return false;
 		
-		else
-			return true;
+		else {
+			
+			adao.removeAppointments(amka);
+		
+			if(adao.removeDoctor(username) == 0)
+				return false;
+		}
+		return true;
 		
 		
 		
