@@ -268,7 +268,7 @@
 			//data constructor
 			
 			function dataContructor() {
-				var data = (mm + 1) + "," + yyyy + ",";
+				var data = (mm + 1) + "-" + yyyy + ",";
 
 				//Monday====================================================//
 				var rows = document.getElementById("monTimes").rows;
