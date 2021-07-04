@@ -81,9 +81,30 @@ public class PatientController extends HttpServlet {
 				request.setAttribute("Appointments", dao.getAppointments(username));
 			}
 			else if(action.equalsIgnoreCase("availables")) {
-				forward = "/patient/availappointments.jsp";
-				//get appointment list from dao and pass it to jsp
-				request.setAttribute("Appointments", dao.getAvailableAppointments());
+				
+				if(request.getParameter("data") == null) {
+					forward = "/patient/availappointments.jsp";
+					//get appointment list from dao and pass it to jsp
+					request.setAttribute("Appointments", dao.getAvailableAppointments());
+				}
+				else if (request.getParameter("data").equals("Pathologist")) {
+					forward = "/patient/availappointments.jsp";
+					//get appointment list from dao and pass it to jsp
+					request.setAttribute("Appointments", dao.getAvailableAppointments(request.getParameter("data")));
+					request.setAttribute("Data", request.getParameter("data"));
+				}
+				else if (request.getParameter("data").equals("Ophthalmologist")) {
+					forward = "/patient/availappointments.jsp";
+					//get appointment list from dao and pass it to jsp
+					request.setAttribute("Appointments", dao.getAvailableAppointments(request.getParameter("data")));
+					request.setAttribute("Data", request.getParameter("data"));
+				}
+				else if (request.getParameter("data").equals("Orthopedic")) {
+					forward = "/patient/availappointments.jsp";
+					//get appointment list from dao and pass it to jsp
+					request.setAttribute("Appointments", dao.getAvailableAppointments(request.getParameter("data")));
+					request.setAttribute("Data", request.getParameter("data"));
+				}
 			}
 			else if(action.equalsIgnoreCase("welcome")) {
 				forward = "/patient/welcomepatient.jsp";

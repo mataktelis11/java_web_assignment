@@ -159,33 +159,69 @@ public class PatientDao{
 	 */
 	public List<Appointment> getAvailableAppointments() {
 			
-			List<Appointment> appointments = new ArrayList<Appointment>();
-			try {
-				PreparedStatement preparedStatement = connection.
-						prepareStatement("select user.firstname, user.surname, temp.doctor_specialty, temp.appdate, temp.endtime, temp.hospital "
-								+ "from	(select doctor.user_username as doctor_username, doctor.speciality as doctor_specialty, doctor.hospital_hospname as hospital, appdate, endtime "
-								+ "		from (appointment inner join patient on patient.amka = appointment.patient_amka) "
-								+ "		inner join doctor on  doctor.amka = appointment.doctor_amka "
-								+ "		where appointment.availability = 1) as temp"
-								+ "		inner join user on user.username = temp.doctor_username");
-				
-				ResultSet rs = preparedStatement.executeQuery();
-	
-				while (rs.next()) {
-					Appointment appointment = new Appointment();
-	
-					appointment.setDoctor(new Doctor(String.valueOf(rs.getString("firstname")), String.valueOf(rs.getString("surname")), String.valueOf(rs.getString("doctor_specialty"))));
-					appointment.setDatetime(String.valueOf(rs.getString("appdate")));
-					appointment.setEndtime(String.valueOf(rs.getString("endtime")));
-					appointment.setHospital(new Hospital(rs.getString("hospital")));
-					appointments.add(appointment);
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
+		List<Appointment> appointments = new ArrayList<Appointment>();
+		try {
+			PreparedStatement preparedStatement = connection.
+					prepareStatement("select user.firstname, user.surname, temp.doctor_specialty, temp.appdate, temp.endtime, temp.hospital "
+							+ "from	(select doctor.user_username as doctor_username, doctor.speciality as doctor_specialty, doctor.hospital_hospname as hospital, appdate, endtime "
+							+ "		from (appointment inner join patient on patient.amka = appointment.patient_amka) "
+							+ "		inner join doctor on  doctor.amka = appointment.doctor_amka "
+							+ "		where appointment.availability = 1) as temp"
+							+ "		inner join user on user.username = temp.doctor_username");
+			
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				Appointment appointment = new Appointment();
+
+				appointment.setDoctor(new Doctor(String.valueOf(rs.getString("firstname")), String.valueOf(rs.getString("surname")), String.valueOf(rs.getString("doctor_specialty"))));
+				appointment.setDatetime(String.valueOf(rs.getString("appdate")));
+				appointment.setEndtime(String.valueOf(rs.getString("endtime")));
+				appointment.setHospital(new Hospital(rs.getString("hospital")));
+				appointments.add(appointment);
 			}
-	
-			return appointments;
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+
+		return appointments;
+	}
+	
+	/**
+	 * Returns the List of Available Appointments.
+	 * @param speciality of the doctor
+	 * @return List of Available Appointments found in the database.
+	 */
+	public List<Appointment> getAvailableAppointments(String speciality) {
+			
+		List<Appointment> appointments = new ArrayList<Appointment>();
+		try {
+			PreparedStatement preparedStatement = connection.
+					prepareStatement("select user.firstname, user.surname, temp.doctor_specialty, temp.appdate, temp.endtime, temp.hospital "
+							+ "from	(select doctor.user_username as doctor_username, doctor.speciality as doctor_specialty, doctor.hospital_hospname as hospital, appdate, endtime "
+							+ "		from (appointment inner join patient on patient.amka = appointment.patient_amka) "
+							+ "		inner join doctor on  doctor.amka = appointment.doctor_amka "
+							+ "		where appointment.availability = 1 and doctor.speciality = ?) as temp"
+							+ "		inner join user on user.username = temp.doctor_username");
+			
+			preparedStatement.setString(1, speciality);
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				Appointment appointment = new Appointment();
+
+				appointment.setDoctor(new Doctor(String.valueOf(rs.getString("firstname")), String.valueOf(rs.getString("surname")), String.valueOf(rs.getString("doctor_specialty"))));
+				appointment.setDatetime(String.valueOf(rs.getString("appdate")));
+				appointment.setEndtime(String.valueOf(rs.getString("endtime")));
+				appointment.setHospital(new Hospital(rs.getString("hospital")));
+				appointments.add(appointment);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return appointments;
+	}
 
 
 

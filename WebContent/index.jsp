@@ -183,7 +183,6 @@
 			
 			// navbar 
 			
-			var prevScrollpos = window.pageYOffset;
 			window.onscroll = function() {
 				if(window.pageYOffset >= document.getElementsByClassName("header")[0].clientHeight) {
 					document.getElementsByClassName("offset")[0].style.height = (document.getElementsByClassName("navbar")[0].clientHeight + "px");
