@@ -126,8 +126,8 @@ public class PatientDao{
 		List<Appointment> appointments = new ArrayList<Appointment>();
 		try {
 			PreparedStatement preparedStatement = connection.
-					prepareStatement("select user.firstname, user.surname, temp.doctor_specialty, temp.appdate, temp.endtime, temp.hospital "
-							+ "from	(select doctor.user_username as doctor_username, doctor.speciality as doctor_specialty, doctor.hospital_hospname as hospital, appdate, endtime "
+					prepareStatement("select user.firstname, user.surname, temp.doctor_specialty, temp.appdate, temp.endtime, temp.hospital, damka, pamka "
+							+ "from	(select doctor.user_username as doctor_username, doctor.speciality as doctor_specialty, doctor.hospital_hospname as hospital, appdate, endtime, doctor.amka as damka, patient.amka as pamka "
 							+ "		from (appointment inner join patient on patient.amka = appointment.patient_amka) "
 							+ "		inner join doctor on  doctor.amka = appointment.doctor_amka "
 							+ "		where patient.user_username = ?) as temp"
@@ -139,10 +139,11 @@ public class PatientDao{
 			while (rs.next()) {
 				Appointment appointment = new Appointment();
 
-				appointment.setDoctor(new Doctor(String.valueOf(rs.getString("firstname")), String.valueOf(rs.getString("surname")), String.valueOf(rs.getString("doctor_specialty"))));
+				appointment.setDoctor(new Doctor(String.valueOf(rs.getString("firstname")), String.valueOf(rs.getString("surname")), String.valueOf(rs.getString("doctor_specialty")), String.valueOf(rs.getString("damka"))));
 				appointment.setDatetime(String.valueOf(rs.getString("appdate")));
 				appointment.setEndtime(String.valueOf(rs.getString("endtime")));
 				appointment.setHospital(new Hospital(rs.getString("hospital")));
+				appointment.setPatient(new Patient(String.valueOf(rs.getString("pamka"))));
 				appointments.add(appointment);
 			}
 		} catch (SQLException e) {
@@ -188,5 +189,23 @@ public class PatientDao{
 		}
 
 
+	
+	public void cancelAppointment(String pamka, String damka, String date) {
+		
+		try {
+			PreparedStatement preparedStatement = connection.
+					prepareStatement("delete from appointment where patient_amka=? and doctor_amka=? and appdate=?;");
+			preparedStatement.setString(1, pamka);
+			preparedStatement.setString(2, damka);
+			preparedStatement.setString(3, date);
+			
+			preparedStatement.executeUpdate();
+			
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		}
+	}
 
 }

@@ -2,6 +2,8 @@ package com.controller;
 
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -274,16 +276,35 @@ public class AdminController extends HttpServlet {
 		
 		List<Appointment> appointments = ddao.getScheduledAppointments(amka);
 		
-		if(appointments.size()>0)
-			return false;
+		//https://tecadmin.net/get-current-timestamp-in-java/
 		
-		else {
-			
-			adao.removeAppointments(amka);
 		
-			if(adao.removeDoctor(username) == 0)
+		Date date= new Date();
+		
+		long time = date.getTime();
+
+		
+		Timestamp ts = new Timestamp(time);
+		
+		
+		
+		for(Appointment a : appointments) {
+			if(Timestamp.valueOf(a.getEndtime()).after(ts))
 				return false;
 		}
+		
+		
+		
+		//if(appointments.size()>0)
+			//return false;
+		
+		
+			
+		adao.removeAppointments(amka);
+		
+		if(adao.removeDoctor(username) == 0)
+			return false;
+		
 		return true;
 		
 		
