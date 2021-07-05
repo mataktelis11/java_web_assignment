@@ -33,8 +33,8 @@
 		
 		
 		<div class="header">
-			<h1>Adding a Hospital</h1>
-			<p> <%= session.getAttribute("name") %> </p>
+			<h1>Add a Hospital</h1>
+			<h2> <%= session.getAttribute("name") %> </h2>
 		</div>
 		
 		<div class="navbar">
@@ -43,7 +43,6 @@
 			
 			<a href="logout.jsp" class="right">Log out</a>
 			<a href="admin?action=welcome" class="right"> <%= session.getAttribute("name") %> </a>
-			<a href="admin?action=appointments" class="right">Appointment menu</a>
 			<a href="admin?action=addpatient" class="right">Add a Patient</a>
 			<a href="admin?action=adddoctor" class="right">Add a Doctor</a>
 			<a id="selected" href="admin?action=addhospital" class="right">Add a Hospital</a>
@@ -52,34 +51,31 @@
 		
 		<div class="offset"> </div>
 		
-		<p>The admin can add a patient here.</p>
+		<h2><b>Add hospital:</b></h2>
 		<form method="post" action="admin">
 			<input type="hidden" name="action" value="inserthospital" />
+			
 			<table>
 			
 				<tr>
 					<td>Hospital Name:</td>
 					<td><input type="text" name="name" /></td>
-					<br />
 				</tr>
 				
 				<tr>
 					<td>Hospital Address:</td>
 					<td><input type="text" name="address" /></td>
-					<br />
 				</tr>
 				
 				<tr>
 					<td></td>
 					<td><input type="submit" value="Add Hospital" /></td>
-					<br />
 				</tr>
 	
 			</table>
 		</form>
 		
-		<br>
-		<p>Hospitals in database:</p>
+		<h3><b>Hospitals in database:</b></h3>
 		<table border=1>
 	        <thead>
 				<tr>
@@ -97,23 +93,15 @@
 	            </c:forEach>
 	        </tbody>
 		</table>
-
-		
-		
-		
-		
-		
-		
-		
 		
 		<% String message = (String)request.getAttribute("message");%>
 		
 			
 		<script>
 		
-		var x = "<%=message%>";
-		if(x != "nomessage")
-			alert(x);
+			var x = "<%=message%>";
+			if(x != "nomessage")
+				alert(x);
 
 		
 			//navbar 

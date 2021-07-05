@@ -31,8 +31,8 @@
 		
 		
 		<div class="header">
-			<h1>Adding a patient</h1>
-			<p> <%= session.getAttribute("name") %> </p>
+			<h1>Add a patient</h1>
+			<h2> <%= session.getAttribute("name") %> </h2>
 		</div>
 		
 		<div class="navbar">
@@ -41,7 +41,6 @@
 			
 			<a href="logout.jsp" class="right">Log out</a>
 			<a href="admin?action=welcome" class="right"> <%= session.getAttribute("name") %> </a>
-			<a href="admin?action=appointments" class="right">Appointment menu</a>
 			<a id="selected" href="admin?action=addpatient" class="right">Add a Patient</a>
 			<a href="admin?action=adddoctor" class="right">Add a Doctor</a>
 			<a href="admin?action=addhospital" class="right">Add a Hospital</a>
@@ -50,55 +49,46 @@
 		
 		<div class="offset"> </div>
 		
-		<p>The admin can add a patient here.</p>
+		<h2><b>Add patient:</b></h2>
 		<form method="post" action="admin">
 			<input type="hidden" name="action" value="insertpatient" />
 			<table>
 				<tr>
 					<td>AMKA:</td>
 					<td><input type="text" name="amka" /></td>
-					<br />
 				</tr>
 				<tr>
 					<td>Name:</td>
 					<td><input type="text" name="name" /></td>
-					<br />
 				</tr>
 				<tr>
 					<td>Surname:</td>
 					<td><input type="text" name="surname" /></td>
-					<br />
 				</tr>
 				<tr>
 					<td>Username:</td>
 					<td><input type="text" name="username" /></td>
-					<br />
 				</tr>
 				<tr>
 					<td>Password:</td>
 					<td><input type="text" name="psw" /></td>
-					<br />
 				</tr>
 				
 				<tr>
 					<td></td>
 					<td><input type="submit" value="Add patient" /></td>
-					<br />
 				</tr>
 	
 			</table>
 		</form>
 		
 		<% String message = (String)request.getAttribute("message");%>
-		
-			
 		<script>
 		
-		var x = "<%=message%>";
-		if(x != "nomessage")
-			alert(x);
+			var x = "<%=message%>";
+			if(x != "nomessage")
+				alert(x);
 
-		
 			//navbar 
 			
 			window.onscroll = function() {

@@ -112,7 +112,6 @@
 			<% } else if(session.getAttribute("role").equals("admin")){ %>
 				<a href="logout.jsp" class="right">Log out</a>
 				<a href="admin?action=welcome" class="right"> <%= session.getAttribute("name") %> </a>
-				<a href="admin?action=appointments" class="right">Appointment menu</a>
 				<a href="admin?action=addpatient" class="right">Add a Patient</a>
 				<a href="admin?action=adddoctor" class="right">Add a Doctor</a>
 				<a href="admin?action=addhospital" class="right">Add a Hospital</a>

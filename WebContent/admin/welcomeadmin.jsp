@@ -14,6 +14,33 @@
 				display: block;
 			}
 			
+			.details {
+				width: 85%;
+				border-collapse: collapse;
+				border: 15px;
+				border-style: solid;
+				box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+				border-color: #666;
+				font-family: verdana;
+				text-align: left;
+				opacity: 0.75;
+				table-layout: fixed;
+				cursor: default;
+			}
+			
+			.details th {
+				padding: 12px;
+				background: #aaa;
+			    color: #ffffff;
+			    font-size: 1.5em;
+			}
+			
+			.details td {
+				font-size: 0.9em;
+				background: #ddd;
+				padding: 12px;
+			}
+			
 		</style>
 	</head>
 	<body>
@@ -34,7 +61,7 @@
 		
 		<div class="header">
 			<h1>Welcome</h1>
-			<p> <%= session.getAttribute("name") %> </p>
+			<h2> <%= session.getAttribute("name") %> </h2>
 		</div>
 		
 		<div class="navbar">
@@ -43,7 +70,6 @@
 			
 			<a href="logout.jsp" class="right">Log out</a>
 			<a id="selected" href="admin?action=welcome" class="right"> <%= session.getAttribute("name") %> </a>
-			<a href="admin?action=appointments" class="right">Appointment menu</a>
 			<a href="admin?action=addpatient" class="right">Add a Patient</a>
 			<a href="admin?action=adddoctor" class="right">Add a Doctor</a>
 			<a href="admin?action=addhospital" class="right">Add a Hospital</a>
@@ -52,13 +78,9 @@
 		
 		<div class="offset"> </div>
 		
-		<p>This is the welcome page of the admin.</p>
-		
-		
-		<p>Details of this account:</p>
-		
 		<br>
-		<table style="width:100%">
+		
+		<table class="details">
 			<tr>
 				<th>Username:</th>
 				<td><c:out value="${Admin.username}"/></td>
