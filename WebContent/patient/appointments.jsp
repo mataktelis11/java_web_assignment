@@ -58,7 +58,7 @@
 		
 		<div class="header">
 			<h1>Appointment menu</h1>
-			<h2> <%= session.getAttribute("name") %> </h2>
+			<h2> of <%= session.getAttribute("name") %> </h2>
 		</div>
 		
 		<div class="navbar">
