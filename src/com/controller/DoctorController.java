@@ -3,6 +3,7 @@ package com.controller;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -109,7 +110,31 @@ public class DoctorController extends HttpServlet {
 			}
 			else if(action.equalsIgnoreCase("cancel")) {
 				
-				dao.cancelAppointment(request.getParameter("pamka"),dao.getAmka((String)session.getAttribute("username")),request.getParameter("date"));
+				
+				//check date
+				
+				//https://www.codegrepper.com/code-examples/java/number+of+days+between+two+timestamps+java+sprin
+				
+				Timestamp ts2 = Timestamp.valueOf(request.getParameter("date"));
+				
+				LocalDate d1 = LocalDate.now();
+				LocalDate d2 = ts2.toLocalDateTime().toLocalDate();
+				
+				Period period = Period.between(d1, d2);
+				
+				int diffd = period.getDays();
+				int diffy = period.getYears();
+				int diffm = period.getMonths();
+				
+				
+				
+				if((diffy>0 || diffm>0) || diffd>=3) {
+					dao.cancelAppointment(request.getParameter("pamka"),dao.getAmka((String)session.getAttribute("username")),request.getParameter("date"));
+				}
+				
+				
+				
+				
 				
 				forward = "/doctor/appointments.jsp";
 				
