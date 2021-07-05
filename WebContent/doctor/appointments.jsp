@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -59,6 +61,35 @@
 		<div class="offset"> </div>
 		
 		<p>This is the appointment page of the doctor.</p>
+		
+		
+		<br>
+		<p>Scheduled appointments</p>
+		
+		<table border=1>
+	        <thead>
+				<tr>
+					<th>Patient AMKA</th>
+					<th>Appointment Date</th>
+					<th>End time</th>
+					<th>Action</th>
+				</tr>
+	        </thead>
+	        <tbody>
+	            <c:forEach items="${requestScope.Appointments}" var="a">
+					<tr>
+
+						<td><c:out value="${a.patient.AMKA}" /></td>
+						<td><c:out value="${a.datetime}" /></td>
+						<td><c:out value="${a.endtime}" /></td>
+						<td>Delete</td>
+					</tr>
+	            </c:forEach>
+	        </tbody>
+		</table>
+		
+		
+		
 			
 		<script>
 			//navbar 

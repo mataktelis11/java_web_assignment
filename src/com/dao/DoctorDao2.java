@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.model.Admin;
 import com.model.Appointment;
 import com.model.Doctor;
 import com.model.Hospital;
@@ -178,5 +179,44 @@ public class DoctorDao2 {
 		
 		return appointments;
 	}
+	
+	
+	
+	
+	
+	
+	public Doctor getDetails(String username) {
+		
+		Doctor a = new Doctor();
+		
+		try {
+			PreparedStatement preparedStatement = connection.
+					prepareStatement("select * from user where username = ?");
+			preparedStatement.setString(1, username);
+			ResultSet rs = preparedStatement.executeQuery();
+
+			if (rs.next()) {
+				
+				a.setUsername(rs.getString("username"));
+				a.setPassword(rs.getString("hashedpassword"));
+				a.setName(rs.getString("firstname"));
+				a.setSurname(rs.getString("surname"));
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return a;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

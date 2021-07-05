@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -59,6 +61,25 @@
 		<div class="offset"> </div>
 		
 		<p>This is the welcome page of the doctor.</p>
+		
+		<p>Details of this account:</p>
+		
+		<br>
+		<table style="width:100%">
+			<tr>
+				<th>Username:</th>
+				<td><c:out value="${Doctor.username}"/></td>
+			</tr>
+			<tr>
+				<th>FirstName:</th>
+				<td><c:out value="${Doctor.name}"/></td>
+			</tr>
+			<tr>
+				<th>SurName:</th>
+				<td><c:out value="${Doctor.surname}"/></td>
+			</tr>
+		</table>
+		
 			
 		<script>
 			//navbar 

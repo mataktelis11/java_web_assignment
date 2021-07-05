@@ -60,13 +60,14 @@ public class DoctorController extends HttpServlet {
 		else {
 			if(action.equalsIgnoreCase("appointments")) {
 				forward = "/doctor/appointments.jsp";
-				request.setAttribute("Appointments", dao.getScheduledAppointments(action));
+				request.setAttribute("Appointments", dao.getScheduledAppointments(dao.getAmka((String)session.getAttribute("username"))));
 			}
 			if(action.equalsIgnoreCase("appointmentdeclaration")) {
 				forward = "/doctor/appointmentdeclaration.jsp";
 			}
 			else if(action.equalsIgnoreCase("welcome")) {
 				forward = "/doctor/welcomedoctor.jsp";
+				request.setAttribute("Doctor", dao.getDetails((String)session.getAttribute("username")));
 			}
 			else if(action.equalsIgnoreCase("callendar")) {
 				
