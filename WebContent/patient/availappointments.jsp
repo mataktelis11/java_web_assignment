@@ -56,7 +56,7 @@
 		
 		<div class="header">
 			<h1>Available Appointments</h1>
-			<p> for next month </p>
+			<h2>make a reservation</h2>
 		</div>
 		
 		<div class="navbar">
