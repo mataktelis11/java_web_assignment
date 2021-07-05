@@ -181,7 +181,21 @@ public class DoctorDao2 {
 	}
 	
 	
-	
+	public void cancelAppointment(String pamka, String damka, String date) {
+		
+		try {
+			PreparedStatement preparedStatement = connection.
+					prepareStatement("DELETE FROM appointment where patient_amka=? and doctor_amka=? and appdate=?;");
+			preparedStatement.setString(1, pamka);
+			preparedStatement.setString(2, damka);
+			preparedStatement.setString(3, date);
+			
+			preparedStatement.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	
 	

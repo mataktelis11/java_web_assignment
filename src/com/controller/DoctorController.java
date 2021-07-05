@@ -1,12 +1,14 @@
 package com.controller;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,6 +20,7 @@ import javax.servlet.http.HttpSession;
 
 import com.dao.DoctorDao2;
 import com.dao.PatientDao;
+import com.model.Appointment;
 import com.model.Patient;
 
 
@@ -60,7 +63,37 @@ public class DoctorController extends HttpServlet {
 		else {
 			if(action.equalsIgnoreCase("appointments")) {
 				forward = "/doctor/appointments.jsp";
-				request.setAttribute("Appointments", dao.getScheduledAppointments(dao.getAmka((String)session.getAttribute("username"))));
+				
+				
+				List<Appointment> appointments = dao.getScheduledAppointments(dao.getAmka((String)session.getAttribute("username")));
+				
+				List<Appointment> appointments1 = new ArrayList<Appointment>();
+				List<Appointment> appointments2 = new ArrayList<Appointment>();
+				
+				
+				//https://tecadmin.net/get-current-timestamp-in-java/
+				
+					Date date= new Date();
+					
+					long time = date.getTime();
+
+					
+					Timestamp ts = new Timestamp(time);
+				
+				for(Appointment a : appointments) {
+					
+					
+
+					
+					if(Timestamp.valueOf(a.getEndtime()).after(ts))
+						appointments1.add(a);
+					else
+						appointments2.add(a);
+				}
+				
+				request.setAttribute("Appointments1", appointments1);
+				request.setAttribute("Appointments2", appointments2);
+				
 			}
 			if(action.equalsIgnoreCase("appointmentdeclaration")) {
 				forward = "/doctor/appointmentdeclaration.jsp";
@@ -73,6 +106,42 @@ public class DoctorController extends HttpServlet {
 				
 				filldates(request.getParameter("data"),(String)session.getAttribute("username"));
 				forward = "/doctor/appointmentdeclaration.jsp";
+			}
+			else if(action.equalsIgnoreCase("cancel")) {
+				
+				dao.cancelAppointment(request.getParameter("pamka"),dao.getAmka((String)session.getAttribute("username")),request.getParameter("date"));
+				
+				forward = "/doctor/appointments.jsp";
+				
+				
+				List<Appointment> appointments = dao.getScheduledAppointments(dao.getAmka((String)session.getAttribute("username")));
+				
+				List<Appointment> appointments1 = new ArrayList<Appointment>();
+				List<Appointment> appointments2 = new ArrayList<Appointment>();
+				
+				
+				//https://tecadmin.net/get-current-timestamp-in-java/
+				
+					Date date= new Date();
+					
+					long time = date.getTime();
+
+					
+					Timestamp ts = new Timestamp(time);
+				
+				for(Appointment a : appointments) {
+					
+					
+
+					
+					if(Timestamp.valueOf(a.getEndtime()).after(ts))
+						appointments1.add(a);
+					else
+						appointments2.add(a);
+				}
+				
+				request.setAttribute("Appointments1", appointments1);
+				request.setAttribute("Appointments2", appointments2);
 			}
 		}
 		

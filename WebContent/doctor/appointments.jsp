@@ -76,13 +76,13 @@
 				</tr>
 	        </thead>
 	        <tbody>
-	            <c:forEach items="${requestScope.Appointments}" var="a">
+	            <c:forEach items="${requestScope.Appointments1}" var="a">
 					<tr>
 
 						<td><c:out value="${a.patient.AMKA}" /></td>
 						<td><c:out value="${a.datetime}" /></td>
 						<td><c:out value="${a.endtime}" /></td>
-						<td>Delete</td>
+						<td><a href="doctor?action=cancel&pamka=<c:out value="${a.patient.AMKA}"/>&date=<c:out value="${a.datetime}"/>">Cancel</a></td>
 					</tr>
 	            </c:forEach>
 	        </tbody>
@@ -90,7 +90,30 @@
 		
 		
 		
-			
+		<p>Old appointments</p>
+		
+		<table border=1>
+	        <thead>
+				<tr>
+					<th>Patient AMKA</th>
+					<th>Appointment Date</th>
+					<th>End time</th>
+				</tr>
+	        </thead>
+	        <tbody>
+	            <c:forEach items="${requestScope.Appointments2}" var="a">
+					<tr>
+
+						<td><c:out value="${a.patient.AMKA}" /></td>
+						<td><c:out value="${a.datetime}" /></td>
+						<td><c:out value="${a.endtime}" /></td>
+					</tr>
+	            </c:forEach>
+	        </tbody>
+		</table>
+		
+		
+		
 		<script>
 			//navbar 
 			
