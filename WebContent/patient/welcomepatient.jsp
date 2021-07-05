@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -22,6 +24,33 @@
 				display: block;
 			}
 			
+			.details {
+				width: 85%;
+				border-collapse: collapse;
+				border: 15px;
+				border-style: solid;
+				box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+				border-color: #666;
+				font-family: verdana;
+				text-align: left;
+				opacity: 0.75;
+				table-layout: fixed;
+				cursor: default;
+			}
+			
+			.details th {
+				padding: 12px;
+				background: #aaa;
+			    color: #ffffff;
+			    font-size: 1.5em;
+			}
+			
+			.details td {
+				font-size: 0.9em;
+				background: #ddd;
+				padding: 12px;
+			}
+			
 		</style>
 	</head>
 	<body class="unselectable">
@@ -42,7 +71,7 @@
 		
 		<div class="header">
 			<h1>Welcome</h1>
-			<p> <%= session.getAttribute("name") %> </p>
+			<h2> <%= session.getAttribute("name") %> </h2>
 		</div>
 		
 		<div class="navbar">
@@ -51,7 +80,6 @@
 			
 			<a href="logout.jsp" class="right">Log out</a>
 			<a id="selected" href="patient?action=welcome" class="right"> <%= session.getAttribute("name") %> </a>
-			<a href="patient?action=details" class="right">Account Details</a>
 			<a href="patient?action=appointments" class="right">Appointment menu</a>
 			<a href="patient?action=availables" class="right">Available Appointments</a>
 			
@@ -59,7 +87,34 @@
 		
 		<div class="offset"> </div>
 		
-		<p>This is the welcome page of the patient.</p>
+		<br>
+		
+		<table class="details">
+			<tr>
+				<th>Username:</th>
+			</tr>
+			<tr>
+				<td><c:out value="${Patient.username}"/></td>
+			</tr>
+			<tr>
+				<th>FirstName:</th>
+			</tr>
+			<tr>
+				<td><c:out value="${Patient.name}"/></td>
+			</tr>
+			<tr>
+				<th>SurName:</th>
+			</tr>
+			<tr>
+				<td><c:out value="${Patient.surname}"/></td>
+			</tr>
+			<tr>
+				<th>AMKA:</th>
+			</tr>
+			<tr>
+				<td><c:out value="${Patient.AMKA}"/></td>
+			</tr>
+		</table>
 			
 		<script>
 			//navbar 

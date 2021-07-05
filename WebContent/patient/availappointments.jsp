@@ -8,7 +8,7 @@
 		<title>Appointments</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="style.css">
-		<link rel="stylesheet" href="patient/board.css">
+		<link rel="stylesheet" href="board.css">
 		<style>
 			
 			/* Makes the text of the buttons unselectable */
@@ -65,7 +65,6 @@
 			
 			<a href="logout.jsp" class="right">Log out</a>
 			<a href="patient?action=welcome" class="right"> <%= session.getAttribute("name") %> </a>
-			<a href="patient?action=details" class="right">Account Details</a>
 			<a href="patient?action=appointments" class="right">Appointment menu</a>
 			<a id="selected" href="patient?action=availables" class="right">Available Appointments</a>
 			

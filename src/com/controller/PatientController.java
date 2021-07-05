@@ -68,16 +68,8 @@ public class PatientController extends HttpServlet {
 			forward = "/falseRequest.jsp";
 		}
 		else {
-			if(action.equalsIgnoreCase("details")) {
-				forward="/patient/patientdetails.jsp";
-				//get username from session
-				String username = (String)session.getAttribute("username");
-				//get Patient-obj from dao
-				Patient patient = dao.getPatientDetails(username);
-				//pass it to jsp
-				request.setAttribute("Patient", patient);
-			}
-			else if(action.equalsIgnoreCase("appointments")) {
+			
+			if(action.equalsIgnoreCase("appointments")) {
 				forward = "/patient/appointments.jsp";
 				//get username from session
 				String username = (String)session.getAttribute("username");
@@ -113,37 +105,79 @@ public class PatientController extends HttpServlet {
 				request.setAttribute("Appointments2", appointments2);
 			}
 			else if(action.equalsIgnoreCase("availables")) {
+				String username = (String)session.getAttribute("username");
+				Date date1= new Date();
+				long time = date1.getTime();
+				Timestamp ts = new Timestamp(time);
 				
 				if(request.getParameter("data") == null) {
 					forward = "/patient/availappointments.jsp";
 					//get appointment list from dao and pass it to jsp
-					request.setAttribute("Appointments", dao.getAvailableAppointments());
-					request.setAttribute("PAMKA", dao.getAmka((String)session.getAttribute("username")));
+					List<Appointment> appointments = dao.getAvailableAppointments();
+					List<Appointment> appointments1 = new ArrayList<Appointment>();
+					for(Appointment a : appointments) {
+						if(Timestamp.valueOf(a.getDatetime()).after(ts)) {
+							appointments1.add(a);
+						};
+					}
+					
+					request.setAttribute("Appointments", appointments1);
+					request.setAttribute("PAMKA", dao.getAmka(username));
 				}
 				else if (request.getParameter("data").equals("Pathologist")) {
 					forward = "/patient/availappointments.jsp";
 					//get appointment list from dao and pass it to jsp
-					request.setAttribute("Appointments", dao.getAvailableAppointments(request.getParameter("data")));
+					List<Appointment> appointments = dao.getAvailableAppointments(request.getParameter("data"));
+					List<Appointment> appointments1 = new ArrayList<Appointment>();
+					for(Appointment a : appointments) {
+						if(Timestamp.valueOf(a.getDatetime()).after(ts)) {
+							appointments1.add(a);
+						};
+					}
+					
+					request.setAttribute("Appointments", appointments1);
 					request.setAttribute("Data", request.getParameter("data"));
-					request.setAttribute("PAMKA", dao.getAmka((String)session.getAttribute("username")));
+					request.setAttribute("PAMKA", dao.getAmka(username));
 				}
 				else if (request.getParameter("data").equals("Ophthalmologist")) {
 					forward = "/patient/availappointments.jsp";
 					//get appointment list from dao and pass it to jsp
-					request.setAttribute("Appointments", dao.getAvailableAppointments(request.getParameter("data")));
+					List<Appointment> appointments = dao.getAvailableAppointments(request.getParameter("data"));
+					List<Appointment> appointments1 = new ArrayList<Appointment>();
+					for(Appointment a : appointments) {
+						if(Timestamp.valueOf(a.getDatetime()).after(ts)) {
+							appointments1.add(a);
+						};
+					}
+					
+					request.setAttribute("Appointments", appointments1);
 					request.setAttribute("Data", request.getParameter("data"));
-					request.setAttribute("PAMKA", dao.getAmka((String)session.getAttribute("username")));
+					request.setAttribute("PAMKA", dao.getAmka(username));
 				}
 				else if (request.getParameter("data").equals("Orthopedic")) {
 					forward = "/patient/availappointments.jsp";
 					//get appointment list from dao and pass it to jsp
-					request.setAttribute("Appointments", dao.getAvailableAppointments(request.getParameter("data")));
+					List<Appointment> appointments = dao.getAvailableAppointments(request.getParameter("data"));
+					List<Appointment> appointments1 = new ArrayList<Appointment>();
+					for(Appointment a : appointments) {
+						if(Timestamp.valueOf(a.getDatetime()).after(ts)) {
+							appointments1.add(a);
+						};
+					}
+					
+					request.setAttribute("Appointments", appointments1);
 					request.setAttribute("Data", request.getParameter("data"));
-					request.setAttribute("PAMKA", dao.getAmka((String)session.getAttribute("username")));
+					request.setAttribute("PAMKA", dao.getAmka(username));
 				}
 			}
 			else if(action.equalsIgnoreCase("welcome")) {
 				forward = "/patient/welcomepatient.jsp";
+
+				String username = (String)session.getAttribute("username");
+				//get Patient-obj from dao
+				Patient patient = dao.getPatientDetails(username);
+				//pass it to jsp
+				request.setAttribute("Patient", patient);
 			}
 			else if(action.equalsIgnoreCase("delete")) {
 				String damka = request.getParameter("damka");
@@ -166,9 +200,7 @@ public class PatientController extends HttpServlet {
 				//https://tecadmin.net/get-current-timestamp-in-java/
 				
 					Date date1= new Date();
-					
 					long time = date1.getTime();
-
 					Timestamp ts = new Timestamp(time);
 				
 				for(Appointment a : appointments) {
@@ -203,9 +235,7 @@ public class PatientController extends HttpServlet {
 				//https://tecadmin.net/get-current-timestamp-in-java/
 				
 				Date date1= new Date();
-					
 				long time = date1.getTime();
-
 				Timestamp ts = new Timestamp(time);
 				
 				for(Appointment a : appointments) {

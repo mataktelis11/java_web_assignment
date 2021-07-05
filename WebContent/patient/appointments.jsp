@@ -9,8 +9,7 @@
 		<title>Appointments</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="style.css">
-		<link rel="stylesheet" href="style.css">
-		<link rel="stylesheet" href="patient/board.css">
+		<link rel="stylesheet" href="board.css">
 		<style>
 		
 			/* Makes the text of the buttons unselectable */
@@ -25,6 +24,17 @@
 		
 			.show {
 				display: block;
+			}
+			
+			.title {
+				opacity: 0.7;
+				padding: 0.2px;
+				border: 1px;
+				border-style: outset;
+				border-color: #666;
+				background-color: #555;
+			    color: white;
+			    font-size: 1.2em;
 			}
 			
 		</style>
@@ -47,8 +57,8 @@
 		
 		
 		<div class="header">
-			<h1>Appointment menu of</h1>
-			<p> <%= session.getAttribute("name") %> </p>
+			<h1>Appointment menu</h1>
+			<h2> <%= session.getAttribute("name") %> </h2>
 		</div>
 		
 		<div class="navbar">
@@ -57,7 +67,6 @@
 			
 			<a href="logout.jsp" class="right">Log out</a>
 			<a href="patient?action=welcome" class="right"> <%= session.getAttribute("name") %> </a>
-			<a href="patient?action=details" class="right">Account Details</a>
 			<a id="selected" href="patient?action=appointments" class="right">Appointment menu</a>
 			<a href="patient?action=availables" class="right">Available Appointments</a>
 			
@@ -65,9 +74,10 @@
 		
 		<div class="offset"> </div>
 		
+		<div class="title">
+			<h2>Scheduled Appointments</h2>
+		</div>
 		
-		<h2>Scheduled Appointments</h2>
-		<br>
     	<table>
 	        <thead>
 				<tr>
@@ -76,7 +86,7 @@
 					<th>Date Time</th>
 					<th>End Time</th>
 					<th>Hospital</th>
-					<th>Action</th>
+					<th></th>
 				</tr>
 	        </thead>
 	        <tbody>
@@ -113,9 +123,10 @@
 	        </tbody>
 		</table>
 		
-		<h2>Appointment History</h2>
-		<p>Appointments that have been completed.</p>
-		<br>
+		<div class="title">
+			<h2>Appointment History</h2>
+		</div>
+		
     	<table>
 	        <thead>
 				<tr>
