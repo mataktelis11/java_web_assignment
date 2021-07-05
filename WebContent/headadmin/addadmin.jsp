@@ -33,8 +33,8 @@
 		
 		
 		<div class="header">
-			<h1>Adding a patient</h1>
-			<p> <%= session.getAttribute("name") %> </p>
+			<h1>Add an administrator</h1>
+			<h2> <%= session.getAttribute("name") %> </h2>
 		</div>
 		
 		<div class="navbar">
@@ -49,43 +49,36 @@
 		
 		<div class="offset"> </div>
 		
-		<p>The admin can add a patient here.</p>
+		<h2><b>Add admin:</b></h2>
 		<form method="post" action="headadmin">
 			<input type="hidden" name="action" value="insertadmin" />
 			<table>
 				<tr>
 					<td>Name:</td>
 					<td><input type="text" name="name" /></td>
-					<br />
 				</tr>
 				<tr>
 					<td>Surname:</td>
 					<td><input type="text" name="surname" /></td>
-					<br />
 				</tr>
 				<tr>
 					<td>Username:</td>
 					<td><input type="text" name="username" /></td>
-					<br />
 				</tr>
 				<tr>
 					<td>Password:</td>
 					<td><input type="text" name="psw" /></td>
-					<br />
 				</tr>
 				
 				<tr>
 					<td></td>
 					<td><input type="submit" value="Add admin" /></td>
-					<br />
 				</tr>
 	
 			</table>
 		</form>
-		
-		
-		<br>
-		<p>Admins in the database:</p>
+	
+		<h3><b>Admins in the database:</b></h3>
 		<table border=1>
 	        <thead>
 				<tr>
@@ -105,22 +98,13 @@
 	        </tbody>
 		</table>
 		
-		
-		
-		
-		
-		
-		
-		
 		<% String message = (String)request.getAttribute("message");%>
 		
-			
 		<script>
 		
-		var x = "<%=message%>";
-		if(x != "nomessage")
-			alert(x);
-
+			var x = "<%=message%>";
+			if(x != "nomessage")
+				alert(x);
 		
 			//navbar 
 			
