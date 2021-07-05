@@ -10,6 +10,7 @@ import java.util.List;
 import com.model.Appointment;
 import com.model.Doctor;
 import com.model.Hospital;
+import com.model.Patient;
 import com.util.DbUtil;
 
 public class DoctorDao2 {
@@ -164,7 +165,7 @@ public class DoctorDao2 {
 			while (rs.next()) {
 				Appointment appointment = new Appointment();
 
-
+				appointment.setPatient(new Patient(rs.getString("patient_amka")));
 				appointment.setDatetime(String.valueOf(rs.getString("appdate")));
 				appointment.setEndtime(String.valueOf(rs.getString("endtime")));
 
