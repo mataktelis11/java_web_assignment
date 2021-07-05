@@ -8,89 +8,8 @@
 		<title>Appointments</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="patient/board.css">
 		<style>
-			
-			/* Modal style */
-			
-			/* The Modal (background) */
-			.modal {
-				display: none; /* Hidden by default */
-				position: fixed; /* Stay in place */
-				z-index: 2; /* Sit on top */
-				padding-top: 100px; /* Location of the box */
-				left: 0;
-				top: 0;
-				width: 100%; /* Full width */
-				height: 100%; /* Full height */
-				overflow: auto; /* Enable scroll if needed */
-				background-color: rgb(0,0,0); /* Fallback color */
-				background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-			}
-			
-			/* Modal Content */
-			.modal-content {
-				border-collapse: collapse;
-				border-radius: 25px;
-				position: relative;
-				background-color: #ccc;
-				margin: auto;
-				padding: 0;
-				width: 50%;
-				opacity: 0.9;
-				-webkit-animation-name: animatetop;
-				-webkit-animation-duration: 0.3s;
-				animation-name: animatetop;
-				animation-duration: 0.3s
-			}
-			
-			/* Add Animation */
-			@-webkit-keyframes animatetop {
-				from {top:-300px; opacity:0} 
-				to {top:0; opacity:1}
-			}
-			
-			@keyframes animatetop {
-				from {top:-300px; opacity:0}
-				to {top:0; opacity:1}
-			}
-			
-			/* The Close Button */
-			.close {
-				color: white;
-				float: right;
-				font-size: 28px;
-				font-weight: bold;
-			}
-			
-			.close:hover,
-			.close:focus {
-				color: #000;
-				text-decoration: none;
-				cursor: pointer;
-			}
-			
-			.modal-header {
-				border-radius: 25px;
-				padding: 2px 16px;
-				background: #333;
-				opacity: 0.8;
-				color: white;
-			}
-			
-			.modal-body {
-				text-align: center;
-				border-radius: 25px;
-				padding: 2px 16px;
-			}
-			
-			.modal-footer {
-				border-radius: 25px;
-				padding: 2px 16px;
-				background: #333;
-				opacity: 0.8;
-				color: white;
-			}
-			/*             */
 			
 			/* Makes the text of the buttons unselectable */
 			.unselectable {
@@ -116,70 +35,6 @@
 				color: black;
 			}
 			
-			.confirmAppointment {
-				border-radius: 25px;
-				background-color: #444;
-				color: white;
-				padding: 16px 20px;
-				border: none;
-				cursor: pointer;
-				opacity: 0.8;
-				width: 100%;
-			}
-			
-			.confirmAppointment:hover {
-				background-color: #aaaaaa;
-				color: black;
-			}
-			
-			.chooseAppointment {
-				background-color: #555;
-				color: white;
-				padding: 16px 20px;
-				border: none;
-				cursor: pointer;
-				opacity: 0.8;
-				width: 170px;
-				float:right;
-			}
-			
-			.chooseAppointment:hover {
-				background-color: #bbbbbb;
-				color: black;
-			}
-			
-			table {
-    			width: 100%;
-				border-collapse: collapse;
-    			font-family: verdana;
-    			text-align: left;
-				opacity: 0.7;
-				table-layout: fixed;
-				cursor: default;
-			}
-			
-			th{
-				opacity: 1;
-				z-index: 1;
-				padding: 8px;
-				background-color: #555;
-			    color: #ffffff;
-			    font-size: 1.5em;
-			}
-			
-			tr:nth-child(even) {
-				background: #ccc;
-			}
-			
-			tr:nth-child(odd) {
-				background: #ddd;
-			}
-			
-			td {
-    			font-size: 0.9em;
-				padding: 8px;
-			}
-			
 		</style>
 		
 	</head>
@@ -200,8 +55,8 @@
 		
 		
 		<div class="header">
-			<h1>Appointment menu of</h1>
-			<p> <%= session.getAttribute("name") %> </p>
+			<h1>Available Appointments</h1>
+			<p> for next month </p>
 		</div>
 		
 		<div class="navbar">
@@ -259,7 +114,7 @@
 				<br>
 				<div class="modal-footer">
 					<br>
-					<button class="confirmAppointment" onclick="addAppointment()">Confirm Reservation</button>
+					<button class="confirm" onclick="addAppointment()">Confirm Reservation</button>
 					<br>
 					<br>
 				</div>
