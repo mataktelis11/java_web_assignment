@@ -113,7 +113,7 @@
 							<c:set var = 'thisyear' value = '${thisdateparts[0]}' />
 							<c:set var = 'appyear' value = '${appdateparts[0]}' />
 							
-							<c:if test="${(thisyear == appyear && thismonth == appmonth && appday - thisday > 3) || (thisyear == appyear && thismonth < appmonth) || (thisyear < appyear)}">
+							<c:if test="${(thisyear == appyear && thismonth == appmonth && appday - thisday >= 3) || (thisyear == appyear && thismonth < appmonth) || (thisyear < appyear)}">
 								<button class="chooseAppointment" onclick='openModal("${a.doctor.name}", "${a.doctor.surname}", "${a.doctor.speciality}", "${a.datetime}", "${a.hospital.name}", "${a.doctor.AMKA}", "${a.patient.AMKA}")'>Cancel appointment</button>
 							</c:if>
 						</td>
