@@ -60,7 +60,7 @@
 	<body class="unselectable">
 	
 		<div class="header">
-			<h1>OH NO! USERNAME OR PASSWORD NOT IN DATABASE!</h1>
+			<h1>Oh no! Username or password not in database!</h1>
 			<p></p>
 		</div>
 		
