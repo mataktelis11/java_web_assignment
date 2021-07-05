@@ -25,6 +25,17 @@
 				display: block;
 			}
 			
+			.title {
+				opacity: 0.7;
+				padding: 0.2px;
+				border: 1px;
+				border-style: outset;
+				border-color: #666;
+				background-color: #555;
+			    color: white;
+			    font-size: 1.2em;
+			}
+			
 		</style>
 	</head>
 	<body class="unselectable">
@@ -61,19 +72,17 @@
 		
 		<div class="offset"> </div>
 		
-		<p>This is the appointment page of the doctor.</p>
+		<div class="title">
+			<h2>Scheduled appointments</h2>
+		</div>
 		
-		
-		<br>
-		<p>Scheduled appointments</p>
-		
-		<table border=1>
+		<table>
 	        <thead>
 				<tr>
 					<th>Patient AMKA</th>
 					<th>Appointment Date</th>
 					<th>End time</th>
-					<th>Action</th>
+					<th></th>
 				</tr>
 	        </thead>
 	        <tbody>
@@ -83,17 +92,20 @@
 						<td><c:out value="${a.patient.AMKA}" /></td>
 						<td><c:out value="${a.datetime}" /></td>
 						<td><c:out value="${a.endtime}" /></td>
-						<td><a href="doctor?action=cancel&pamka=<c:out value="${a.patient.AMKA}"/>&date=<c:out value="${a.datetime}"/>">Cancel</a></td>
+						<td>
+							<button class="chooseAppointment" onclick='openModal("${a.datetime}", "${a.patient.AMKA}")'>Cancel appointment</button>
+						</td>
 					</tr>
 	            </c:forEach>
 	        </tbody>
 		</table>
 		
 		
+		<div class="title">
+			<h2>Appointment History</h2>
+		</div>
 		
-		<p>Old appointments</p>
-		
-		<table border=1>
+		<table>
 	        <thead>
 				<tr>
 					<th>Patient AMKA</th>
@@ -113,9 +125,80 @@
 	        </tbody>
 		</table>
 		
+		<div id="myModal" class="modal">
+			<!-- Modal content -->
+			<div class="modal-content">
+				<div class="modal-header">
+					<span class="close">&times;</span>
+					<h2>Make a reservation with this doctor?</h2>
+				</div>
+				<br>
+				<div class="modal-body"><p style="font-size:15px; font-family:verdana;"></p><p style="font-size:15px; font-family:verdana;"></p><p style="font-size:15px; font-family:verdana;"></p><p style="font-size:15px; font-family:verdana;"></p></div>
+				<br>
+				<div class="modal-footer">
+					<br>
+					<button class="confirm" onclick="cancelAppointment()">Confirm cancellation</button>
+					<br>
+					<br>
+				</div>
+			</div>
+		</div>
+		
 		
 		
 		<script>
+		
+			//delete appointment
+			
+			function cancelAppointment() {
+				window.location.href = "doctor?action=cancel&pamka="+patientAMKA+"&date="+dateTime;
+			}
+		
+			//modal
+			
+			// Get the modal
+			var modal = document.getElementById("myModal");
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close")[0];
+			
+			//POST data variables
+			var patientAMKA;
+			var dateTime;
+			
+			// When the user clicks the button, open the modal 
+			function openModal(datetime, patAMKA) {
+				modal.style.display = "block";
+				
+				patientAMKA = patAMKA;
+				dateTime = datetime;
+				
+				var date = datetime.split(' ')[0];
+				var time = datetime.split(' ')[1];
+				
+				
+				document.getElementsByClassName("modal-body")[0].childNodes[0].innerHTML = "Cancel the reservation with Patient <b> " + patientAMKA + 
+				" </b> on the <b> " + date + " </b> at <b> " + time + " </b>?";
+				
+				document.getElementsByClassName("modal-body")[0].childNodes[1].innerHTML = "<br><b> Patient AMKA: </b> " + patientAMKA;
+				document.getElementsByClassName("modal-body")[0].childNodes[2].innerHTML = "<br><b> Appointment Date: </b> " + date;
+				document.getElementsByClassName("modal-body")[0].childNodes[3].innerHTML = "<br><b> Appointment Time: </b> " + time;
+					
+				
+			}
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function() {
+				modal.style.display = "none";
+			}
+			
+			// When the user clicks anywhere outside of the modal, close it
+			window.onclick = function(event) {
+				if (event.target == modal) {
+					modal.style.display = "none";
+				}
+			}
+			
 			//navbar 
 			
 			window.onscroll = function() {

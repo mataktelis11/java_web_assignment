@@ -24,6 +24,33 @@
 				display: block;
 			}
 			
+			.details {
+				width: 85%;
+				border-collapse: collapse;
+				border: 15px;
+				border-style: solid;
+				box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+				border-color: #666;
+				font-family: verdana;
+				text-align: left;
+				opacity: 0.75;
+				table-layout: fixed;
+				cursor: default;
+			}
+			
+			.details th {
+				padding: 12px;
+				background: #aaa;
+			    color: #ffffff;
+			    font-size: 1.5em;
+			}
+			
+			.details td {
+				font-size: 0.9em;
+				background: #ddd;
+				padding: 12px;
+			}
+			
 		</style>
 	</head>
 	<body class="unselectable">
@@ -60,23 +87,31 @@
 		
 		<div class="offset"> </div>
 		
-		<p>This is the welcome page of the doctor.</p>
-		
-		<p>Details of this account:</p>
-		
 		<br>
-		<table style="width:100%">
+		<table class="details">
 			<tr>
 				<th>Username:</th>
+				</tr>
+				<tr>
 				<td><c:out value="${Doctor.username}"/></td>
 			</tr>
 			<tr>
 				<th>FirstName:</th>
+				</tr>
+				<tr>
 				<td><c:out value="${Doctor.name}"/></td>
 			</tr>
 			<tr>
 				<th>SurName:</th>
+				</tr>
+				<tr>
 				<td><c:out value="${Doctor.surname}"/></td>
+			</tr>
+			<tr>
+				<th>AMKA:</th>
+			</tr>
+			<tr>
+				<td><c:out value="${Doctor.AMKA}"/></td>
 			</tr>
 		</table>
 		

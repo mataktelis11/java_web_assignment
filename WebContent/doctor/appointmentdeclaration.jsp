@@ -28,6 +28,7 @@
 			
 			/* Button used to open the contact form - fixed at the bottom of the page */
 			.submitButton {
+				box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
 				background-color: #555;
 				color: white;
 				padding: 16px 20px;
@@ -104,6 +105,7 @@
 			/* DateTime selection board */
 			
 			.weekdays {
+				opacity: 0.7;
 				cursor: pointer;
 				margin: 0;
 				padding: 10px 0;

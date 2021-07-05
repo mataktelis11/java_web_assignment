@@ -215,6 +215,7 @@ public class DoctorDao2 {
 				a.setPassword(rs.getString("hashedpassword"));
 				a.setName(rs.getString("firstname"));
 				a.setSurname(rs.getString("surname"));
+				a.setAMKA(getAmka(rs.getString("username")));
 
 			}
 		} catch (SQLException e) {
