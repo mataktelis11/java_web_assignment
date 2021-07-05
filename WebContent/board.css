@@ -58,7 +58,7 @@
 }
 
 .modal-header {
-	border-radius:25px 25px 1px 1px;
+	border-radius: 25px;
 	padding: 2px 16px;
 	background: #333;
 	opacity: 0.8;
@@ -72,7 +72,7 @@
 }
 
 .modal-footer {
-	border-radius: 1px 1px 25px 25px;
+	border-radius: 25px;
 	padding: 2px 16px;
 	background: #333;
 	opacity: 0.8;
