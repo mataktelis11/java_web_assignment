@@ -5,7 +5,7 @@
 <html>
 	<head>
 		<meta charset="ISO-8859-1">
-		<title>Welcome</title>
+		<title>Appointment Menu</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="style.css">
 		<link rel="stylesheet" href="board.css">
@@ -55,8 +55,8 @@
 		
 		
 		<div class="header">
-			<h1>Welcome</h1>
-			<p> <%= session.getAttribute("name") %> </p>
+			<h1>Appointment menu</h1>
+			<h2> of <%= session.getAttribute("name") %> </h2>
 		</div>
 		
 		<div class="navbar">
@@ -130,7 +130,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<span class="close">&times;</span>
-					<h2>Make a reservation with this doctor?</h2>
+					<h2>Cancel this appointment?</h2>
 				</div>
 				<br>
 				<div class="modal-body"><p style="font-size:15px; font-family:verdana;"></p><p style="font-size:15px; font-family:verdana;"></p><p style="font-size:15px; font-family:verdana;"></p><p style="font-size:15px; font-family:verdana;"></p></div>

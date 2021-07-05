@@ -157,7 +157,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<span class="close">&times;</span>
-					<h2>Make a reservation with this doctor?</h2>
+					<h2>Cancel the appointment with this doctor?</h2>
 				</div>
 				<br>
 				<div class="modal-body"><p style="font-size:15px; font-family:verdana;"></p><p style="font-size:15px; font-family:verdana;"></p><p style="font-size:15px; font-family:verdana;"></p><p style="font-size:15px; font-family:verdana;"></p><p style='font-size:10px; font-family:verdana;'></p></div>

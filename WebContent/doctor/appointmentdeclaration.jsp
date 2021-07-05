@@ -251,7 +251,7 @@
 					yyyy += 1;
 				}
 				
-				document.getElementsByClassName("header")[0].innerHTML = '<br>' + months[mm] + '<br>' + yyyy;
+				document.getElementsByClassName("header")[0].innerHTML = '<b><br>' + months[mm] + '<br></b>' + yyyy;
 				
 			}
 			

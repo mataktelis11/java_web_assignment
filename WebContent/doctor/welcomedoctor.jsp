@@ -71,7 +71,7 @@
 		
 		<div class="header">
 			<h1>Welcome</h1>
-			<p> <%= session.getAttribute("name") %> </p>
+			<h2> <%= session.getAttribute("name") %> </h2>
 		</div>
 		
 		<div class="navbar">
