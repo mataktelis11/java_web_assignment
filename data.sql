@@ -4,6 +4,9 @@
 SET SQL_SAFE_UPDATES = 0;
 
 
+alter table appointment add constraint unique(doctor_amka, appdate);
+
+
 DELETE FROM `appointment`;
 DELETE FROM `doctor`;
 DELETE FROM `hospital`;
