@@ -14,11 +14,11 @@ import com.model.Hospital;
 import com.model.Patient;
 import com.util.DbUtil;
 
-public class DoctorDao2 {
+public class DoctorDao {
 
 	private Connection connection;
 	
-	public DoctorDao2() {
+	public DoctorDao() {
 		super();
 		connection = DbUtil.getConnection();
 	}
