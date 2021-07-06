@@ -4,38 +4,89 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.YearMonth;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.util.List;
 
+import com.model.Admin;
+import com.model.Appointment;
+import com.model.Doctor;
+import com.model.Hospital;
+import com.model.Patient;
 import com.util.DbUtil;
 
-/**
- * 
- * Data Access Object class for Doctors only.<br>
- * 
- * 
- * @author telis, vasilis, atnwnis
- *
- */
-public class DoctorDao {
+public class DoctorDao2 {
+
 	private Connection connection;
 	
-	
-	public DoctorDao() {
+	public DoctorDao2() {
+		super();
 		connection = DbUtil.getConnection();
 	}
+	
+	
+	
+	
+	/**
+	 * Adds a user to the database with the role = 'patient'
+	 * @param patient to be added
+	 * @return the number of affected rows in the database
+	 */
+	private int addDoctorUser(Doctor doctor) {
+
+		
+		try {
+			PreparedStatement preparedStatement = connection.
+					prepareStatement("INSERT INTO user VALUES (?,?,?,?,?,'doctor');");
+			preparedStatement.setString(1, doctor.getUsername());
+			preparedStatement.setString(2, doctor.getPassword());
+			preparedStatement.setString(3, doctor.getSalt());
+			preparedStatement.setString(4, doctor.getName());
+			preparedStatement.setString(5, doctor.getSurname());
+
+			int count =  preparedStatement.executeUpdate();
+			
+			return count;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	
+	/**
+	 * Adds a patient to the database'
+	 * @param patient to be added
+	 * @return the number of affected rows in the database
+	 */
+	public int addDoctor(Doctor doctor) {
+
+		//use the above method
+		if(addDoctorUser(doctor)==0) return 0;
+		
+		try {
+			PreparedStatement preparedStatement = connection.
+					prepareStatement("INSERT INTO doctor VALUES (?,?,?,?,?);");
+			preparedStatement.setString(1, doctor.getUsername());
+			preparedStatement.setString(2, doctor.getAMKA());
+			preparedStatement.setString(3, doctor.getHospital().getName());
+			preparedStatement.setString(4, doctor.getAdmin());
+			preparedStatement.setString(5, doctor.getSpeciality());
+
+			int count =  preparedStatement.executeUpdate();
+			
+			return count;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	
 	
 	public String getAmka(String username) {
 		try {
 			PreparedStatement preparedStatement = connection.
-					prepareStatement("select * from user inner join doctor on user.username = doctor.user_username where user.username = ?");
+					prepareStatement("select amka from doctor  where user_username = ?");
 			preparedStatement.setString(1, username);
 			ResultSet rs = preparedStatement.executeQuery();
 			
@@ -49,100 +100,138 @@ public class DoctorDao {
 		return "0";
 	}
 	
-	public void setApp(String username,String date1,String date2) {
+	
+	
+	public void addAvailableAppointment(String username,String date1,String date2) {
 		String s=getAmka(username);
 		try {
-			PreparedStatement preparedstatement =connection.prepareStatement("INSERT INTO appointment VALUES (1,?,?,?,1);");
-			preparedstatement.setString(0, s);
-			preparedstatement.setString(1, date1);
-			preparedstatement.setString(0, date2);
+			PreparedStatement preparedstatement =connection.prepareStatement("INSERT INTO appointment VALUES (5,?,?,?,1);");
+			preparedstatement.setString(1, s);
+			preparedstatement.setString(2, date1);
+			preparedstatement.setString(3, date2);
 			
 			int count = preparedstatement.executeUpdate();
+			
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
 	
 	}
-	 public void fillDates(String username,String date) {
-		//ArrayList<String> test = new ArrayList();
+	
+	
+	public List<Doctor> getAllDoctors() {
 		
+		List<Doctor> doctors = new ArrayList<Doctor>();
 		
-		String[] split = date.split(",");
-		String[] s1=split[0].split("-");
-		//System.out.println(s1[1]);
-		Date x=  new GregorianCalendar(2020, 1, 20).getTime();
-		ArrayList<String[]> spans=new ArrayList();
-		//print day and spans
-		for (int i=1;i<split.length;i++) {
-			spans.add(split[i].split("-"));
-			//System.out.println(Arrays.toString(spans.get(i-1))+(i-1));
-		}
-		//print spans
-		for (int i=0;i<spans.size();i++) {
+		try {
 			
 			
-			int c=1;
-			int month=1;
-			try {
-			LocalDate date2=LocalDate.of(Integer.parseInt(s1[1]),getDayMonth(s1[0]), 1);
-			 for(int z=0;z<date2.lengthOfMonth();z++){
-		            if(spans.get(i)[0].equalsIgnoreCase(date2.getDayOfWeek().toString())){
+			PreparedStatement preparedStatement = connection.
+					prepareStatement("select username, amka, firstname, surname from doctor inner join user on doctor.user_username = user.username;");
+			
+			ResultSet rs = preparedStatement.executeQuery();
 
-		                break;
-		            }else{
-		                date2=date2.plusDays(1);
-		            }
-		        }
-			 c=date2.getDayOfMonth();
-			 month=getDayMonth(s1[0]);
-			 //System.out.println(date2.getDayOfYear());
-			}catch(ParseException e) {
-				e.printStackTrace();
-			}
-			YearMonth yearMonthObject = YearMonth.of(Integer.parseInt(s1[1]), month);
-			int daysInMonth = yearMonthObject.lengthOfMonth();
-			for (int k=c;k<=daysInMonth;k+=7) {
-			x=  new GregorianCalendar(Integer.parseInt(s1[1]), month-1, k).getTime();
-			
-			for(int j=1;j<spans.get(i).length;j++) {
-			String[] s=spans.get(i)[j].split("/");
-			//System.out.println(Arrays.toString(s)+i+j);
-			int from =Integer.parseInt(s[0]);
-			int until=Integer.parseInt(s[1]);
-			for (int a=from;a<until;a++) {
-				x.setHours(a);
-				x.setSeconds(0);
-				for (int b=0;b<=30;b+=30) {
-					x.setMinutes(b);
-					java.sql.Date da = new java.sql.Date(x.getTime());
-					String s2=da.toString()+" "+x.toString().substring(11, 20);
-					Date y= x;
-					if(b==30) {
-						
-						y.setHours(a+1);
-						y.setMinutes(0);
-						
-					}else {
-						y.setMinutes(30);
-						}
-					String s3=da.toString()+" "+y.toString().substring(11, 20);
-					//test.add(s2+"// "+s3+'\n');
-					setApp(username,s2,s3);
-					}
-				}
-			}
-		}
-		}
-		
+			while (rs.next()) {
+				Doctor doctor = new Doctor();
 
-		System.out.println(Arrays.toString(split));
-		//System.out.println(test);
+				doctor.setName(rs.getString("firstname"));
+				doctor.setSurname(rs.getString("surname"));
+				doctor.setAMKA(rs.getString("amka"));
+				doctor.setUsername(rs.getString("username"));
+				
+				doctors.add(doctor);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		
+		return doctors;
 	}
 	
-	 public int getDayMonth(String s) throws ParseException {
-		Date date = new SimpleDateFormat("MMMM").parse(s);
-		//System.out.println(date);
-		LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-		return localDate.getMonthValue();
+	public List<Appointment> getScheduledAppointments(String amka){
+		
+		List<Appointment> appointments = new ArrayList<Appointment>();
+		
+		try {
+			
+			
+			PreparedStatement preparedStatement = connection.
+					prepareStatement("select * from appointment where doctor_amka=? and availability=0;");
+			
+			preparedStatement.setString(1, amka);
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				Appointment appointment = new Appointment();
+
+				appointment.setPatient(new Patient(rs.getString("patient_amka")));
+				appointment.setDatetime(String.valueOf(rs.getString("appdate")));
+				appointment.setEndtime(String.valueOf(rs.getString("endtime")));
+
+				appointments.add(appointment);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return appointments;
 	}
+	
+	
+	public void cancelAppointment(String pamka, String damka, String date) {
+		
+		try {
+			PreparedStatement preparedStatement = connection.
+					prepareStatement("DELETE FROM appointment where patient_amka=? and doctor_amka=? and appdate=?;");
+			preparedStatement.setString(1, pamka);
+			preparedStatement.setString(2, damka);
+			preparedStatement.setString(3, date);
+			
+			preparedStatement.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	public Doctor getDetails(String username) {
+		
+		Doctor a = new Doctor();
+		
+		try {
+			PreparedStatement preparedStatement = connection.
+					prepareStatement("select * from user where username = ?");
+			preparedStatement.setString(1, username);
+			ResultSet rs = preparedStatement.executeQuery();
+
+			if (rs.next()) {
+				
+				a.setUsername(rs.getString("username"));
+				a.setPassword(rs.getString("hashedpassword"));
+				a.setName(rs.getString("firstname"));
+				a.setSurname(rs.getString("surname"));
+				a.setAMKA(getAmka(rs.getString("username")));
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return a;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
