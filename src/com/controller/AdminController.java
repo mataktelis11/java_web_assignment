@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.dao.AdminDao;
-import com.dao.DoctorDao2;
+import com.dao.DoctorDao;
 import com.dao.HospitalDao;
 import com.dao.PatientDao;
 import com.model.Appointment;
@@ -39,7 +39,7 @@ public class AdminController extends HttpServlet {
 	private PatientDao dao;
 	private Generator gen;
 	private HospitalDao hdao;
-	private DoctorDao2 ddao;
+	private DoctorDao ddao;
 	private AdminDao adao;
 
 	public AdminController() {
@@ -47,7 +47,7 @@ public class AdminController extends HttpServlet {
 		dao = new PatientDao();
 		gen = new Generator();
 		hdao = new HospitalDao();
-		ddao = new DoctorDao2();
+		ddao = new DoctorDao();
 		adao = new AdminDao();
 	}
 
@@ -74,33 +74,48 @@ public class AdminController extends HttpServlet {
 			forward = "/falseRequest.jsp";
 		}
 		else {
+			
+			
 			if(action.equalsIgnoreCase("appointments")) {
 				forward = "/admin/appointments.jsp";
 			}
+			
+			
+			
 			else if(action.equalsIgnoreCase("welcome")) {
 				forward = "/admin/welcomeadmin.jsp";
 				request.setAttribute("Admin", adao.getDetails((String)session.getAttribute("username")));
 			}
+			
+			
+			
 			else if(action.equalsIgnoreCase("addpatient")) {
 				forward = "/admin/addpatient.jsp";
 				request.setAttribute("message", "nomessage");
 			}
+			
+			
+			
 			else if(action.equalsIgnoreCase("adddoctor")) {
 				forward = "/admin/adddoctor.jsp";
 				request.setAttribute("Hospitals", hdao.getHospitals());
 				request.setAttribute("message", "nomessage");
 				request.setAttribute("Doctors", ddao.getAllDoctors());
 			}
+			
+			
+			
 			else if(action.equalsIgnoreCase("addhospital")) {
 				forward = "/admin/addhospital.jsp";
 				request.setAttribute("Hospitals", hdao.getHospitals());
 				request.setAttribute("message", "nomessage");
 			}
+			
+			
+			
 			else if(action.equalsIgnoreCase("delete")) {
 				forward = "/admin/adddoctor.jsp";
 				request.setAttribute("Hospitals", hdao.getHospitals());
-				
-				
 				
 				String username = request.getParameter("DoctorUsername");
 				String amka = request.getParameter("DoctorAMKA");
@@ -131,8 +146,6 @@ public class AdminController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		
-		
-		
 		if(action.equalsIgnoreCase("insertpatient")) {
 			
 			forward = "/admin/addpatient.jsp";
@@ -158,9 +171,6 @@ public class AdminController extends HttpServlet {
 				p.setUsername(username);
 				p.setAMKA(amka);
 				
-				
-				
-				
 				//call dao
 				int check = dao.addPatient(p);
 				
@@ -177,9 +187,10 @@ public class AdminController extends HttpServlet {
 			else {
 				request.setAttribute("message", "Failed to add patient.");
 			}
-			
-			
 		}
+		
+		
+		
 		else if(action.equalsIgnoreCase("insertdoctor")) {
 			
 			forward = "/admin/adddoctor.jsp";
@@ -232,9 +243,9 @@ public class AdminController extends HttpServlet {
 				request.setAttribute("Doctors", ddao.getAllDoctors());
 			}
 
-
-			
 		}
+		
+		
 		
 		else if(action.equalsIgnoreCase("inserthospital")) {
 			
@@ -278,7 +289,6 @@ public class AdminController extends HttpServlet {
 		
 		//https://tecadmin.net/get-current-timestamp-in-java/
 		
-		
 		Date date= new Date();
 		
 		long time = date.getTime();
@@ -292,13 +302,6 @@ public class AdminController extends HttpServlet {
 			if(Timestamp.valueOf(a.getEndtime()).after(ts))
 				return false;
 		}
-		
-		
-		
-		//if(appointments.size()>0)
-			//return false;
-		
-		
 			
 		adao.removeAppointments(amka);
 		

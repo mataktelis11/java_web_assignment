@@ -71,6 +71,7 @@ public class PatientController extends HttpServlet {
 		}
 		else {
 			
+			
 			if(action.equalsIgnoreCase("appointments")) {
 				forward = "/patient/appointments.jsp";
 				//get username from session
@@ -106,6 +107,9 @@ public class PatientController extends HttpServlet {
 				request.setAttribute("Appointments1", appointments1);
 				request.setAttribute("Appointments2", appointments2);
 			}
+			
+			
+			
 			else if(action.equalsIgnoreCase("availables")) {
 				String username = (String)session.getAttribute("username");
 				Date date1= new Date();
@@ -172,6 +176,9 @@ public class PatientController extends HttpServlet {
 					request.setAttribute("PAMKA", dao.getAmka(username));
 				}
 			}
+			
+			
+			
 			else if(action.equalsIgnoreCase("welcome")) {
 				forward = "/patient/welcomepatient.jsp";
 
@@ -181,6 +188,9 @@ public class PatientController extends HttpServlet {
 				//pass it to jsp
 				request.setAttribute("Patient", patient);
 			}
+			
+			
+			
 			else if(action.equalsIgnoreCase("delete")) {
 				String damka = request.getParameter("damka");
 				String pamka = request.getParameter("pamka");
@@ -238,6 +248,9 @@ public class PatientController extends HttpServlet {
 				request.setAttribute("Appointments1", appointments1);
 				request.setAttribute("Appointments2", appointments2);
 			}
+			
+			
+			
 			else if(action.equalsIgnoreCase("add")) {
 				String damka = request.getParameter("damka");
 				String pamka = request.getParameter("pamka");
@@ -332,13 +345,10 @@ public class PatientController extends HttpServlet {
 				request.setAttribute("message", message);
 			}
 			
-			
-
 		}
 
 		RequestDispatcher view = request.getRequestDispatcher(forward);
 		view.forward(request, response);
 	}
-
 	
 }

@@ -36,9 +36,6 @@ public class HeadAdminController extends HttpServlet {
 		gen = new Generator();
 	}
 
-
-
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String forward="";
@@ -62,11 +59,16 @@ public class HeadAdminController extends HttpServlet {
 			forward = "/falseRequest.jsp";
 		}
 		else {
+			
+			
 			if(action.equalsIgnoreCase("welcome")) {
 				forward = "/headadmin/welcomeheadadmin.jsp";
 				request.setAttribute("HAdmin", dao.getDetails((String)session.getAttribute("username")));
 				
 			}
+			
+			
+			
 			else if(action.equalsIgnoreCase("addadmin")) {
 				forward = "/headadmin/addadmin.jsp";
 				request.setAttribute("message", "nomessage");
@@ -78,9 +80,8 @@ public class HeadAdminController extends HttpServlet {
 		RequestDispatcher view = request.getRequestDispatcher(forward);
 		view.forward(request, response);
 	}
-
 	
-
+	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -91,6 +92,7 @@ public class HeadAdminController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		HttpSession session = request.getSession(false);
+		
 		
 		if(action.equalsIgnoreCase("insertadmin")) {
 			
@@ -132,16 +134,10 @@ public class HeadAdminController extends HttpServlet {
 					request.setAttribute("Admins", dao.getAllAdmins());
 				}
 			}
-
-
-			
 		}
-		
-
 		
 		RequestDispatcher view = request.getRequestDispatcher(forward);
 		view.forward(request, response);
-
 		
 	}
 	

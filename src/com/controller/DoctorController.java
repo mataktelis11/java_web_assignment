@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.dao.DoctorDao2;
+import com.dao.DoctorDao;
 import com.dao.PatientDao;
 import com.model.Appointment;
 import com.model.Patient;
@@ -33,10 +33,10 @@ public class DoctorController extends HttpServlet {
 	 */
 	private static final long serialVersionUID = -91978933072924051L;
 	//private DoctorDao dao;
-	private DoctorDao2 dao;
+	private DoctorDao dao;
 	public DoctorController() {
 		super();
-		dao = new DoctorDao2();
+		dao = new DoctorDao();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -62,6 +62,8 @@ public class DoctorController extends HttpServlet {
 			forward = "/falseRequest.jsp";
 		}
 		else {
+			
+			
 			if(action.equalsIgnoreCase("appointments")) {
 				forward = "/doctor/appointments.jsp";
 				
@@ -96,20 +98,31 @@ public class DoctorController extends HttpServlet {
 				request.setAttribute("Appointments2", appointments2);
 				
 			}
+			
+			
+			
 			if(action.equalsIgnoreCase("appointmentdeclaration")) {
 				forward = "/doctor/appointmentdeclaration.jsp";
 			}
+			
+			
+			
 			else if(action.equalsIgnoreCase("welcome")) {
 				forward = "/doctor/welcomedoctor.jsp";
 				request.setAttribute("Doctor", dao.getDetails((String)session.getAttribute("username")));
 			}
+			
+			
+			
 			else if(action.equalsIgnoreCase("callendar")) {
 				
 				filldates(request.getParameter("data"),(String)session.getAttribute("username"));
 				forward = "/doctor/appointmentdeclaration.jsp";
 			}
+			
+			
+			
 			else if(action.equalsIgnoreCase("cancel")) {
-				
 				
 				//check date
 				
@@ -132,10 +145,6 @@ public class DoctorController extends HttpServlet {
 					dao.cancelAppointment(request.getParameter("pamka"),dao.getAmka((String)session.getAttribute("username")),request.getParameter("date"));
 				}
 				
-				
-				
-				
-				
 				forward = "/doctor/appointments.jsp";
 				
 				
@@ -156,9 +165,6 @@ public class DoctorController extends HttpServlet {
 				
 				for(Appointment a : appointments) {
 					
-					
-
-					
 					if(Timestamp.valueOf(a.getEndtime()).after(ts))
 						appointments1.add(a);
 					else
@@ -173,9 +179,6 @@ public class DoctorController extends HttpServlet {
 		RequestDispatcher view = request.getRequestDispatcher(forward);
 		view.forward(request, response);
 	}
-	
-	
-	
 	
 	private void filldates(String data,String username) {
 		String[] split = data.split(",");
@@ -213,44 +216,36 @@ public class DoctorController extends HttpServlet {
 			YearMonth yearMonthObject = YearMonth.of(Integer.parseInt(s1[1]), month);
 			int daysInMonth = yearMonthObject.lengthOfMonth();
 			for (int k=c;k<=daysInMonth;k+=7) {
-			x=  new GregorianCalendar(Integer.parseInt(s1[1]), month-1, k).getTime();
-			
-			for(int j=1;j<spans.get(i).length;j++) {
-			String[] s=spans.get(i)[j].split("-");
-			
-			int from =Integer.parseInt(s[0]);
-			int until=Integer.parseInt(s[1]);
-			for (int a=from;a<until;a++) {
-				x.setHours(a);
-				x.setSeconds(0);
-				for (int b=0;b<=30;b+=30) {
-					x.setMinutes(b);
-					java.sql.Date da = new java.sql.Date(x.getTime());
-					String s2=da.toString()+" "+x.toString().substring(11, 20);
-					Date y= x;
-					if(b==30) {
-						
-						y.setHours(a+1);
-						y.setMinutes(0);
-						
-					}else {
-						y.setMinutes(30);
-						}
-					String s3=da.toString()+" "+y.toString().substring(11, 20);
+				x=  new GregorianCalendar(Integer.parseInt(s1[1]), month-1, k).getTime();
+				
+				for(int j=1;j<spans.get(i).length;j++) {
+					String[] s=spans.get(i)[j].split("-");
 					
-					dao.addAvailableAppointment(username, s2, s3);
+					int from =Integer.parseInt(s[0]);
+					int until=Integer.parseInt(s[1]);
+					for (int a=from;a<until;a++) {
+						x.setHours(a);
+						x.setSeconds(0);
+						for (int b=0;b<=30;b+=30) {
+							x.setMinutes(b);
+							java.sql.Date da = new java.sql.Date(x.getTime());
+							String s2=da.toString()+" "+x.toString().substring(11, 20);
+							Date y= x;
+							if(b==30) {
+								
+								y.setHours(a+1);
+								y.setMinutes(0);
+								
+							}else {
+								y.setMinutes(30);
+								}
+							String s3=da.toString()+" "+y.toString().substring(11, 20);
+							
+							dao.addAvailableAppointment(username, s2, s3);
+						}
 					}
 				}
 			}
 		}
-		}
-		
-
-		
-		
 	}
- 
-		
-	
-	
 }
