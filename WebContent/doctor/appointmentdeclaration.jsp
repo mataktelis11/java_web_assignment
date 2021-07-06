@@ -12,6 +12,88 @@
 				background: #eee;
 			}
 			
+			/* Modal style */
+			
+			/* The Modal (background) */
+			.modal {
+				display: none; /* Hidden by default */
+				position: fixed; /* Stay in place */
+				z-index: 2; /* Sit on top */
+				padding-top: 100px; /* Location of the box */
+				left: 0;
+				top: 0;
+				width: 100%; /* Full width */
+				height: 100%; /* Full height */
+				overflow: auto; /* Enable scroll if needed */
+				background-color: rgb(0,0,0); /* Fallback color */
+				background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+			}
+			
+			/* Modal Content */
+			.modal-content {
+				border-collapse: collapse;
+				border-radius: 25px;
+				position: relative;
+				background-color: #ccc;
+				margin: auto;
+				padding: 0;
+				width: 50%;
+				opacity: 0.9;
+				-webkit-animation-name: animatetop;
+				-webkit-animation-duration: 0.3s;
+				animation-name: animatetop;
+				animation-duration: 0.3s
+			}
+			
+			/* Add Animation */
+			@-webkit-keyframes animatetop {
+				from {top:-300px; opacity:0} 
+				to {top:0; opacity:1}
+			}
+			
+			@keyframes animatetop {
+				from {top:-300px; opacity:0}
+				to {top:0; opacity:1}
+			}
+			
+			/* The Close Button */
+			.close {
+				color: white;
+				float: right;
+				font-size: 28px;
+				font-weight: bold;
+			}
+			
+			.close:hover,
+			.close:focus {
+				color: #000;
+				text-decoration: none;
+				cursor: pointer;
+			}
+			
+			.modal-header {
+				border-radius: 25px;
+				padding: 2px 16px;
+				background: #333;
+				opacity: 0.8;
+				color: white;
+			}
+			
+			.modal-body {
+				text-align: center;
+				border-radius: 25px;
+				padding: 2px 16px;
+			}
+			
+			.modal-footer {
+				border-radius: 25px;
+				padding: 2px 16px;
+				background: #333;
+				opacity: 0.8;
+				color: white;
+			}
+			/*             */
+			
 			.header {
 				font-size: 42px !important;
 			}
@@ -39,6 +121,22 @@
 				bottom: 23px;
 				right: 28px;
 				width: 280px;
+			}
+			
+			.confirm {
+				border-radius: 25px;
+				background-color: #444;
+				color: white;
+				padding: 16px 20px;
+				border: none;
+				cursor: pointer;
+				opacity: 0.8;
+				width: 100%;
+			}
+			
+			.confirm:hover {
+				background-color: #aaaaaa;
+				color: black;
 			}
 			
 			/* Error Popup -- https://www.w3schools.com/howto/howto_js_popup.asp */
@@ -180,17 +278,17 @@
 		
 		<table class="board">
 		
-				<tr class="weekdays">
-					<td onclick="myCreateFunction('monTimes')"> Monday <br> <b>click to add</b> </td>
-					<td onclick="myCreateFunction('tusTimes')"> Tuesday <br> <b>click to add</b> </td>
-					<td onclick="myCreateFunction('wedTimes')"> Wednesday <br> <b>click to add</b> </td>
-					<td onclick="myCreateFunction('thuTimes')"> Thursday <br> <b>click to add</b> </td>
-					<td onclick="myCreateFunction('friTimes')"> Friday <br> <b>click to add</b> </td>
-					<td onclick="myCreateFunction('satTimes')"> Saturday <br> <b>click to add</b> </td>
-					<td onclick="myCreateFunction('sunTimes')"> Sunday <br> <b>click to add</b> </td>
-				</tr>
+			<tr class="weekdays">
+				<td onclick="myCreateFunction('monTimes')"> Monday <br> <b>click to add</b> </td>
+				<td onclick="myCreateFunction('tusTimes')"> Tuesday <br> <b>click to add</b> </td>
+				<td onclick="myCreateFunction('wedTimes')"> Wednesday <br> <b>click to add</b> </td>
+				<td onclick="myCreateFunction('thuTimes')"> Thursday <br> <b>click to add</b> </td>
+				<td onclick="myCreateFunction('friTimes')"> Friday <br> <b>click to add</b> </td>
+				<td onclick="myCreateFunction('satTimes')"> Saturday <br> <b>click to add</b> </td>
+				<td onclick="myCreateFunction('sunTimes')"> Sunday <br> <b>click to add</b> </td>
+			</tr>
 				
-				<tr class="days">
+			<tr class="days">
 				<td>
 					<table id="monTimes">
 					</table>
@@ -226,13 +324,36 @@
 					</table>
 					<br>
 				</td>
-				</tr>
-				</table>
+			</tr>
+		</table>
 				
-				<div class="popup">
-					<button class="submitButton" onclick="dataContructor()" >Submit Data</button>
-					<span class="popuptext" id="error" onclick="errorPopup()"><b style="color:red">ERROR</b> <br> <i>hint: check the time spans</i> </span>
+		<div class="popup">
+			<button class="submitButton" onclick="openModal()" >Submit Data</button>
+			<span class="popuptext" id="error" onclick="errorPopup()"><b style="color:red">ERROR</b> <br> <i>hint: check the time spans</i> </span>
+		</div>
+				
+		<div id="myModal" class="modal">
+			<!-- Modal content -->
+			<div class="modal-content">
+				<div class="modal-header">
+					<span class="close">&times;</span>
+					<h2>Confirm appointment declaration?</h2>
 				</div>
+				<br>
+				<div class="modal-body">
+					<p style="font-size:15px; font-family:verdana;">Your availability for the upcoming month will be recorded.</p>
+					<p style="font-size:15px; font-family:verdana;">Afterwards, please avoid declaring more appointments until next month</p>
+					<p style="font-size:15px; font-family:verdana;">to avoid possible complications within our database.</p>
+					<p style="font-size:10px; font-family:verdana;"><i>The declaration page will automatically update itself for next month's appointments.</i></p></div>
+				<br>
+				<div class="modal-footer">
+					<br>
+					<button class="confirm" onclick="dataContructor()">Confirm declaration</button>
+					<br>
+					<br>
+				</div>
+			</div>
+		</div>
 				
 		<script>
 			
@@ -451,6 +572,31 @@
 			    var table = document.getElementById(id);
 			   	var rowIndex = document.getElementById(ele.id).rowIndex;
 			    table.deleteRow(rowIndex);
+			}
+			
+			//modal
+			
+			// Get the modal
+			var modal = document.getElementById("myModal");
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close")[0];
+			
+			// When the user clicks the button, open the modal 
+			function openModal() {
+				modal.style.display = "block";
+			}
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function() {
+				modal.style.display = "none";
+			}
+			
+			// When the user clicks anywhere outside of the modal, close it
+			window.onclick = function(event) {
+				if (event.target == modal) {
+					modal.style.display = "none";
+				}
 			}
 		 
 			//navbar 
