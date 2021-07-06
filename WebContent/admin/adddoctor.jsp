@@ -14,6 +14,16 @@
 				display: block;
 			}
 			
+			/* Makes the text of the buttons unselectable */
+			.unselectable {
+			    -webkit-touch-callout: none;
+			    -webkit-user-select: none;
+			    -khtml-user-select: none;
+			    -moz-user-select: none;
+			    -ms-user-select: none;
+			    user-select: none;
+			}
+			
 		</style>
 	</head>
 	<body>
@@ -31,22 +41,23 @@
 		
 		%>
 		
-		
-		<div class="header">
-			<h1>Add a doctor</h1>
-			<h2> <%= session.getAttribute("name") %> </h2>
-		</div>
-		
-		<div class="navbar">
-			<a href="index.jsp">Home</a>
-			<a href="about.jsp">About</a>
+		<div class="unselectable">
+			<div class="header">
+				<h1>Add a doctor</h1>
+				<h2> <%= session.getAttribute("name") %> </h2>
+			</div>
 			
-			<a href="logout.jsp" class="right">Log out</a>
-			<a href="admin?action=welcome" class="right"> <%= session.getAttribute("name") %> </a>
-			<a href="admin?action=addpatient" class="right">Add a Patient</a>
-			<a id="selected" href="admin?action=adddoctor" class="right">Add a Doctor</a>
-			<a href="admin?action=addhospital" class="right">Add a Hospital</a>
-			
+			<div class="navbar">
+				<a href="index.jsp">Home</a>
+				<a href="about.jsp">About</a>
+				
+				<a href="logout.jsp" class="right">Log out</a>
+				<a href="admin?action=welcome" class="right"> <%= session.getAttribute("name") %> </a>
+				<a href="admin?action=addpatient" class="right">Add a Patient</a>
+				<a id="selected" href="admin?action=adddoctor" class="right">Add a Doctor</a>
+				<a href="admin?action=addhospital" class="right">Add a Hospital</a>
+				
+			</div>
 		</div>
 		
 		<div class="offset"> </div>

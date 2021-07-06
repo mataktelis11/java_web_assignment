@@ -38,7 +38,7 @@
 			
 		</style>
 	</head>
-	<body class="unselectable">
+	<body>
 	
 		<% 
 			
@@ -53,21 +53,22 @@
 		
 		%>
 		
-		
-		<div class="header">
-			<h1>Appointment menu</h1>
-			<h2> of <%= session.getAttribute("name") %> </h2>
-		</div>
-		
-		<div class="navbar">
-			<a href="index.jsp">Home</a>
-			<a href="about.jsp">About</a>
+		<div class="unselectable">
+			<div class="header">
+				<h1>Appointment menu</h1>
+				<h2> of <%= session.getAttribute("name") %> </h2>
+			</div>
 			
-			<a href="logout.jsp" class="right">Log out</a>
-			<a href="doctor?action=welcome" class="right"> <%= session.getAttribute("name") %> </a>
-			<a id="selected" href="doctor?action=appointments" class="right">Appointment menu</a>
-			<a href="doctor?action=appointmentdeclaration" class="right">Appointment declaration</a>
-			
+			<div class="navbar">
+				<a href="index.jsp">Home</a>
+				<a href="about.jsp">About</a>
+				
+				<a href="logout.jsp" class="right">Log out</a>
+				<a href="doctor?action=welcome" class="right"> <%= session.getAttribute("name") %> </a>
+				<a id="selected" href="doctor?action=appointments" class="right">Appointment menu</a>
+				<a href="doctor?action=appointmentdeclaration" class="right">Appointment declaration</a>
+				
+			</div>
 		</div>
 		
 		<div class="offset"> </div>

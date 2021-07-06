@@ -81,49 +81,49 @@
 		
 		</style>
 	</head>
-	<body class="unselectable">
+	<body>
+		<div class="unselectable">
+			<div class="header">
+				<h1>Web Health</h1>
+				<p>Doctor appointment search service</p>
+			</div>
+			
+			<div class="navbar">
+				<a id="selected" href="index.jsp">Home</a>
+				<a href="about.jsp">About</a>
+				
+				<% if(session.getAttribute("username")==null) { %>
+				
+					<a href="login.html" class="right">Log in</a>
+					<a href="register.html" class="right">Register</a>
+					
+				<% } else if(session.getAttribute("role").equals("patient")){ %>
+					<a href="logout.jsp" class="right">Log out</a>
+					<a href="patient?action=welcome" class="right"> <%= session.getAttribute("name") %> </a>
+					<a href="patient?action=appointments" class="right">Appointment menu</a>
+					<a href="patient?action=availables" class="right">Available Appointments</a>
+					
+				<% } else if(session.getAttribute("role").equals("doctor")){ %>
+					<a href="logout.jsp" class="right">Log out</a>
+					<a href="doctor?action=welcome" class="right"> <%= session.getAttribute("name") %> </a>
+					<a href="doctor?action=appointments" class="right">Appointment menu</a>
+					<a href="doctor?action=appointmentdeclaration" class="right">Appointment declaration</a>
+					
+				<% } else if(session.getAttribute("role").equals("admin")){ %>
+					<a href="logout.jsp" class="right">Log out</a>
+					<a href="admin?action=welcome" class="right"> <%= session.getAttribute("name") %> </a>
+					<a href="admin?action=addpatient" class="right">Add a Patient</a>
+					<a href="admin?action=adddoctor" class="right">Add a Doctor</a>
+					<a href="admin?action=addhospital" class="right">Add a Hospital</a>
 	
-		<div class="header">
-			<h1>Web Health</h1>
-			<p>Doctor appointment search service</p>
+				<% } else if(session.getAttribute("role").equals("headadmin")){ %>
+					<a href="logout.jsp" class="right">Log out</a>
+					<a href="headadmin?action=welcome" class="right"> <%= session.getAttribute("name") %> </a>
+					<a href="headadmin?action=addadmin" class="right">Add an Admin</a>
+				<% } %>
+				
+			</div>
 		</div>
-		
-		<div class="navbar">
-			<a id="selected" href="index.jsp">Home</a>
-			<a href="about.jsp">About</a>
-			
-			<% if(session.getAttribute("username")==null) { %>
-			
-				<a href="login.html" class="right">Log in</a>
-				<a href="register.html" class="right">Register</a>
-				
-			<% } else if(session.getAttribute("role").equals("patient")){ %>
-				<a href="logout.jsp" class="right">Log out</a>
-				<a href="patient?action=welcome" class="right"> <%= session.getAttribute("name") %> </a>
-				<a href="patient?action=appointments" class="right">Appointment menu</a>
-				<a href="patient?action=availables" class="right">Available Appointments</a>
-				
-			<% } else if(session.getAttribute("role").equals("doctor")){ %>
-				<a href="logout.jsp" class="right">Log out</a>
-				<a href="doctor?action=welcome" class="right"> <%= session.getAttribute("name") %> </a>
-				<a href="doctor?action=appointments" class="right">Appointment menu</a>
-				<a href="doctor?action=appointmentdeclaration" class="right">Appointment declaration</a>
-				
-			<% } else if(session.getAttribute("role").equals("admin")){ %>
-				<a href="logout.jsp" class="right">Log out</a>
-				<a href="admin?action=welcome" class="right"> <%= session.getAttribute("name") %> </a>
-				<a href="admin?action=addpatient" class="right">Add a Patient</a>
-				<a href="admin?action=adddoctor" class="right">Add a Doctor</a>
-				<a href="admin?action=addhospital" class="right">Add a Hospital</a>
-
-			<% } else if(session.getAttribute("role").equals("headadmin")){ %>
-				<a href="logout.jsp" class="right">Log out</a>
-				<a href="headadmin?action=welcome" class="right"> <%= session.getAttribute("name") %> </a>
-				<a href="headadmin?action=addadmin" class="right">Add an Admin</a>
-			<% } %>
-			
-		</div>
-		
 		
 		<div class="offset"> </div>
 	
