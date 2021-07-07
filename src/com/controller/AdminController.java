@@ -81,15 +81,9 @@ public class AdminController extends HttpServlet {
 			forward = "/falseRequest.jsp";
 		}
 		else {
+
 			
-			
-			if(action.equalsIgnoreCase("appointments")) {
-				forward = "/admin/appointments.jsp";
-			}
-			
-			
-			
-			else if(action.equalsIgnoreCase("welcome")) {
+			if(action.equalsIgnoreCase("welcome")) {
 				forward = "/admin/welcomeadmin.jsp";
 				request.setAttribute("Admin", adao.getDetails((String)session.getAttribute("username")));
 			}
