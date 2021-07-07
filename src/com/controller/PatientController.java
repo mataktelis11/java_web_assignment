@@ -247,9 +247,6 @@ public class PatientController extends HttpServlet {
 				List<Appointment> appointments1 = new ArrayList<Appointment>();
 				List<Appointment> appointments2 = new ArrayList<Appointment>();
 				
-				
-				//https://tecadmin.net/get-current-timestamp-in-java/
-				
 				Date date1= new Date();
 				long time = date1.getTime();
 				Timestamp ts = new Timestamp(time);
