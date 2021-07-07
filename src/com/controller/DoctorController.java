@@ -24,7 +24,14 @@ import com.dao.PatientDao;
 import com.model.Appointment;
 import com.model.Patient;
 
-
+/**
+ * 
+ * Class that extends <b>HttpServlet</b>.
+ * Simulates the function is the Doctors<br>
+ * 
+ * @authors telis, vasilis, atnwnis
+ * 
+ */
 @WebServlet("/doctor")
 public class DoctorController extends HttpServlet {
 	
@@ -168,6 +175,11 @@ public class DoctorController extends HttpServlet {
 		view.forward(request, response);
 	}
 	
+	/**
+	 * Submit the available Appoitmetns of a Doctor
+	 * @param data The hours and days of the month the doctor submitted
+	 * @param username The username of the doctor
+	 */
 	private void filldates(String data,String username) {
 		String[] split = data.split(",");
 		String[] s1=split[0].split("-");
@@ -229,7 +241,7 @@ public class DoctorController extends HttpServlet {
 								}
 							String s3=da.toString()+" "+y.toString().substring(11, 20);
 							
-							dao.addAvailableAppointment(username, s2, s3);
+							dao.addAvailableAppointment(username, s2, s3);//dao gets the amka of the doctor by the given username
 						}
 					}
 				}

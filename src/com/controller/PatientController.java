@@ -26,8 +26,7 @@ import com.util.Encryption;
 /**
  * 
  * Class that extends <b>HttpServlet</b>.
- * It's only function is the <i>login</i> of all user types.<br>
- * If the credentials are right, the user is forwarded to the corresponding welcome page and a <b>session</b> is created.
+ * Simulates the function is the Patients<br>
  * 
  * @authors telis, vasilis, atnwnis
  * 

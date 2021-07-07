@@ -19,7 +19,14 @@ import com.model.Hospital;
 import com.util.Encryption;
 import com.util.Generator;
 
-
+/**
+ * 
+ * Class that extends <b>HttpServlet</b>.
+ * Simulates the function is the HeadAdmins<br>
+ * 
+ * @authors telis, vasilis, atnwnis
+ * 
+ */
 @WebServlet("/headadmin")
 public class HeadAdminController extends HttpServlet {
 	

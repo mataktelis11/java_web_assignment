@@ -28,7 +28,14 @@ import com.util.Validate;
 
 
 
-
+/**
+ * 
+ * Class that extends <b>HttpServlet</b>.
+ * Simulates the function is the Admins<br>
+ * 
+ * @authors telis, vasilis, atnwnis
+ * 
+ */
 @WebServlet("/admin")
 public class AdminController extends HttpServlet {
 
@@ -283,6 +290,13 @@ public class AdminController extends HttpServlet {
 		view.forward(request, response);
 	}
 
+	/**
+	 * Removes a doctor from the database. The Doctor must not have Apoointments that are scheduled.
+	 * All Appointments are removed as well as the data from the User and Doctor table.
+	 * @param username
+	 * @param amka
+	 * @return
+	 */
 	public boolean removeDoctor(String username, String amka) {
 		
 		List<Appointment> appointments = ddao.getScheduledAppointments(amka);
