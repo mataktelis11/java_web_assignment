@@ -286,18 +286,13 @@ public class AdminController extends HttpServlet {
 	public boolean removeDoctor(String username, String amka) {
 		
 		List<Appointment> appointments = ddao.getScheduledAppointments(amka);
-		
-		//https://tecadmin.net/get-current-timestamp-in-java/
-		
+
 		Date date= new Date();
 		
 		long time = date.getTime();
 
-		
 		Timestamp ts = new Timestamp(time);
-		
-		
-		
+
 		for(Appointment a : appointments) {
 			if(Timestamp.valueOf(a.getEndtime()).after(ts))
 				return false;

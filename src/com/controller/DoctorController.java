@@ -73,21 +73,14 @@ public class DoctorController extends HttpServlet {
 				List<Appointment> appointments1 = new ArrayList<Appointment>();
 				List<Appointment> appointments2 = new ArrayList<Appointment>();
 				
-				
-				//https://tecadmin.net/get-current-timestamp-in-java/
-				
-					Date date= new Date();
+				Date date= new Date();
 					
-					long time = date.getTime();
+				long time = date.getTime();
 
-					
-					Timestamp ts = new Timestamp(time);
+				Timestamp ts = new Timestamp(time);
 				
 				for(Appointment a : appointments) {
-					
-					
 
-					
 					if(Timestamp.valueOf(a.getEndtime()).after(ts))
 						appointments1.add(a);
 					else
@@ -126,8 +119,6 @@ public class DoctorController extends HttpServlet {
 				
 				//check date
 				
-				//https://www.codegrepper.com/code-examples/java/number+of+days+between+two+timestamps+java+sprin
-				
 				Timestamp ts2 = Timestamp.valueOf(request.getParameter("date"));
 				
 				LocalDate d1 = LocalDate.now();
@@ -152,10 +143,7 @@ public class DoctorController extends HttpServlet {
 				
 				List<Appointment> appointments1 = new ArrayList<Appointment>();
 				List<Appointment> appointments2 = new ArrayList<Appointment>();
-				
-				
-				//https://tecadmin.net/get-current-timestamp-in-java/
-				
+
 					Date date= new Date();
 					
 					long time = date.getTime();
@@ -199,16 +187,16 @@ public class DoctorController extends HttpServlet {
 			int month=Integer.parseInt(s1[0]);
 			try {
 			LocalDate date2=LocalDate.of(Integer.parseInt(s1[1]),month, 1);
-			 for(int z=0;z<date2.lengthOfMonth();z++){
-		            if(spans.get(i)[0].equalsIgnoreCase(date2.getDayOfWeek().toString())){
+			for(int z=0;z<date2.lengthOfMonth();z++){
+				if(spans.get(i)[0].equalsIgnoreCase(date2.getDayOfWeek().toString())){
 
-		                break;
-		            }else{
-		                date2=date2.plusDays(1);
-		            }
-		        }
-			 c=date2.getDayOfMonth();
-			 
+					break;
+				}else{
+					date2=date2.plusDays(1);
+				}
+			}
+			c=date2.getDayOfMonth();
+			
 			
 			}catch(Exception e) {
 				e.printStackTrace();

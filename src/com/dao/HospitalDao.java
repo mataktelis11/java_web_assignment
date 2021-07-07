@@ -11,7 +11,14 @@ import java.util.List;
 import com.model.Hospital;
 import com.util.DbUtil;
 
-
+/**
+ * 
+ * Data Access Object class for Hospitals only.<br>
+ * 
+ * 
+ * @author telis, vasilis, atnwnis
+ *
+ */
 public class HospitalDao {
 
 	private Connection connection;
@@ -21,6 +28,11 @@ public class HospitalDao {
 		connection = DbUtil.getConnection();
 	}
 
+	/**
+	 * Add a given Hospital to the Database
+	 * @param hospital
+	 * @return
+	 */
 	public int addHospital(Hospital hospital) {
 		
 		try {
@@ -40,6 +52,10 @@ public class HospitalDao {
 		
 	}
 	
+	/**
+	 * Return all Hospitals of the Database
+	 * @return
+	 */
 	public List<Hospital> getHospitals(){
 		
 		List<Hospital> hospitals = new ArrayList<Hospital>();

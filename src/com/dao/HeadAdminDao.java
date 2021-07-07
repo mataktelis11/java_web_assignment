@@ -11,6 +11,15 @@ import com.model.HeadAdmin;
 import com.model.Admin;
 import com.util.DbUtil;
 
+
+/**
+ * 
+ * Data Access Object class for HeadAdmins.<br>
+ * 
+ * 
+ * @author telis, vasilis, atnwnis
+ *
+ */
 public class HeadAdminDao {
 
 	private Connection connection;
@@ -20,6 +29,11 @@ public class HeadAdminDao {
 		
 	}
 	
+	/**
+	 * Get basic details of a HeadAdmin with the given username
+	 * @param username
+	 * @return
+	 */
 	public HeadAdmin getDetails(String username) {
 		
 		HeadAdmin ha = new HeadAdmin();
@@ -45,6 +59,10 @@ public class HeadAdminDao {
 		return ha;
 	}
 	
+	/**
+	 * Returns all Admins. Only gets their username and the username of the headadmin that added them.
+	 * @return
+	 */
 	public List<Admin> getAllAdmins(){
 		
 		List<Admin> admins = new ArrayList<Admin>();
@@ -70,7 +88,11 @@ public class HeadAdminDao {
 		return admins;
 	}
 	
-	
+	/**
+	 * Adds a user to the database with role='admin'
+	 * @param admin
+	 * @return
+	 */
 	public int addAdminUser(Admin admin) {
 		
 		
@@ -95,6 +117,11 @@ public class HeadAdminDao {
 		
 	}
 	
+	/**
+	 * Adds an admin to the database.
+	 * @param admin
+	 * @return
+	 */
 	public int addAdmin(Admin admin) {
 		
 		

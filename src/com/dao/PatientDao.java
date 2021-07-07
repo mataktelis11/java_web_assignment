@@ -225,7 +225,12 @@ public class PatientDao{
 	}
 
 
-	
+	/**
+	 * Cancels an Appointment. patient_amka is set to the dummy value (5) and availability to 1
+	 * @param pamka patient_amka of the Appointment
+	 * @param damka doctor_amka of the Appointment
+	 * @param date appdate of the Appointment
+	 */
 	public void cancelAppointment(String pamka, String damka, String date) {
 		
 		try {
@@ -242,6 +247,12 @@ public class PatientDao{
 		}
 	}
 	
+	/**
+	 * Schedules Appointment to Database. patient_amka is set to the given pamka and availability is set to 0
+	 * @param pamka patient_amka of the Appointment
+	 * @param damka doctor_amka of the Appointment
+	 * @param date appdate of the Appointment
+	 */
 	public void addAppointment(String pamka, String damka, String date) {
 		
 		try {
@@ -258,6 +269,11 @@ public class PatientDao{
 		}
 	}
 	
+	/**
+	 * Returns the amka of the Patient with the given username
+	 * @param username
+	 * @return
+	 */
 	public String getAmka(String username) {
 		try {
 			PreparedStatement preparedStatement = connection.

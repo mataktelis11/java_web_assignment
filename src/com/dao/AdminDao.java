@@ -8,6 +8,16 @@ import java.sql.SQLException;
 import com.model.Admin;
 import com.util.DbUtil;
 
+
+
+/**
+ * 
+ * Data Access Object class for Admins.<br>
+ * 
+ * 
+ * @author telis, vasilis, atnwnis
+ *
+ */
 public class AdminDao {
 
 	private Connection connection;
@@ -17,7 +27,11 @@ public class AdminDao {
 		connection = DbUtil.getConnection();
 	}
 
-	
+	/**
+	 * Get basic details of a Admin with the given username
+	 * @param username
+	 * @return
+	 */
 	public Admin getDetails(String username) {
 		
 		Admin a = new Admin();
@@ -43,7 +57,11 @@ public class AdminDao {
 		return a;
 	}
 	
-	
+	/**
+	 * Remove a User with the given username
+	 * @param username
+	 * @return
+	 */
 	private int removeUser(String username) {
 		
 		
@@ -62,7 +80,11 @@ public class AdminDao {
 		
 	}
 	
-	
+	/**
+	 * Remove a Doctor with the given username
+	 * @param username
+	 * @return
+	 */
 	public int removeDoctor(String username) {
 		
 		try {
@@ -83,7 +105,11 @@ public class AdminDao {
 
 	}
 	
-	
+	/**
+	 * Delete Appointment with the given Doctor Amka
+	 * @param amka
+	 * @return
+	 */
 	public int removeAppointments(String amka) {
 		
 		try {

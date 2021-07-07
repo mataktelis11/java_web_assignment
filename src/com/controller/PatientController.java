@@ -20,6 +20,7 @@ import com.dao.PatientDao;
 import com.model.Appointment;
 import com.model.Patient;
 import com.util.Generator;
+import com.util.Validate;
 import com.util.Encryption;
 
 /**
@@ -83,21 +84,13 @@ public class PatientController extends HttpServlet {
 				List<Appointment> appointments1 = new ArrayList<Appointment>();
 				List<Appointment> appointments2 = new ArrayList<Appointment>();
 				
+				Date date= new Date();
 				
-				//https://tecadmin.net/get-current-timestamp-in-java/
-				
-					Date date= new Date();
-					
-					long time = date.getTime();
+				long time = date.getTime();
 
-					
-					Timestamp ts = new Timestamp(time);
+				Timestamp ts = new Timestamp(time);
 				
 				for(Appointment a : appointments) {
-					
-					
-
-					
 					if(Timestamp.valueOf(a.getEndtime()).after(ts))
 						appointments1.add(a);
 					else
@@ -178,7 +171,6 @@ public class PatientController extends HttpServlet {
 			}
 			
 			
-			
 			else if(action.equalsIgnoreCase("welcome")) {
 				forward = "/patient/welcomepatient.jsp";
 
@@ -189,8 +181,6 @@ public class PatientController extends HttpServlet {
 				request.setAttribute("Patient", patient);
 			}
 			
-			
-			
 			else if(action.equalsIgnoreCase("delete")) {
 				String damka = request.getParameter("damka");
 				String pamka = request.getParameter("pamka");
@@ -198,9 +188,6 @@ public class PatientController extends HttpServlet {
 				
 				
 				//check date
-				
-				//https://www.codegrepper.com/code-examples/java/number+of+days+between+two+timestamps+java+sprin
-				
 				Timestamp ts2 = Timestamp.valueOf(request.getParameter("date"));
 				
 				LocalDate d1 = LocalDate.now();
@@ -210,15 +197,11 @@ public class PatientController extends HttpServlet {
 				
 				int diffd = period.getDays();
 				int diffy = period.getYears();
-				int diffm = period.getMonths();
-				
-				
+				int diffm = period.getMonths();	
 				
 				if((diffy>0 || diffm>0) || diffd>=3) {
 					dao.cancelAppointment(pamka, damka, date);
 				}
-				
-				
 				
 				forward = "/patient/appointments.jsp";
 				//get username from session
@@ -229,9 +212,6 @@ public class PatientController extends HttpServlet {
 				
 				List<Appointment> appointments1 = new ArrayList<Appointment>();
 				List<Appointment> appointments2 = new ArrayList<Appointment>();
-				
-				
-				//https://tecadmin.net/get-current-timestamp-in-java/
 				
 					Date date1= new Date();
 					long time = date1.getTime();
@@ -302,7 +282,7 @@ public class PatientController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		
-		if(action.equalsIgnoreCase("register")) {
+		if(action.equalsIgnoreCase("register") ) {
 			
 			Patient p = new Patient();
 			
@@ -315,7 +295,7 @@ public class PatientController extends HttpServlet {
 			String passwordRepeat = request.getParameter("psw-repeat");
 			
 			//check data
-			if(password.equals(passwordRepeat)) {
+			if(password.equals(passwordRepeat) && Validate.validAMKA(amka) && Validate.validPass(password)) {
 				//pass data to object
 				p.setName(name);
 				p.setSurname(surName);
@@ -325,7 +305,6 @@ public class PatientController extends HttpServlet {
 				p.setAMKA(amka);
 				
 				//call dao
-				
 				int check = dao.addPatient(p);
 				
 				if(check == 1) {
@@ -337,7 +316,7 @@ public class PatientController extends HttpServlet {
 					String message = "username and/or amka already in the database OR invalid.";
 					request.setAttribute("message", message);
 				}
-					
+				
 			}
 			else {
 				forward = "/regfail.jsp";

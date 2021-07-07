@@ -76,17 +76,17 @@ public class LoginController extends HttpServlet {
 						switch(user.getRole()) {
 						
 							case "patient":
-								//forward = "/patient/welcomepatient.jsp";
+								
 								response.sendRedirect("patient?action=welcome");
 							break;
 							
 							case "doctor":
-								//forward = "/doctor/welcomedoctor.jsp";
+								
 								response.sendRedirect("doctor?action=welcome");
 							break;
 							
 							case "admin":
-								//forward = "/admin/welcomeadmin.jsp";
+								
 								response.sendRedirect("admin?action=welcome");
 							break;
 							
@@ -102,8 +102,6 @@ public class LoginController extends HttpServlet {
 				}
 			}
 			
-			//RequestDispatcher view = request.getRequestDispatcher(forward);
-			//view.forward(request, response);
 		}
 	}
 }

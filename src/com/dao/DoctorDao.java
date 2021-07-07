@@ -14,6 +14,16 @@ import com.model.Hospital;
 import com.model.Patient;
 import com.util.DbUtil;
 
+
+
+/**
+ * 
+ * Data Access Object class for Doctors.<br>
+ * 
+ * 
+ * @author telis, vasilis, atnwnis
+ *
+ */
 public class DoctorDao {
 
 	private Connection connection;
@@ -27,7 +37,7 @@ public class DoctorDao {
 	
 	
 	/**
-	 * Adds a user to the database with the role = 'patient'
+	 * Adds a user to the database with the role = 'doctor'
 	 * @param patient to be added
 	 * @return the number of affected rows in the database
 	 */
@@ -54,9 +64,9 @@ public class DoctorDao {
 	
 	
 	/**
-	 * Adds a patient to the database'
-	 * @param patient to be added
-	 * @return the number of affected rows in the database
+	 * Adds a doctor to the database
+	 * @param doctor
+	 * @return
 	 */
 	public int addDoctor(Doctor doctor) {
 
@@ -82,7 +92,11 @@ public class DoctorDao {
 	}
 	
 	
-	
+	/**
+	 * Returns the amka of a doctor with the given username
+	 * @param username
+	 * @return
+	 */
 	public String getAmka(String username) {
 		try {
 			PreparedStatement preparedStatement = connection.
@@ -101,7 +115,12 @@ public class DoctorDao {
 	}
 	
 	
-	
+	/**
+	 * Adds a new Appointment with dummy patient amka (5) and availability 1
+	 * @param username
+	 * @param date1
+	 * @param date2
+	 */
 	public void addAvailableAppointment(String username,String date1,String date2) {
 		String s=getAmka(username);
 		try {
@@ -118,7 +137,10 @@ public class DoctorDao {
 	
 	}
 	
-	
+	/**
+	 * Get all Doctors of the Database
+	 * @return
+	 */
 	public List<Doctor> getAllDoctors() {
 		
 		List<Doctor> doctors = new ArrayList<Doctor>();
@@ -150,6 +172,11 @@ public class DoctorDao {
 		return doctors;
 	}
 	
+	/**
+	 * Get appointments of a doctor with availability 0
+	 * @param amka
+	 * @return
+	 */
 	public List<Appointment> getScheduledAppointments(String amka){
 		
 		List<Appointment> appointments = new ArrayList<Appointment>();
@@ -180,7 +207,12 @@ public class DoctorDao {
 		return appointments;
 	}
 	
-	
+	/**
+	 * Delete an Appointment
+	 * @param pamka patient_amka of the Appointment
+	 * @param damka doctor_amka of the Appointment
+	 * @param date appdate of the Appointment
+	 */
 	public void cancelAppointment(String pamka, String damka, String date) {
 		
 		try {
@@ -198,7 +230,11 @@ public class DoctorDao {
 	}
 	
 	
-	
+	/**
+	 * Gets the details of the Doctor
+	 * @param username
+	 * @return
+	 */
 	public Doctor getDetails(String username) {
 		
 		Doctor a = new Doctor();
