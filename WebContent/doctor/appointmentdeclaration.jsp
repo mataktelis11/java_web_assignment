@@ -16,17 +16,17 @@
 			
 			/* The Modal (background) */
 			.modal {
-				display: none; /* Hidden by default */
-				position: fixed; /* Stay in place */
-				z-index: 2; /* Sit on top */
-				padding-top: 100px; /* Location of the box */
+				display: none;
+				position: fixed;
+				z-index: 2;
+				padding-top: 100px;
 				left: 0;
 				top: 0;
-				width: 100%; /* Full width */
-				height: 100%; /* Full height */
-				overflow: auto; /* Enable scroll if needed */
-				background-color: rgb(0,0,0); /* Fallback color */
-				background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+				width: 100%;
+				height: 100%;
+				overflow: auto;
+				background-color: rgb(0,0,0);
+				background-color: rgba(0,0,0,0.4);
 			}
 			
 			/* Modal Content */
@@ -108,7 +108,7 @@
 			    user-select: none;
 			}
 			
-			/* Button used to open the contact form - fixed at the bottom of the page */
+			/* submit button - fixed at the bottom of the page */
 			.submitButton {
 				box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
 				background-color: #555;
@@ -139,7 +139,7 @@
 				color: black;
 			}
 			
-			/* Error Popup -- https://www.w3schools.com/howto/howto_js_popup.asp */
+			/* Error Popup */
 			
 			/* Popup container */
 			.popup {
