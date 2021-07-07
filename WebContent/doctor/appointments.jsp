@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -94,7 +95,23 @@
 						<td><c:out value="${a.datetime}" /></td>
 						<td><c:out value="${a.endtime}" /></td>
 						<td>
-							<button class="chooseAppointment" onclick='openModal("${a.datetime}", "${a.patient.AMKA}")'>Cancel appointment</button>
+							<c:set var = 'date' value = '<%= new java.util.Date()%>' />
+							<p style="display:none;"><fmt:formatDate var='now' value="${date}" type="date" pattern="yyyy-MM-dd"/></p>
+							
+							<c:set var = "thisdateparts" value = "${fn:split(now, '-')}" />
+							<c:set var = "appdateparts" value = "${fn:split(a.datetime, '-')}" />
+							
+							<fmt:parseNumber var="thisday" value="${thisdateparts[2]}" type = "number" integerOnly="true"/>
+							<fmt:parseNumber var="appday" value="${appdateparts[2]}" type = "number" integerOnly="true"/>
+							
+							<c:set var = 'thismonth' value = '${thisdateparts[1]}' />
+							<c:set var = 'appmonth' value = '${appdateparts[1]}' />
+							<c:set var = 'thisyear' value = '${thisdateparts[0]}' />
+							<c:set var = 'appyear' value = '${appdateparts[0]}' />
+							
+							<c:if test="${(thisyear == appyear && thismonth == appmonth && appday - thisday >= 3) || (thisyear == appyear && thismonth < appmonth) || (thisyear < appyear)}">
+								<button class="chooseAppointment" onclick='openModal("${a.datetime}", "${a.patient.AMKA}")'>Cancel appointment</button>
+							</c:if>
 						</td>
 					</tr>
 	            </c:forEach>
