@@ -33,7 +33,7 @@ Application Dependencies:
 
 
 To run this application you need:
-1. Opeb the **database_ver2.mwb** file with MySql Workbench and choose **Database > Forward Engineer**. A database with the name **doctorappointment** will be created. Make sure that the schema **doctorappointment** is the default one.
+1. Open the **database_ver2.mwb** file with MySql Workbench and choose **Database > Forward Engineer**. A database with the name **doctorappointment** will be created. Make sure that the schema **doctorappointment** is the default one.
 2. Open the **data.sql** file with MySql Workbench and execute it. This will add dummy data to the DataBase.
 3. Paste the code below to the **context.xml** file of your Tomcat:  
 `<Resource name="jdbc/ LiveDataSource " auth=" Container "`  
