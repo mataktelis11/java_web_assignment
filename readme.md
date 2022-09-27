@@ -28,7 +28,7 @@ As the title suggests, this is a Java Web Application used for management of reg
 Application Dependencies:
 1. A java IDE (e.g. Eclipse)
 2. Apache Tomcat (v8 or v9 recommended) and hooked on your installed IDE
-3. Download the latest **mysql-connector-java-X.X.X-bin.jar** from http://dev.mysql.com/downloads/connector/j/, and copy it to the **lib** folder in you Tomcat installation.
+3. Download the latest **mysql-connector-java-X.X.X-bin.jar** from http://dev.mysql.com/downloads/connector/j/, and copy it to the **lib** folder in your Tomcat installation.
 4. MySql and MySql Workbench
 
 
@@ -49,4 +49,8 @@ Where **username** and **password** correspond to yours.
 
 You can now run the application. Log in to the dummy accounts using the passwords in the **data.sql** file.
 
+## Disclaimer
 
+The project was done for **educational purposes only** and it is not meant to be used officially. For example, it uses the MD5 hash algorithm for the storage of the passwords which is not a good practise (crypt can be a good alternative). We are aware of this flaw and you will probably find more if you examine our code.
+
+The main goal of this project was for us to get familiar with Java Web Development in general, and learn the basic set up for the creation of a dynamic website which also utilizes a database.
